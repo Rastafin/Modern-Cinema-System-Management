@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backend.Model
+namespace Backend.Model.Enums
 {
-    public interface IPerson
+    public enum RoomType
     {
-
+        Small = 10,
+        Medium = 20,
+        Large = 30
     }
 }
