@@ -18,5 +18,14 @@ namespace Backend.Model
         public string Email { get; set; } = null!;
         public Role Role { get; set; }
 
+        public User(string login, string password, string email)
+        {
+            Login = login;
+            Password = password;
+            Email = email;
+            Role = Role.User;
+        }
+
+        public User() { }
     }
 }
