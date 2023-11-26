@@ -1,5 +1,6 @@
 ﻿using Backend.Model;
 using Backend.Model.Enums;
+using Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,24 +41,28 @@ namespace GUI
         {
             Sex parsedSex;
 
-            if (!Enum.TryParse(textBoxSex.Text, out parsedSex))
+            if (!ValidationService.ValidateClientRegisterProcess(textBoxName.Text, textBoxLastname.Text, textBoxBirthday.Text, textBoxPhoneNumber.Text,
+                textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, maskedTextBoxZipCode.Text, out string message))
             {
-                MessageBox.Show("Bad Sex format");
+                labelMessage.Text = message;
                 return;
             }
 
-            Client client = new Client(textBoxName.Text, textBoxLastname.Text, textBoxBirthday.Text, parsedSex, textBoxPhoneNumber.Text,
-                textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, textBoxZipCode.Text);
-
-            User user = new User(textBoxLogin.Text, textBoxPassword.Text, textBoxEmail.Text);
+            if (!Enum.TryParse(textBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
+            {
+                labelMessage.Text = "Bad Sex format";
+                return;
+            }
 
             try
             {
-                client.Register(client, user);
+                Client.AddClientWithUser(new Client(textBoxName.Text, textBoxLastname.Text, textBoxBirthday.Text, parsedSex, textBoxPhoneNumber.Text,
+                textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, maskedTextBoxZipCode.Text),
+                    new User(textBoxLogin.Text, textBoxPassword.Text, textBoxEmail.Text));
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured while trying to register your account");
+                labelMessage.Text = "Error occured while trying to register your account";
             }
         }
     }

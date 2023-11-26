@@ -34,6 +34,9 @@
             textBoxPassword = new TextBox();
             panel1 = new Panel();
             buttonExit = new Button();
+            pictureBox1 = new PictureBox();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // buttonRegister
@@ -85,6 +88,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Coral;
+            panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1920, 114);
@@ -101,6 +105,16 @@
             buttonExit.Text = "Exit";
             buttonExit.UseVisualStyleBackColor = false;
             buttonExit.Click += buttonExit_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources._4170e6ab0f6d30dca42c2df7cf52fb999351cb63d11203175d4ddb638955e9c2;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(141, 94);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
             // 
             // StartFormLogin
             // 
@@ -120,6 +134,8 @@
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
             Load += Form1_Load;
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -132,5 +148,6 @@
         private TextBox textBoxPassword;
         private Panel panel1;
         private Button buttonExit;
+        private PictureBox pictureBox1;
     }
 }

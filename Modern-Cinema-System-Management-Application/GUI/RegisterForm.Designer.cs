@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
             buttonBack = new Button();
             textBoxLogin = new TextBox();
             textBoxPassword = new TextBox();
@@ -44,21 +45,36 @@
             textBoxHouseNumber = new TextBox();
             textBoxZipCode = new TextBox();
             buttonRegister = new Button();
+            maskedTextBoxZipCode = new MaskedTextBox();
+            labelMessage = new Label();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Coral;
+            panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1920, 114);
             panel1.TabIndex = 5;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources._4170e6ab0f6d30dca42c2df7cf52fb999351cb63d11203175d4ddb638955e9c2;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(141, 94);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
             // buttonBack
             // 
             buttonBack.BackColor = Color.Coral;
             buttonBack.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonBack.Location = new Point(927, 893);
+            buttonBack.Location = new Point(901, 893);
             buttonBack.Name = "buttonBack";
             buttonBack.Size = new Size(200, 56);
             buttonBack.TabIndex = 6;
@@ -103,7 +119,7 @@
             // 
             textBoxName.BackColor = Color.Coral;
             textBoxName.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxName.Location = new Point(808, 263);
+            textBoxName.Location = new Point(782, 263);
             textBoxName.Name = "textBoxName";
             textBoxName.PlaceholderText = "NAME";
             textBoxName.Size = new Size(431, 46);
@@ -114,7 +130,7 @@
             // 
             textBoxLastname.BackColor = Color.Coral;
             textBoxLastname.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxLastname.Location = new Point(808, 361);
+            textBoxLastname.Location = new Point(782, 361);
             textBoxLastname.Name = "textBoxLastname";
             textBoxLastname.PlaceholderText = "LASTNAME";
             textBoxLastname.Size = new Size(431, 46);
@@ -125,7 +141,7 @@
             // 
             textBoxBirthday.BackColor = Color.Coral;
             textBoxBirthday.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxBirthday.Location = new Point(808, 459);
+            textBoxBirthday.Location = new Point(782, 459);
             textBoxBirthday.Name = "textBoxBirthday";
             textBoxBirthday.PlaceholderText = "BIRTHDAY";
             textBoxBirthday.Size = new Size(431, 46);
@@ -136,7 +152,7 @@
             // 
             textBoxSex.BackColor = Color.Coral;
             textBoxSex.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxSex.Location = new Point(808, 563);
+            textBoxSex.Location = new Point(782, 563);
             textBoxSex.Name = "textBoxSex";
             textBoxSex.PlaceholderText = "SEX";
             textBoxSex.Size = new Size(431, 46);
@@ -147,7 +163,7 @@
             // 
             textBoxPhoneNumber.BackColor = Color.Coral;
             textBoxPhoneNumber.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxPhoneNumber.Location = new Point(808, 657);
+            textBoxPhoneNumber.Location = new Point(782, 657);
             textBoxPhoneNumber.Name = "textBoxPhoneNumber";
             textBoxPhoneNumber.PlaceholderText = "PHONE NUMBER";
             textBoxPhoneNumber.Size = new Size(431, 46);
@@ -201,10 +217,12 @@
             // textBoxZipCode
             // 
             textBoxZipCode.BackColor = Color.Coral;
+            textBoxZipCode.Enabled = false;
             textBoxZipCode.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxZipCode.Location = new Point(1334, 657);
+            textBoxZipCode.Location = new Point(1334, 632);
             textBoxZipCode.Name = "textBoxZipCode";
             textBoxZipCode.PlaceholderText = "ZIP CODE";
+            textBoxZipCode.ReadOnly = true;
             textBoxZipCode.Size = new Size(431, 46);
             textBoxZipCode.TabIndex = 18;
             textBoxZipCode.TextAlign = HorizontalAlignment.Center;
@@ -213,7 +231,7 @@
             // 
             buttonRegister.BackColor = Color.Coral;
             buttonRegister.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonRegister.Location = new Point(927, 797);
+            buttonRegister.Location = new Point(901, 797);
             buttonRegister.Name = "buttonRegister";
             buttonRegister.Size = new Size(200, 56);
             buttonRegister.TabIndex = 19;
@@ -221,12 +239,36 @@
             buttonRegister.UseVisualStyleBackColor = false;
             buttonRegister.Click += buttonRegister_Click_1;
             // 
+            // maskedTextBoxZipCode
+            // 
+            maskedTextBoxZipCode.BackColor = Color.Coral;
+            maskedTextBoxZipCode.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            maskedTextBoxZipCode.Location = new Point(1334, 673);
+            maskedTextBoxZipCode.Mask = "00-999";
+            maskedTextBoxZipCode.Name = "maskedTextBoxZipCode";
+            maskedTextBoxZipCode.Size = new Size(431, 46);
+            maskedTextBoxZipCode.TabIndex = 20;
+            maskedTextBoxZipCode.TextAlign = HorizontalAlignment.Center;
+            // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Red;
+            labelMessage.Location = new Point(809, 140);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 21;
+            labelMessage.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1888, 1002);
+            Controls.Add(labelMessage);
+            Controls.Add(maskedTextBoxZipCode);
             Controls.Add(buttonRegister);
             Controls.Add(textBoxZipCode);
             Controls.Add(textBoxHouseNumber);
@@ -249,6 +291,8 @@
             Text = "RegisterForm";
             WindowState = FormWindowState.Maximized;
             Load += RegisterForm_Load;
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -271,5 +315,8 @@
         private TextBox textBoxHouseNumber;
         private TextBox textBoxZipCode;
         private Button buttonRegister;
+        private PictureBox pictureBox1;
+        private MaskedTextBox maskedTextBoxZipCode;
+        private Label labelMessage;
     }
 }

@@ -1,4 +1,5 @@
 using Backend.Data;
+using Backend.Model;
 
 namespace GUI
 {
@@ -32,9 +33,9 @@ namespace GUI
 
             try
             {
-                if(ClientService.ValidateUser(login, password))
+                if (User.ValidateUser(login, password, out int userId))
                 {
-                    UserMainMenu userMainMenu = new UserMainMenu();
+                    UserMainMenu userMainMenu = new UserMainMenu(userId);
                     userMainMenu.Show();
                     this.Hide();
                 }

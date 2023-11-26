@@ -1,5 +1,6 @@
 ﻿using Backend.Data;
 using Backend.Model.Enums;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -33,27 +34,45 @@ namespace Backend.Model
             ZipCode = zipCode;
         }
 
-        public void Register(Client client, User user)
+
+        public static void AddClientWithUser(Client client, User user)
         {
-            try
+            using (var context = new DataContext())
             {
-                ClientService.AddClientWithUser(client, user);
-            }
-            catch (Exception ex)
-            {
-                throw;
+                using var transaction = context.Database.BeginTransaction();
+
+                try
+                {
+                    context.Users.Add(user);
+                    context.SaveChanges();
+
+                    client.UserId = user.Id;
+                    context.Clients.Add(client);
+                    context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
             }
         }
 
-        public void Login(string login, string password)
+        public static Client GetClient(int userId)
         {
-            try
+            using (var context = new DataContext())
             {
-                ClientService.ValidateUser(login, password);
-            }
-            catch(Exception ex)
-            {
-                throw;
+                try
+                {
+                    var client = context.Clients.FirstOrDefault(c => c.User.Id == userId);
+                    return client;
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
