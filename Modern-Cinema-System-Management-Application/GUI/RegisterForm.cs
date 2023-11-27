@@ -48,6 +48,12 @@ namespace GUI
                 return;
             }
 
+            if(!ValidationService.ValidateUserRegisterProcess(textBoxLogin.Text, textBoxPassword.Text, textBoxEmail.Text, out string secondMessage))
+            {
+                labelMessage.Text = secondMessage;
+                return;
+            }
+
             if (!Enum.TryParse(textBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
             {
                 labelMessage.Text = "Bad Sex format";
@@ -58,7 +64,7 @@ namespace GUI
             {
                 Client.AddClientWithUser(new Client(textBoxName.Text, textBoxLastname.Text, textBoxBirthday.Text, parsedSex, textBoxPhoneNumber.Text,
                 textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, maskedTextBoxZipCode.Text),
-                    new User(textBoxLogin.Text, textBoxPassword.Text, textBoxEmail.Text));
+                    new User(textBoxLogin.Text, PasswordHasher.HashPassword(textBoxPassword.Text), textBoxEmail.Text));
             }
             catch (Exception ex)
             {

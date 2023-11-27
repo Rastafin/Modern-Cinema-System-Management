@@ -99,6 +99,7 @@
             textBoxPassword.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             textBoxPassword.Location = new Point(220, 361);
             textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.PasswordChar = '*';
             textBoxPassword.PlaceholderText = "PASSWORD";
             textBoxPassword.Size = new Size(431, 46);
             textBoxPassword.TabIndex = 8;

@@ -1,4 +1,5 @@
-﻿using Backend.Model.Enums;
+﻿using Backend.Data;
+using Backend.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,84 @@ namespace Backend.Services
 
             message = string.Empty;
             return true;
+        }
+
+        public static bool ValidateUserRegisterProcess(string login, string password, string email, out string message)
+        {
+            if(login == null || login.Length  == 0 || password == null || password.Length == 0 || email == null || email.Length == 0)
+            {
+                message = "Not every form field is filled";
+                return false;
+            }
+
+            if(login.Length < 5)
+            {
+                message = "Login must contain at least 5 characters";
+                return false;
+
+            }
+            
+            if (login.Length > 20)
+            {
+                message = "Login can contain max 20 characters";
+                return false;
+
+            }
+
+            if(password.Length < 5)
+            {
+                message = "Password must contain at least 5 characters";
+                return false;
+            }
+
+            if (login.Length > 20)
+            {
+                message = "Password can contain max 20 characters";
+                return false;
+
+            }
+
+            if (!password.Any(char.IsDigit))
+            {
+                message = "Password must contain at least one digit";
+                return false;
+            }
+
+            if(!IsValidEmail(email))
+            {
+                message = "Invalid email format";
+                return false;
+            }
+
+            using(var context = new DataContext())
+            {
+                if(context.Users.Any(u => u.Login == login))
+                {
+                    message = "Login already exists";
+                    return false;
+                }
+
+                if (context.Users.Any(u => u.Email == email))
+                {
+                    message = "Email already exists";
+                    return false;
+                }
+            }
+            message = string.Empty;
+            return true;
+        }
+
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
     }
 }

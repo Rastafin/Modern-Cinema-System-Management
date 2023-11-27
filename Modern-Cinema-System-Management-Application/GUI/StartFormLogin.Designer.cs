@@ -33,8 +33,8 @@
             textBoxLogin = new TextBox();
             textBoxPassword = new TextBox();
             panel1 = new Panel();
-            buttonExit = new Button();
             pictureBox1 = new PictureBox();
+            buttonExit = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -80,6 +80,7 @@
             textBoxPassword.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             textBoxPassword.Location = new Point(737, 489);
             textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.PasswordChar = '*';
             textBoxPassword.PlaceholderText = "PASSWORD";
             textBoxPassword.Size = new Size(431, 46);
             textBoxPassword.TabIndex = 3;
@@ -94,6 +95,16 @@
             panel1.Size = new Size(1920, 114);
             panel1.TabIndex = 4;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources._4170e6ab0f6d30dca42c2df7cf52fb999351cb63d11203175d4ddb638955e9c2;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(141, 94);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
             // buttonExit
             // 
             buttonExit.BackColor = Color.Coral;
@@ -105,16 +116,6 @@
             buttonExit.Text = "Exit";
             buttonExit.UseVisualStyleBackColor = false;
             buttonExit.Click += buttonExit_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources._4170e6ab0f6d30dca42c2df7cf52fb999351cb63d11203175d4ddb638955e9c2;
-            pictureBox1.Location = new Point(12, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(141, 94);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
             // 
             // StartFormLogin
             // 

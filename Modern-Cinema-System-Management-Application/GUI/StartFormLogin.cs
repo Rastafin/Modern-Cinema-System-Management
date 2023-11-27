@@ -33,7 +33,7 @@ namespace GUI
 
             try
             {
-                if (User.ValidateUser(login, password, out int userId))
+                if (User.CheckUserData(login, password, out int userId))
                 {
                     UserMainMenu userMainMenu = new UserMainMenu(userId);
                     userMainMenu.Show();

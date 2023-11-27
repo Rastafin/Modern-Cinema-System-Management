@@ -1,5 +1,6 @@
 ﻿using Backend.Data;
 using Backend.Model.Enums;
+using Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,7 +31,7 @@ namespace Backend.Model
         public User() { }
 
 
-        public static bool ValidateUser(string login, string password, out int userId)
+        public static bool CheckUserData(string login, string password, out int userId)
         {
             userId = -1;
 
@@ -38,9 +39,15 @@ namespace Backend.Model
             {
                 try
                 {
-                    var user = context.Users.FirstOrDefault(x => x.Login == login && x.Password == password);
-                    if(user != null) userId = user.Id;
-                    return user != null;
+                    var user = context.Users.FirstOrDefault(x => x.Login == login);
+
+                    if (user != null &&  PasswordHasher.VerifyPassword(password, user.Password))
+                    {
+                        userId = user.Id;
+                        return true;
+                    }
+
+                    return false;
                 }
                 catch (Exception ex)
                 {
