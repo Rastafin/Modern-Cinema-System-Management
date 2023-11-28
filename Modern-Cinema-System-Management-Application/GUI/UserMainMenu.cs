@@ -15,6 +15,7 @@ namespace GUI
     public partial class UserMainMenu : Form
     {
         private readonly User? _user;
+        private readonly string _imagesPath = @"C:\ForkRepo\Modern-Cinema-System-Management\Modern-Cinema-System-Management-Application\Backend\Data\Pictures\";
         public UserMainMenu(int userId)
         {
             InitializeComponent();
@@ -49,7 +50,62 @@ namespace GUI
             NavBarManager.SetAdminButtonVisibility(buttonAdminPanel, _user!.Role);
             NavBarManager.SetEmployeeButtonVisibility(buttonEmployeePanel, _user!.Role);
 
-            //MessageBox.Show(_user.Login.ToString());
+            try
+            {
+                var screenings = Screening.GetAllScreeningsWithRoomsAndMovies()
+                    .Select(s => new
+                    {
+                        //ImagePath = Path.Combine(_imagesPath, s.Movie.ImageFileName!),
+                        Image = Image.FromFile(_imagesPath + s.Movie.ImageFileName),
+                        s.StartTime,
+                        s.Movie.Title,
+                        s.Movie.Description,
+                        s.Movie.Director,
+                        s.Movie.Duaration,
+                    })
+                    .ToList();
+
+                dataGridViewMovies.AutoGenerateColumns = false;
+
+                dataGridViewMovies.Columns.Add("Image", "Image");
+                dataGridViewMovies.Columns.Add("StartTime", "Start Time");
+                dataGridViewMovies.Columns.Add("Title", "Title");
+                dataGridViewMovies.Columns.Add("Description", "Description");
+                dataGridViewMovies.Columns.Add("Director", "Director");
+                dataGridViewMovies.Columns.Add("Duration", "Duration");
+
+
+                DataGridViewImageColumn dataGridViewImageColumn = new DataGridViewImageColumn();
+                dataGridViewImageColumn.HeaderText = "Image";
+                dataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch;
+                dataGridViewImageColumn.Width = 100;
+
+                dataGridViewMovies.Columns.Add(dataGridViewImageColumn);
+
+                foreach (var screening in screenings)
+                {
+                    //if (File.Exists(screening.ImagePath))
+                    //{
+                        var row = dataGridViewMovies.Rows[dataGridViewMovies.Rows.Add()];
+
+                        row.Cells["Image"].Value = screening.Image;
+                        row.Cells["StartTime"].Value = screening.StartTime;
+                        row.Cells["Title"].Value = screening.Title;
+                        row.Cells["Description"].Value = screening.Description;
+                        row.Cells["Director"].Value = screening.Director;
+                        row.Cells["Duration"].Value = screening.Duaration;
+
+                    //}
+                }
+
+                //dataGridViewMovies.DataSource = screenings;
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to load screenings" + ex.Message);
+                return;
+            }
         }
     }
 }
