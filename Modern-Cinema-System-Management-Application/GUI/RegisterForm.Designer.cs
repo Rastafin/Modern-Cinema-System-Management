@@ -47,6 +47,8 @@
             buttonRegister = new Button();
             maskedTextBoxZipCode = new MaskedTextBox();
             labelMessage = new Label();
+            maskedTextBoxBirthday = new MaskedTextBox();
+            comboBoxSex = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -141,8 +143,9 @@
             // textBoxBirthday
             // 
             textBoxBirthday.BackColor = Color.Coral;
+            textBoxBirthday.Enabled = false;
             textBoxBirthday.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxBirthday.Location = new Point(782, 459);
+            textBoxBirthday.Location = new Point(782, 445);
             textBoxBirthday.Name = "textBoxBirthday";
             textBoxBirthday.PlaceholderText = "BIRTHDAY";
             textBoxBirthday.Size = new Size(431, 46);
@@ -152,6 +155,7 @@
             // textBoxSex
             // 
             textBoxSex.BackColor = Color.Coral;
+            textBoxSex.Enabled = false;
             textBoxSex.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             textBoxSex.Location = new Point(782, 563);
             textBoxSex.Name = "textBoxSex";
@@ -164,7 +168,7 @@
             // 
             textBoxPhoneNumber.BackColor = Color.Coral;
             textBoxPhoneNumber.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxPhoneNumber.Location = new Point(782, 657);
+            textBoxPhoneNumber.Location = new Point(782, 691);
             textBoxPhoneNumber.Name = "textBoxPhoneNumber";
             textBoxPhoneNumber.PlaceholderText = "PHONE NUMBER";
             textBoxPhoneNumber.Size = new Size(431, 46);
@@ -256,11 +260,36 @@
             labelMessage.AutoSize = true;
             labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelMessage.ForeColor = Color.Red;
-            labelMessage.Location = new Point(809, 140);
+            labelMessage.Location = new Point(782, 139);
             labelMessage.Name = "labelMessage";
             labelMessage.Size = new Size(0, 40);
             labelMessage.TabIndex = 21;
             labelMessage.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // maskedTextBoxBirthday
+            // 
+            maskedTextBoxBirthday.BackColor = Color.Coral;
+            maskedTextBoxBirthday.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            maskedTextBoxBirthday.Location = new Point(782, 487);
+            maskedTextBoxBirthday.Mask = "00/00/0000";
+            maskedTextBoxBirthday.Name = "maskedTextBoxBirthday";
+            maskedTextBoxBirthday.Size = new Size(431, 46);
+            maskedTextBoxBirthday.TabIndex = 22;
+            maskedTextBoxBirthday.TextAlign = HorizontalAlignment.Center;
+            maskedTextBoxBirthday.ValidatingType = typeof(DateTime);
+            // 
+            // comboBoxSex
+            // 
+            comboBoxSex.BackColor = Color.LightSalmon;
+            comboBoxSex.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSex.FlatStyle = FlatStyle.Flat;
+            comboBoxSex.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            comboBoxSex.FormattingEnabled = true;
+            comboBoxSex.Items.AddRange(new object[] { "Man", "Woman" });
+            comboBoxSex.Location = new Point(782, 606);
+            comboBoxSex.Name = "comboBoxSex";
+            comboBoxSex.Size = new Size(431, 48);
+            comboBoxSex.TabIndex = 23;
             // 
             // RegisterForm
             // 
@@ -268,6 +297,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1888, 1002);
+            Controls.Add(comboBoxSex);
+            Controls.Add(maskedTextBoxBirthday);
             Controls.Add(labelMessage);
             Controls.Add(maskedTextBoxZipCode);
             Controls.Add(buttonRegister);
@@ -319,5 +350,7 @@
         private PictureBox pictureBox1;
         private MaskedTextBox maskedTextBoxZipCode;
         private Label labelMessage;
+        private MaskedTextBox maskedTextBoxBirthday;
+        private ComboBox comboBoxSex;
     }
 }

@@ -32,7 +32,7 @@ namespace GUI
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            StartFormLogin startFormLogin = new StartFormLogin();
+            StartFormLogin startFormLogin = new StartFormLogin("");
             startFormLogin.Show();
             this.Hide();
         }
@@ -41,20 +41,20 @@ namespace GUI
         {
             Sex parsedSex;
 
-            if (!ValidationService.ValidateClientRegisterProcess(textBoxName.Text, textBoxLastname.Text, textBoxBirthday.Text, textBoxPhoneNumber.Text,
+            if (!ValidationService.ValidateClientRegisterProcess(textBoxName.Text, textBoxLastname.Text, maskedTextBoxBirthday.Text, textBoxPhoneNumber.Text,
                 textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, maskedTextBoxZipCode.Text, out string message))
             {
                 labelMessage.Text = message;
                 return;
             }
 
-            if(!ValidationService.ValidateUserRegisterProcess(textBoxLogin.Text, textBoxPassword.Text, textBoxEmail.Text, out string secondMessage))
+            if (!ValidationService.ValidateUserRegisterProcess(textBoxLogin.Text, textBoxPassword.Text, textBoxEmail.Text, out string secondMessage))
             {
                 labelMessage.Text = secondMessage;
                 return;
             }
-
-            if (!Enum.TryParse(textBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
+     
+            if (!Enum.TryParse(comboBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
             {
                 labelMessage.Text = "Bad Sex format";
                 return;
@@ -62,14 +62,19 @@ namespace GUI
 
             try
             {
-                Client.AddClientWithUser(new Client(textBoxName.Text, textBoxLastname.Text, textBoxBirthday.Text, parsedSex, textBoxPhoneNumber.Text,
+                Client.AddClientWithUser(new Client(textBoxName.Text, textBoxLastname.Text, maskedTextBoxBirthday.Text, parsedSex, textBoxPhoneNumber.Text,
                 textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, maskedTextBoxZipCode.Text),
                     new User(textBoxLogin.Text, PasswordHasher.HashPassword(textBoxPassword.Text), textBoxEmail.Text));
             }
             catch (Exception ex)
             {
                 labelMessage.Text = "Error occured while trying to register your account";
+                return;
             }
+
+            StartFormLogin startFormLogin = new StartFormLogin("You registered successfully, now you can log in");
+            startFormLogin.Show();
+            this.Close();
         }
     }
 }

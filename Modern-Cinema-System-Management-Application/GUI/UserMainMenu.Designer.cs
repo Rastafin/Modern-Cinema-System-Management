@@ -37,8 +37,10 @@
             buttonProfile = new Button();
             pictureBox1 = new PictureBox();
             buttonLogout = new Button();
+            dataGridView1 = new DataGridView();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -167,12 +169,22 @@
             buttonLogout.UseVisualStyleBackColor = false;
             buttonLogout.Click += buttonExit_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(332, 230);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(1455, 873);
+            dataGridView1.TabIndex = 6;
+            // 
             // UserMainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1872, 1220);
+            Controls.Add(dataGridView1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "UserMainMenu";
@@ -182,6 +194,7 @@
             Load += UserMainMenu_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -197,5 +210,6 @@
         private Button buttonComingSoon;
         private Button buttonAdminPanel;
         private Button buttonEmployeePanel;
+        private DataGridView dataGridView1;
     }
 }

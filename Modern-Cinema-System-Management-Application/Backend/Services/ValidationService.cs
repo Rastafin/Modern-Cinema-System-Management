@@ -2,6 +2,7 @@
 using Backend.Model.Enums;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -69,6 +70,18 @@ namespace Backend.Services
             if (!Regex.IsMatch(houseNumber, @"^[0-9a-zA-Z]+$"))
             {
                 message = "Invalid house number format. Please use only alphanumeric characters";
+                return false;
+            }
+
+            if (!DateTime.TryParseExact(birthday, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+            {
+                message = "Invalid birthday format. Please use format 'dd/MM/yyyy'";
+                return false;
+            }
+
+            if (parsedDate > DateTime.Now)
+            {
+                message = "Birthday cannot be in the future";
                 return false;
             }
 

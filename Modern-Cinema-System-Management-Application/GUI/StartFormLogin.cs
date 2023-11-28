@@ -5,13 +5,16 @@ namespace GUI
 {
     public partial class StartFormLogin : Form
     {
-        public StartFormLogin()
+        private readonly string _message = String.Empty;
+        public StartFormLogin(string message)
         {
             InitializeComponent();
+            _message = message;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            labelMessage.Text = _message;
         }
 
         private void button1_Click(object sender, EventArgs e)

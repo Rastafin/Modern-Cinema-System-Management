@@ -36,7 +36,7 @@ namespace GUI
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            StartFormLogin startFormLogin = new StartFormLogin();
+            StartFormLogin startFormLogin = new StartFormLogin("");
             startFormLogin.Show();
             this.Hide();
         }

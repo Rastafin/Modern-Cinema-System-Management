@@ -35,6 +35,7 @@
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             buttonExit = new Button();
+            labelMessage = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -117,12 +118,23 @@
             buttonExit.UseVisualStyleBackColor = false;
             buttonExit.Click += buttonExit_Click;
             // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(669, 186);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 6;
+            // 
             // StartFormLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(labelMessage);
             Controls.Add(buttonExit);
             Controls.Add(panel1);
             Controls.Add(textBoxPassword);
@@ -150,5 +162,6 @@
         private Panel panel1;
         private Button buttonExit;
         private PictureBox pictureBox1;
+        private Label labelMessage;
     }
 }
