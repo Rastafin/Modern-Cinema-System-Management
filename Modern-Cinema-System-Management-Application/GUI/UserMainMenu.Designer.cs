@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             buttonAdminPanel = new Button();
             buttonEmployeePanel = new Button();
@@ -171,19 +173,52 @@
             // 
             // dataGridViewMovies
             // 
-            dataGridViewMovies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewMovies.AllowUserToAddRows = false;
+            dataGridViewMovies.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewMovies.BackgroundColor = Color.Black;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.Coral;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Coral;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewMovies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewMovies.ColumnHeadersHeight = 50;
+            dataGridViewMovies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewMovies.EnableHeadersVisualStyles = false;
+            dataGridViewMovies.GridColor = Color.Snow;
             dataGridViewMovies.Location = new Point(332, 230);
             dataGridViewMovies.Name = "dataGridViewMovies";
-            dataGridViewMovies.RowTemplate.Height = 25;
+            dataGridViewMovies.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.Coral;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Coral;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridViewMovies.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewMovies.RowHeadersVisible = false;
+            dataGridViewMovies.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewMovies.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewMovies.RowTemplate.DefaultCellStyle.BackColor = Color.Black;
+            dataGridViewMovies.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewMovies.RowTemplate.DefaultCellStyle.ForeColor = Color.Coral;
+            dataGridViewMovies.RowTemplate.Height = 300;
+            dataGridViewMovies.RowTemplate.ReadOnly = true;
+            dataGridViewMovies.RowTemplate.Resizable = DataGridViewTriState.False;
+            dataGridViewMovies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewMovies.Size = new Size(1465, 873);
             dataGridViewMovies.TabIndex = 6;
+            dataGridViewMovies.SelectionChanged += dataGridViewMovies_SelectionChanged;
             // 
             // UserMainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(1872, 1220);
+            ClientSize = new Size(1872, 1100);
             Controls.Add(dataGridViewMovies);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;

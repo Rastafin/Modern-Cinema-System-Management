@@ -1,5 +1,6 @@
 ﻿using Backend.Model;
 using GUI.Functions;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,8 @@ namespace GUI
     public partial class UserMainMenu : Form
     {
         private readonly User? _user;
-        private readonly string _imagesPath = @"C:\ForkRepo\Modern-Cinema-System-Management\Modern-Cinema-System-Management-Application\Backend\Data\Pictures\";
+        //private readonly string _imagesPath = @"C:\ForkRepo\Modern-Cinema-System-Management\Modern-Cinema-System-Management-Application\Backend\Data\Pictures\";
+        private readonly string _imagesPath = @"..\..\..\..\Backend\Data\Pictures\";
         public UserMainMenu(int userId)
         {
             InitializeComponent();
@@ -67,7 +69,14 @@ namespace GUI
 
                 dataGridViewMovies.AutoGenerateColumns = false;
 
-                dataGridViewMovies.Columns.Add("Image", "Image");
+                DataGridViewImageColumn dataGridViewImageColumn = new DataGridViewImageColumn();
+                dataGridViewImageColumn.HeaderText = "";
+                dataGridViewImageColumn.Name = "Image";
+                dataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch;
+                dataGridViewImageColumn.Width = 100;
+
+                dataGridViewMovies.Columns.Add(dataGridViewImageColumn);
+
                 dataGridViewMovies.Columns.Add("StartTime", "Start Time");
                 dataGridViewMovies.Columns.Add("Title", "Title");
                 dataGridViewMovies.Columns.Add("Description", "Description");
@@ -75,17 +84,10 @@ namespace GUI
                 dataGridViewMovies.Columns.Add("Duration", "Duration");
 
 
-                DataGridViewImageColumn dataGridViewImageColumn = new DataGridViewImageColumn();
-                dataGridViewImageColumn.HeaderText = "Image";
-                dataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch;
-                dataGridViewImageColumn.Width = 100;
-
-                dataGridViewMovies.Columns.Add(dataGridViewImageColumn);
-
                 foreach (var screening in screenings)
                 {
-                    //if (File.Exists(screening.ImagePath))
-                    //{
+                    if (screening.Image != null)
+                    {
                         var row = dataGridViewMovies.Rows[dataGridViewMovies.Rows.Add()];
 
                         row.Cells["Image"].Value = screening.Image;
@@ -95,17 +97,25 @@ namespace GUI
                         row.Cells["Director"].Value = screening.Director;
                         row.Cells["Duration"].Value = screening.Duaration;
 
-                    //}
+                    }
                 }
 
-                //dataGridViewMovies.DataSource = screenings;
+                foreach(DataGridViewColumn column in dataGridViewMovies.Columns)
+                {
+                    column.Resizable = DataGridViewTriState.False;
+                }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error occured while trying to load screenings" + ex.Message);
                 return;
             }
+        }
+
+        private void dataGridViewMovies_SelectionChanged(object sender, EventArgs e)
+        {
+            dataGridViewMovies.ClearSelection();
         }
     }
 }
