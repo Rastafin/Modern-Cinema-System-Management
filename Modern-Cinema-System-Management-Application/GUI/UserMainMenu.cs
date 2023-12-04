@@ -1,4 +1,5 @@
 ﻿using Backend.Model;
+using Backend.Services;
 using GUI.Functions;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
@@ -52,55 +53,86 @@ namespace GUI
             NavBarManager.SetAdminButtonVisibility(buttonAdminPanel, _user!.Role);
             NavBarManager.SetEmployeeButtonVisibility(buttonEmployeePanel, _user!.Role);
 
+            dataGridViewMovies.AutoGenerateColumns = false;
+
+            DataGridViewImageColumn dataGridViewImageColumn = new DataGridViewImageColumn();
+            dataGridViewImageColumn.HeaderText = "";
+            dataGridViewImageColumn.Name = "Image";
+            dataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch;
+            dataGridViewImageColumn.Width = 100;
+
+            dataGridViewMovies.Columns.Add(dataGridViewImageColumn);
+
+            dataGridViewMovies.Columns.Add("StartTime", "Start Time");
+            dataGridViewMovies.Columns.Add("Title", "Title");
+            dataGridViewMovies.Columns.Add("Description", "Description");
+            dataGridViewMovies.Columns.Add("Director", "Director");
+            dataGridViewMovies.Columns.Add("Duration", "Duration");
+
+            //dataGridViewMovies.Columns["StartTime"].Width = 300;
+
+            loadScreeningsByDate();
+        }
+
+        private void loadScreeningsByDate()
+        {
             try
             {
+                string selectedDateFromPicker = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                 var screenings = Screening.GetAllScreeningsWithRoomsAndMovies()
                     .Select(s => new
                     {
-                        //ImagePath = Path.Combine(_imagesPath, s.Movie.ImageFileName!),
                         Image = Image.FromFile(_imagesPath + s.Movie.ImageFileName),
                         s.StartTime,
                         s.Movie.Title,
                         s.Movie.Description,
                         s.Movie.Director,
                         s.Movie.Duaration,
-                    })
+                    }).Where(n => ParsingService.ParseStartDate(n.StartTime) == selectedDateFromPicker)
                     .ToList();
 
-                dataGridViewMovies.AutoGenerateColumns = false;
+                dataGridViewMovies.Rows.Clear();
 
-                DataGridViewImageColumn dataGridViewImageColumn = new DataGridViewImageColumn();
-                dataGridViewImageColumn.HeaderText = "";
-                dataGridViewImageColumn.Name = "Image";
-                dataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch;
-                dataGridViewImageColumn.Width = 100;
+                dataGridViewMovies.Show();
+                labelMessage.Text = String.Empty;
 
-                dataGridViewMovies.Columns.Add(dataGridViewImageColumn);
-
-                dataGridViewMovies.Columns.Add("StartTime", "Start Time");
-                dataGridViewMovies.Columns.Add("Title", "Title");
-                dataGridViewMovies.Columns.Add("Description", "Description");
-                dataGridViewMovies.Columns.Add("Director", "Director");
-                dataGridViewMovies.Columns.Add("Duration", "Duration");
-
+                if (screenings == null || screenings.Count == 0)
+                {
+                    dataGridViewMovies.Hide();
+                    labelMessage.Text = "There are not any movies on the selected date";
+                    return;
+                }
 
                 foreach (var screening in screenings)
                 {
                     if (screening.Image != null)
                     {
-                        var row = dataGridViewMovies.Rows[dataGridViewMovies.Rows.Add()];
 
-                        row.Cells["Image"].Value = screening.Image;
-                        row.Cells["StartTime"].Value = screening.StartTime;
-                        row.Cells["Title"].Value = screening.Title;
-                        row.Cells["Description"].Value = screening.Description;
-                        row.Cells["Director"].Value = screening.Director;
-                        row.Cells["Duration"].Value = screening.Duaration;
+                        DataGridViewRow? existingRow = dataGridViewMovies.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(row => row.Cells["Title"].Value.ToString() == screening.Title)
+                            .FirstOrDefault();
+
+                        if (existingRow == null)
+                        {
+                            var row = dataGridViewMovies.Rows[dataGridViewMovies.Rows.Add()];
+
+                            row.Cells["Image"].Value = screening.Image;
+                            row.Cells["StartTime"].Value = ParsingService.ParseStartTime(screening.StartTime);
+                            row.Cells["Title"].Value = screening.Title;
+                            row.Cells["Description"].Value = screening.Description;
+                            row.Cells["Director"].Value = screening.Director;
+                            row.Cells["Duration"].Value = screening.Duaration;
+                        }
+                        else
+                        {
+                            existingRow.Cells["StartTime"].Value += $", {ParsingService.ParseStartTime(screening.StartTime)}";
+                        }
 
                     }
                 }
 
-                foreach(DataGridViewColumn column in dataGridViewMovies.Columns)
+                foreach (DataGridViewColumn column in dataGridViewMovies.Columns)
                 {
                     column.Resizable = DataGridViewTriState.False;
                 }
@@ -116,6 +148,32 @@ namespace GUI
         private void dataGridViewMovies_SelectionChanged(object sender, EventArgs e)
         {
             dataGridViewMovies.ClearSelection();
+        }
+
+        private void buttonAdminPanel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            loadScreeningsByDate();
+        }
+
+        private void dataGridViewMovies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewMovies.Columns[e.ColumnIndex].Name == "StartTime")
+            {
+                if (e.Value != null)
+                {
+                    dataGridViewMovies.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.WrapMode = DataGridViewTriState.True;
+                }
+            }
         }
     }
 }

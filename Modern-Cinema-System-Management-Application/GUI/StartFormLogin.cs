@@ -42,6 +42,10 @@ namespace GUI
                     userMainMenu.Show();
                     this.Hide();
                 }
+                else
+                {
+                    labelMessage.Text = "        Incorrect data. Try again";
+                }
             }
             catch (Exception ex)
             {

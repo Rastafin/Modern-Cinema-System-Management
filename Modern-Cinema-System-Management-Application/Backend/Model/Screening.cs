@@ -35,6 +35,7 @@ namespace Backend.Model
                     return context.Screenings
                         .Include(s => s.Room)
                         .Include(s => s.Movie)
+                        .OrderBy(s => s.StartTime)
                         .ToList();
                 }
                 catch(Exception ex)

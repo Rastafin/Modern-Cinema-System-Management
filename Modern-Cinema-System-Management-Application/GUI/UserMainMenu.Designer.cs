@@ -40,6 +40,8 @@
             pictureBox1 = new PictureBox();
             buttonLogout = new Button();
             dataGridViewMovies = new DataGridView();
+            dateTimePicker1 = new DateTimePicker();
+            labelMessage = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovies).BeginInit();
@@ -75,6 +77,7 @@
             buttonAdminPanel.TabIndex = 13;
             buttonAdminPanel.Text = "ADMIN PANEL";
             buttonAdminPanel.UseVisualStyleBackColor = false;
+            buttonAdminPanel.Click += buttonAdminPanel_Click;
             // 
             // buttonEmployeePanel
             // 
@@ -188,7 +191,7 @@
             dataGridViewMovies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewMovies.EnableHeadersVisualStyles = false;
             dataGridViewMovies.GridColor = Color.Snow;
-            dataGridViewMovies.Location = new Point(332, 230);
+            dataGridViewMovies.Location = new Point(332, 180);
             dataGridViewMovies.Name = "dataGridViewMovies";
             dataGridViewMovies.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -209,9 +212,36 @@
             dataGridViewMovies.RowTemplate.ReadOnly = true;
             dataGridViewMovies.RowTemplate.Resizable = DataGridViewTriState.False;
             dataGridViewMovies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewMovies.Size = new Size(1465, 873);
+            dataGridViewMovies.Size = new Size(1500, 950);
             dataGridViewMovies.TabIndex = 6;
+            dataGridViewMovies.CellContentClick += dataGridViewMovies_CellContentClick;
+            dataGridViewMovies.CellFormatting += dataGridViewMovies_CellFormatting;
             dataGridViewMovies.SelectionChanged += dataGridViewMovies_SelectionChanged;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CalendarForeColor = Color.White;
+            dateTimePicker1.CalendarMonthBackground = Color.Black;
+            dateTimePicker1.CalendarTitleBackColor = Color.Black;
+            dateTimePicker1.CalendarTitleForeColor = Color.White;
+            dateTimePicker1.CalendarTrailingForeColor = Color.White;
+            dateTimePicker1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new Point(927, 36);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(265, 43);
+            dateTimePicker1.TabIndex = 7;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(788, 106);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 8;
             // 
             // UserMainMenu
             // 
@@ -219,6 +249,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(labelMessage);
+            Controls.Add(dateTimePicker1);
             Controls.Add(dataGridViewMovies);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -246,5 +278,7 @@
         private Button buttonAdminPanel;
         private Button buttonEmployeePanel;
         private DataGridView dataGridViewMovies;
+        private DateTimePicker dateTimePicker1;
+        private Label labelMessage;
     }
 }

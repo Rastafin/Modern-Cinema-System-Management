@@ -123,7 +123,7 @@
             labelMessage.AutoSize = true;
             labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelMessage.ForeColor = Color.Coral;
-            labelMessage.Location = new Point(669, 186);
+            labelMessage.Location = new Point(724, 191);
             labelMessage.Name = "labelMessage";
             labelMessage.Size = new Size(0, 40);
             labelMessage.TabIndex = 6;
