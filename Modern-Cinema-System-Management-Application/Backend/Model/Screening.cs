@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,5 +45,33 @@ namespace Backend.Model
                 }
             }
         }
+
+        public static List<string> GetMovieHoursOnSelectedDate(int movieId, string date)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    var screenings = context.Screenings
+                        .Include(s => s.Room)
+                        .Include(s => s.Movie)
+                        .Where(s => s.MovieId == movieId)
+                        .OrderBy(s => s.StartTime)
+                        .ToList();
+
+                    var movieHours = screenings
+                        .Where(s => ParsingService.ParseStartDate(s.StartTime) == date)
+                        .Select(s => ParsingService.ParseStartTime(s.StartTime))
+                        .ToList();
+
+                    return movieHours;
+
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }      
     }
 }

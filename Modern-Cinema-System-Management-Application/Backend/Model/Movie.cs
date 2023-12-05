@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backend.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,5 +24,19 @@ namespace Backend.Model
         public bool IsArchived { get; set; } = false;
         public List<Screening> Screenings { get; set; }
 
+        public static Movie GetMovieByTitle(string title)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    return context.Movies.FirstOrDefault(m => m.Title == title);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

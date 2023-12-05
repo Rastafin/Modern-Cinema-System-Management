@@ -17,7 +17,6 @@ namespace GUI
     public partial class UserMainMenu : Form
     {
         private readonly User? _user;
-        //private readonly string _imagesPath = @"C:\ForkRepo\Modern-Cinema-System-Management\Modern-Cinema-System-Management-Application\Backend\Data\Pictures\";
         private readonly string _imagesPath = @"..\..\..\..\Backend\Data\Pictures\";
         public UserMainMenu(int userId)
         {
@@ -68,6 +67,18 @@ namespace GUI
             dataGridViewMovies.Columns.Add("Description", "Description");
             dataGridViewMovies.Columns.Add("Director", "Director");
             dataGridViewMovies.Columns.Add("Duration", "Duration");
+
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+            buttonColumn.HeaderText = "";
+            buttonColumn.Text = "Book";
+            buttonColumn.UseColumnTextForButtonValue = true;
+
+            dataGridViewMovies.Columns.Add(buttonColumn);
+
+            DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
+            cellStyle.Padding = new Padding(50, 120, 50, 120);
+
+            buttonColumn.DefaultCellStyle = cellStyle;
 
             //dataGridViewMovies.Columns["StartTime"].Width = 300;
 
@@ -157,7 +168,32 @@ namespace GUI
 
         private void dataGridViewMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (dataGridViewMovies.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex != -1)
+                {
+                    try
+                    {
+                        var titleValue = dataGridViewMovies.Rows[e.RowIndex].Cells["Title"].Value.ToString();
+                        string selectedDateFromPicker = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+                        if (titleValue == null || selectedDateFromPicker == null)
+                        {
+                            throw new Exception();
+                        }
 
+                        Movie movie = Movie.GetMovieByTitle(titleValue);
+
+                        if (movie == null) throw new Exception();
+
+                        UserTicketsAmountChoice userTicketsAmountChoice = new UserTicketsAmountChoice(movie, selectedDateFromPicker, _imagesPath);
+                        userTicketsAmountChoice.ShowDialog();
+
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show("Error occured while trying to open booking interface. " + ex.Message);
+                    }                
+                }
+            }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -175,5 +211,16 @@ namespace GUI
                 }
             }
         }
+
+        private void dataGridViewMovies_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+        }
     }
 }
+
+
+
+
+
+
+

@@ -216,6 +216,7 @@
             dataGridViewMovies.TabIndex = 6;
             dataGridViewMovies.CellContentClick += dataGridViewMovies_CellContentClick;
             dataGridViewMovies.CellFormatting += dataGridViewMovies_CellFormatting;
+            dataGridViewMovies.CellPainting += dataGridViewMovies_CellPainting;
             dataGridViewMovies.SelectionChanged += dataGridViewMovies_SelectionChanged;
             // 
             // dateTimePicker1
