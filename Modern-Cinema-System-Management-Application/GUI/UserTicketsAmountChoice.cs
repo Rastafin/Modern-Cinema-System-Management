@@ -56,5 +56,18 @@ namespace GUI
                 MessageBox.Show("Error occured while trying to get movie hours. " + ex.Message);
             }
         }
+
+        private void buttonChooseSeats_Click(object sender, EventArgs e)
+        {
+            if(!(numericUpDownHalfprice.Value > 0 || numericUpDownRegular.Value >0))
+            {
+                labelMessage.Visible = true;
+                return;
+            }
+
+            labelMessage.Visible = false;
+            RoomSmallSeatsChoice roomSmallSeatsChoice = new RoomSmallSeatsChoice();
+            roomSmallSeatsChoice.ShowDialog();
+        }
     }
 }

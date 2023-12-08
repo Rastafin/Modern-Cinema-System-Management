@@ -39,6 +39,7 @@
             buttonChooseSeats = new Button();
             buttonCancel = new Button();
             labelDate = new Label();
+            labelMessage = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMovie).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownRegular).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownHalfprice).BeginInit();
@@ -145,6 +146,7 @@
             buttonChooseSeats.TabIndex = 29;
             buttonChooseSeats.Text = "Choose seats";
             buttonChooseSeats.UseVisualStyleBackColor = false;
+            buttonChooseSeats.Click += buttonChooseSeats_Click;
             // 
             // buttonCancel
             // 
@@ -172,12 +174,25 @@
             labelDate.TabIndex = 31;
             labelDate.Text = "Date";
             // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(356, 766);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(513, 40);
+            labelMessage.TabIndex = 32;
+            labelMessage.Text = "At least one ticket need to be selected";
+            labelMessage.Visible = false;
+            // 
             // UserTicketsAmountChoice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(14, 14, 14);
             ClientSize = new Size(1184, 850);
+            Controls.Add(labelMessage);
             Controls.Add(labelDate);
             Controls.Add(buttonCancel);
             Controls.Add(buttonChooseSeats);
@@ -214,5 +229,6 @@
         private Button buttonChooseSeats;
         private Button buttonCancel;
         private Label labelDate;
+        private Label labelMessage;
     }
 }
