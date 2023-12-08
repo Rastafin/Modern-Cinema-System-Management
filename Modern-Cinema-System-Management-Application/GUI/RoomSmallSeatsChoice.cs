@@ -30,7 +30,7 @@ namespace GUI
                 if (i == idButtonInList)
                 {
                     _buttonStatusList[i] = !_buttonStatusList[i];
-                    return !_buttonStatusList[i];
+                    return _buttonStatusList[i];
                 }
             }
             return false;
@@ -54,19 +54,26 @@ namespace GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*if (buttonClicked(button1.Text))
+            if (buttonClicked(button1.Text))
             {
                 button1.BackColor = Color.Blue;
             }
             else
             {
-                button1.BackColor = Color.Green;
-            }*/
+                button1.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button2.Text))
+            {
+                button2.BackColor = Color.Blue;
+            }
+            else
+            {
+                button2.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
