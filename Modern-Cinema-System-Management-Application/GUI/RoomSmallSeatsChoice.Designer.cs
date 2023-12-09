@@ -57,6 +57,12 @@
             button19 = new Button();
             button20 = new Button();
             buttonChooseBook = new Button();
+            buttonFree = new Button();
+            buttonChosen = new Button();
+            buttonTaken = new Button();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
             panelScreen.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -406,12 +412,81 @@
             buttonChooseBook.UseVisualStyleBackColor = false;
             buttonChooseBook.Click += buttonChooseBook_Click;
             // 
+            // buttonFree
+            // 
+            buttonFree.BackColor = Color.FromArgb(128, 255, 128);
+            buttonFree.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonFree.Location = new Point(971, 218);
+            buttonFree.Name = "buttonFree";
+            buttonFree.Size = new Size(40, 40);
+            buttonFree.TabIndex = 55;
+            buttonFree.UseVisualStyleBackColor = false;
+            // 
+            // buttonChosen
+            // 
+            buttonChosen.BackColor = Color.Blue;
+            buttonChosen.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonChosen.Location = new Point(971, 297);
+            buttonChosen.Name = "buttonChosen";
+            buttonChosen.Size = new Size(40, 40);
+            buttonChosen.TabIndex = 56;
+            buttonChosen.UseVisualStyleBackColor = false;
+            // 
+            // buttonTaken
+            // 
+            buttonTaken.BackColor = Color.Red;
+            buttonTaken.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonTaken.Location = new Point(971, 376);
+            buttonTaken.Name = "buttonTaken";
+            buttonTaken.Size = new Size(40, 40);
+            buttonTaken.TabIndex = 57;
+            buttonTaken.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.FromArgb(128, 255, 128);
+            label2.Location = new Point(1035, 218);
+            label2.Name = "label2";
+            label2.Size = new Size(68, 30);
+            label2.TabIndex = 58;
+            label2.Text = "- Free";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Blue;
+            label3.Location = new Point(1035, 297);
+            label3.Name = "label3";
+            label3.Size = new Size(97, 30);
+            label3.TabIndex = 59;
+            label3.Text = "- Chosen";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(1035, 376);
+            label4.Name = "label4";
+            label4.Size = new Size(82, 30);
+            label4.TabIndex = 60;
+            label4.Text = "- Taken";
+            // 
             // RoomSmallSeatsChoice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(14, 14, 14);
             ClientSize = new Size(1168, 811);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(buttonTaken);
+            Controls.Add(buttonChosen);
+            Controls.Add(buttonFree);
             Controls.Add(buttonChooseBook);
             Controls.Add(button16);
             Controls.Add(button17);
@@ -446,6 +521,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -479,5 +555,11 @@
         private Button button19;
         private Button button20;
         private Button buttonChooseBook;
+        private Button buttonFree;
+        private Button buttonChosen;
+        private Button buttonTaken;
+        private Label label2;
+        private Label label3;
+        private Label label4;
     }
 }

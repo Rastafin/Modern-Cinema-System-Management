@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -72,6 +73,42 @@ namespace Backend.Model
                     throw;
                 }
             }
-        }      
+        }
+        
+        public static int GetRoomIdOnSelectedDate(string dateWithHour, int movieId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    return context.Screenings
+                        .Where(s => s.StartTime == dateWithHour && s.MovieId == movieId)
+                        .Select(s => s.RoomId)
+                        .FirstOrDefault();
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public static int GetScreeningIdFromDateAndMovie(string dateWithHour, int movieId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    return context.Screenings
+                        .Where(s => s.StartTime == dateWithHour && s.MovieId == movieId)
+                        .Select(s => s.Id)
+                        .FirstOrDefault();
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

@@ -148,6 +148,10 @@ namespace GUI
                     column.Resizable = DataGridViewTriState.False;
                 }
 
+                if(ParsingService.ParseStringToDateTime(selectedDateFromPicker) < DateTime.Today)
+                {
+                    labelMessage.Text = "All screenings for that day have ended";
+                }
             }
             catch (Exception ex)
             {
@@ -168,14 +172,15 @@ namespace GUI
 
         private void dataGridViewMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            string selectedDateFromPicker = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && ParsingService.ParseStringToDateTime(selectedDateFromPicker) >= DateTime.Today)
             {
                 if (dataGridViewMovies.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex != -1)
                 {
                     try
                     {
                         var titleValue = dataGridViewMovies.Rows[e.RowIndex].Cells["Title"].Value.ToString();
-                        string selectedDateFromPicker = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                         if (titleValue == null || selectedDateFromPicker == null)
                         {
                             throw new Exception();
@@ -185,7 +190,7 @@ namespace GUI
 
                         if (movie == null) throw new Exception();
 
-                        UserTicketsAmountChoice userTicketsAmountChoice = new UserTicketsAmountChoice(movie, selectedDateFromPicker, _imagesPath);
+                        UserTicketsAmountChoice userTicketsAmountChoice = new UserTicketsAmountChoice(movie, selectedDateFromPicker, _imagesPath, _user);
                         userTicketsAmountChoice.ShowDialog();
 
                     } catch (Exception ex)

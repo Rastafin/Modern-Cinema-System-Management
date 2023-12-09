@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Backend.Services
 {
@@ -14,8 +15,7 @@ namespace Backend.Services
             {
                 return startTime.Substring(11, 5);
             }
-
-            return startTime;
+            throw new ArgumentException("Bad date format");
         }
 
         public static string ParseStartDate(string startTime)
@@ -25,7 +25,18 @@ namespace Backend.Services
                 return startTime.Substring(0, 10);
             }
 
-            return startTime;
+            throw new ArgumentException("Bad date format");
+        }
+
+        public static DateTime ParseStringToDateTime(string dateString)
+        {
+            DateTime parsedDate;
+            if(DateTime.TryParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
+            {
+                return parsedDate;
+            }
+
+            throw new ArgumentException("Bad date format");
         }
     }
 }

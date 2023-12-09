@@ -16,11 +16,13 @@ namespace GUI
         private readonly Movie _movie;
         private readonly string _movieDate;
         private readonly string _imagesPath;
-        public UserTicketsAmountChoice(Movie movie, string movieDate, string imagesPath)
+        private readonly User _user;
+        public UserTicketsAmountChoice(Movie movie, string movieDate, string imagesPath, User user)
         {
             _movie = movie;
             _movieDate = movieDate;
             _imagesPath = imagesPath;
+            _user = user;
 
             InitializeComponent();
         }
@@ -65,9 +67,23 @@ namespace GUI
                 return;
             }
 
-            labelMessage.Visible = false;
-            RoomSmallSeatsChoice roomSmallSeatsChoice = new RoomSmallSeatsChoice();
-            roomSmallSeatsChoice.ShowDialog();
+            try
+            {
+                string dateWithHour = _movieDate + " " + comboBoxMovieHours.SelectedItem.ToString();
+                
+                if(Screening.GetRoomIdOnSelectedDate(dateWithHour, _movie.Id) == 1)
+                {       
+                    labelMessage.Visible = false;
+                    RoomSmallSeatsChoice roomSmallSeatsChoice 
+                        = new RoomSmallSeatsChoice(Screening.GetScreeningIdFromDateAndMovie(dateWithHour, _movie.Id), _user);
+
+                    roomSmallSeatsChoice.ShowDialog();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error occured while trying load RoomSeatsChoice Interface" + ex.Message);
+            }
         }
     }
 }

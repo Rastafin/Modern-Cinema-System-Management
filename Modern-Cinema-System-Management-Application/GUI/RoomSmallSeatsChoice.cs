@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backend.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,8 @@ namespace GUI
     public partial class RoomSmallSeatsChoice : Form
     {
         private List<bool> _buttonStatusList = new List<bool>();
+        private readonly int _screeningId;
+        private readonly User _user;
         private void listOfButtonsInitialization()
         {
             for (int i = 0; i < 20; i++)
@@ -36,10 +39,12 @@ namespace GUI
             return false;
         }
 
-        public RoomSmallSeatsChoice()
+        public RoomSmallSeatsChoice(int screeningId, User user)
         {
             InitializeComponent();
             listOfButtonsInitialization();
+            _screeningId = screeningId;
+            _user = user;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -49,7 +54,7 @@ namespace GUI
 
         private void RoomSmallSeatsChoice_Load(object sender, EventArgs e)
         {
-
+            MessageBox.Show(_screeningId.ToString() + " " + _user.Login.ToString());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -78,92 +83,218 @@ namespace GUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button3.Text))
+            {
+                button3.BackColor = Color.Blue;
+            }
+            else
+            {
+                button3.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button4.Text))
+            {
+                button4.BackColor = Color.Blue;
+            }
+            else
+            {
+                button4.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button5.Text))
+            {
+                button5.BackColor = Color.Blue;
+            }
+            else
+            {
+                button5.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button6.Text))
+            {
+                button6.BackColor = Color.Blue;
+            }
+            else
+            {
+                button6.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button7.Text))
+            {
+                button7.BackColor = Color.Blue;
+            }
+            else
+            {
+                button7.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button8.Text))
+            {
+                button8.BackColor = Color.Blue;
+            }
+            else
+            {
+                button8.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button9.Text))
+            {
+                button9.BackColor = Color.Blue;
+            }
+            else
+            {
+                button9.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button10.Text))
+            {
+                button10.BackColor = Color.Blue;
+            }
+            else
+            {
+                button10.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button11.Text))
+            {
+                button11.BackColor = Color.Blue;
+            }
+            else
+            {
+                button11.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button12.Text))
+            {
+                button12.BackColor = Color.Blue;
+            }
+            else
+            {
+                button12.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button13.Text))
+            {
+                button13.BackColor = Color.Blue;
+            }
+            else
+            {
+                button13.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button14.Text))
+            {
+                button14.BackColor = Color.Blue;
+            }
+            else
+            {
+                button14.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button15.Text))
+            {
+                button15.BackColor = Color.Blue;
+            }
+            else
+            {
+                button15.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button16.Text))
+            {
+                button16.BackColor = Color.Blue;
+            }
+            else
+            {
+                button16.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button17.Text))
+            {
+                button17.BackColor = Color.Blue;
+            }
+            else
+            {
+                button17.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button18.Text))
+            {
+                button18.BackColor = Color.Blue;
+            }
+            else
+            {
+                button18.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button19.Text))
+            {
+                button19.BackColor = Color.Blue;
+            }
+            else
+            {
+                button19.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-
+            if (buttonClicked(button20.Text))
+            {
+                button20.BackColor = Color.Blue;
+            }
+            else
+            {
+                button20.BackColor = Color.FromArgb(128, 255, 128);
+            }
         }
 
         private void buttonChooseBook_Click(object sender, EventArgs e)

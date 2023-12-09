@@ -8,8 +8,8 @@ namespace Backend.Model.Enums
 {
     public enum RoomType
     {
-        Small = 10,
-        Medium = 20,
-        Large = 30
+        Small = 20,
+        Medium = 30,
+        Large = 40
     }
 }
