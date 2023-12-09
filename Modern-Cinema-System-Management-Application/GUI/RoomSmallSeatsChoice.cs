@@ -54,7 +54,7 @@ namespace GUI
 
         private void RoomSmallSeatsChoice_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(_screeningId.ToString() + " " + _user.Login.ToString());
+
         }
 
         private void button1_Click(object sender, EventArgs e)

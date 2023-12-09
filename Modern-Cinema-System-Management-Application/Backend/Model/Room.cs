@@ -16,7 +16,6 @@ namespace Backend.Model
         public int Id { get; set; }
         public string? RoomNumber { get; set; }
         public RoomType Capacity { get; set; }
-        public List<Seat> Seats { get; set; }
         public List<Screening> Screenings { get; set; }
     }
 }

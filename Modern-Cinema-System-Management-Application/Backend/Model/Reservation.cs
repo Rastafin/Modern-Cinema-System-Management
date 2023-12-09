@@ -19,12 +19,10 @@ namespace Backend.Model
         public int? ClientId { get; set; }
         public Client? Client { get; set; }
 
-        [ForeignKey("SeatId")]
-        public int? SeatId { get; set; }
-        public Seat? Seat { get; set; }
-
         [ForeignKey("ScreeningId")]
         public int? ScreeningId { get; set; }
         public Screening? Screening { get; set; }
+
+        public string? Seat { get; set; }
     }
 }

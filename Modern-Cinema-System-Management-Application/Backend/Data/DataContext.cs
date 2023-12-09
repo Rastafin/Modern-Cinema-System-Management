@@ -19,7 +19,6 @@ namespace Backend.Data
         public DbSet<Reservation> Reservations { get; set; } = null!;
         public DbSet<Room> Rooms { get; set; } = null!;
         public DbSet<Screening> Screenings { get; set; } = null!;
-        public DbSet<Seat> Seats { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
