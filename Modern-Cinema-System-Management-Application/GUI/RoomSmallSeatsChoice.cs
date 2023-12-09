@@ -18,9 +18,37 @@ namespace GUI
         private readonly User _user;
         private void listOfButtonsInitialization()
         {
-            for (int i = 0; i < 20; i++)
+            try
             {
-                _buttonStatusList.Add(false);
+                MessageBox.Show(_screeningId.ToString());
+
+                for (int i = 0; i < 20; i++)
+                {
+                    _buttonStatusList.Add(false);
+                }
+
+                List<string> reservedSeats = Reservation.GetReservedSeatsForScreening(_screeningId);
+
+                if (reservedSeats == null) return;
+
+                foreach (string reservedSeat in reservedSeats)
+                {
+                    MessageBox.Show("Here");
+                    string buttonName = "button" + (reservedSeat);
+                    Control[] foundButtons = this.Controls.Find(buttonName, true);
+
+                    if (foundButtons.Length > 0 && foundButtons[0] is Button)
+                    {
+                        Button button = (Button)foundButtons[0];
+
+                        button.BackColor = Color.Red;
+                        button.Enabled = false;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to load seats. " + ex.Message);
             }
         }
 
@@ -41,10 +69,11 @@ namespace GUI
 
         public RoomSmallSeatsChoice(int screeningId, User user)
         {
-            InitializeComponent();
-            listOfButtonsInitialization();
             _screeningId = screeningId;
             _user = user;
+
+            InitializeComponent();
+            listOfButtonsInitialization();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

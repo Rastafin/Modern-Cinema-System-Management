@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Backend.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,5 +25,23 @@ namespace Backend.Model
         public Screening? Screening { get; set; }
 
         public string? Seat { get; set; }
+
+        public static List<string> GetReservedSeatsForScreening(int screeningId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    return context.Reservations
+                        .Where(s => s.ScreeningId == screeningId)
+                        .Select(s => s.Seat)
+                        .ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

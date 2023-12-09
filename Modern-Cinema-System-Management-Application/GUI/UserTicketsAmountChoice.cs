@@ -72,7 +72,8 @@ namespace GUI
                 string dateWithHour = _movieDate + " " + comboBoxMovieHours.SelectedItem.ToString();
                 
                 if(Screening.GetRoomIdOnSelectedDate(dateWithHour, _movie.Id) == 1)
-                {       
+                {
+                    //MessageBox.Show(Screening.GetScreeningIdFromDateAndMovie(dateWithHour, _movie.Id).ToString());    
                     labelMessage.Visible = false;
                     RoomSmallSeatsChoice roomSmallSeatsChoice 
                         = new RoomSmallSeatsChoice(Screening.GetScreeningIdFromDateAndMovie(dateWithHour, _movie.Id), _user);
