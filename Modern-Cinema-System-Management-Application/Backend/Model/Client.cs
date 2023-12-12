@@ -15,7 +15,6 @@ namespace Backend.Model
     [Table("Clients")]
     public class Client : Person
     {
-        public List<Reservation> Reservations { get; set; }
 
         public Client() { }
 

@@ -20,6 +20,7 @@ namespace Backend.Model
         public string Password { get; set; } = null!;
         public string Email { get; set; } = null!;
         public Role Role { get; set; }
+        public List<Reservation> Reservations { get; set; }
         public User(string login, string password, string email)
         {
             Login = login;

@@ -16,9 +16,9 @@ namespace Backend.Model
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("ClientId")]
-        public int? ClientId { get; set; }
-        public Client? Client { get; set; }
+        [ForeignKey("UserId")]
+        public int? UserId { get; set; }
+        public User? User { get; set; }
 
         [ForeignKey("ScreeningId")]
         public int? ScreeningId { get; set; }
@@ -44,7 +44,7 @@ namespace Backend.Model
             }
         }
 
-        public static void MakeReservationForScreening(int clientId, int screeningId, List<string> listOfSeats)
+        public static void MakeReservationForScreening(int userId, int screeningId, List<string> listOfSeats)
         {
             using (var context = new DataContext())
             {
@@ -54,7 +54,7 @@ namespace Backend.Model
                     {
                         Reservation reservation = new Reservation
                         {
-                            ClientId = clientId,
+                            UserId = userId,
                             ScreeningId = screeningId,
                             Seat = seat
                         };

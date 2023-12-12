@@ -66,7 +66,7 @@ namespace GUI
             dataGridViewMovies.Columns.Add("Title", "Title");
             dataGridViewMovies.Columns.Add("Description", "Description");
             dataGridViewMovies.Columns.Add("Director", "Director");
-            dataGridViewMovies.Columns.Add("Duration", "Duration");
+            dataGridViewMovies.Columns.Add("Duration", "Duration (min)");
 
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "";

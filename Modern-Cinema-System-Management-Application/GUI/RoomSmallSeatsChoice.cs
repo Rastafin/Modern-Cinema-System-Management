@@ -341,14 +341,14 @@ namespace GUI
         {
             int numberOfSelectedSeats = _buttonStatusList.Count(status => status);
 
-            if (numberOfSelectedSeats != _numberOfSeatsForReservation)
+            if (numberOfSelectedSeats != _numberOfSeatsForReservation)              
             {
                 labelMessage.Show();
                 return;
             }
             try
             {
-                Reservation.MakeReservationForScreening(Client.GetClient(_user.Id).Id, _screeningId, getSelectedSeats());
+                Reservation.MakeReservationForScreening(_user.Id, _screeningId, getSelectedSeats());
             }
             catch(Exception ex)
             {
