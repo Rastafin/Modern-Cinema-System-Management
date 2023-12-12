@@ -349,6 +349,13 @@ namespace GUI
             try
             {
                 Reservation.MakeReservationForScreening(_user.Id, _screeningId, getSelectedSeats());
+                UserTicketsAmountChoice? userTicketsAmountChoice = Application.OpenForms.OfType<UserTicketsAmountChoice>().FirstOrDefault();
+                UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>().FirstOrDefault();
+
+                if (userTicketsAmountChoice != null) userTicketsAmountChoice.Hide();
+                if (userMainMenu != null) { userMainMenu.ChangeLabelMessage("Your reservation has been made"); }
+
+                this.Close();
             }
             catch(Exception ex)
             {

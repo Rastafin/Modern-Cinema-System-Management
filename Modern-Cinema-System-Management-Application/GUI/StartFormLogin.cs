@@ -40,7 +40,7 @@ namespace GUI
                 {
                     UserMainMenu userMainMenu = new UserMainMenu(userId);
                     userMainMenu.Show();
-                    this.Hide();
+                    Hide();
                 }
                 else
                 {

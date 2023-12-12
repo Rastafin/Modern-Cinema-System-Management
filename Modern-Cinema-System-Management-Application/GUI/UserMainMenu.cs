@@ -9,8 +9,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace GUI
 {
@@ -41,7 +41,7 @@ namespace GUI
         {
             StartFormLogin startFormLogin = new StartFormLogin("");
             startFormLogin.Show();
-            this.Hide();
+            Close();
         }
 
         private void UserMainMenu_Load(object sender, EventArgs e)
@@ -148,7 +148,7 @@ namespace GUI
                     column.Resizable = DataGridViewTriState.False;
                 }
 
-                if(ParsingService.ParseStringToDateTime(selectedDateFromPicker) < DateTime.Today)
+                if (ParsingService.ParseStringToDateTime(selectedDateFromPicker) < DateTime.Today)
                 {
                     labelMessage.Text = "All screenings for that day have ended";
                 }
@@ -193,10 +193,11 @@ namespace GUI
                         UserTicketsAmountChoice userTicketsAmountChoice = new UserTicketsAmountChoice(movie, selectedDateFromPicker, _imagesPath, _user);
                         userTicketsAmountChoice.ShowDialog();
 
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         MessageBox.Show("Error occured while trying to open booking interface. " + ex.Message);
-                    }                
+                    }
                 }
             }
         }
@@ -219,6 +220,25 @@ namespace GUI
 
         private void dataGridViewMovies_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
+        }
+
+        public void ChangeLabelMessage(string message)
+        {
+            if (message != null) labelMessage.Text = message;
+
+            System.Threading.Timer timer = null;
+            timer = new System.Threading.Timer((state) =>
+            {
+                labelMessage.Invoke((MethodInvoker)(() => labelMessage.Text = ""));
+                timer.Dispose();
+            }, null, 4000, System.Threading.Timeout.Infinite);
+        }
+
+        private void buttonReservations_Click(object sender, EventArgs e)
+        {
+            UserReservation userReservation = new UserReservation(_user!);
+            userReservation.Show();
+            Hide();
         }
     }
 }
