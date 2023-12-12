@@ -16,12 +16,11 @@ namespace GUI
         private List<bool> _buttonStatusList = new List<bool>();
         private readonly int _screeningId;
         private readonly User _user;
+        private readonly int _numberOfSeatsForReservation;
         private void listOfButtonsInitialization()
         {
             try
             {
-                MessageBox.Show(_screeningId.ToString());
-
                 for (int i = 0; i < 20; i++)
                 {
                     _buttonStatusList.Add(false);
@@ -33,7 +32,6 @@ namespace GUI
 
                 foreach (string reservedSeat in reservedSeats)
                 {
-                    MessageBox.Show("Here");
                     string buttonName = "button" + (reservedSeat);
                     Control[] foundButtons = this.Controls.Find(buttonName, true);
 
@@ -46,7 +44,7 @@ namespace GUI
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error occured while trying to load seats. " + ex.Message);
             }
@@ -55,25 +53,38 @@ namespace GUI
         private bool buttonClicked(string buttonText)
         {
             int idButtonInList = int.Parse(buttonText) - 1;
-
-            for (int i = 0; i < 20; i++)
+            try
             {
-                if (i == idButtonInList)
+
+
+                for (int i = 0; i < 20; i++)
                 {
-                    _buttonStatusList[i] = !_buttonStatusList[i];
-                    return _buttonStatusList[i];
+                    if (i == idButtonInList)
+                    {
+                        _buttonStatusList[i] = !_buttonStatusList[i];
+                        return _buttonStatusList[i];
+                    }
                 }
+
+                throw new Exception();
             }
-            return false;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to find this button");
+                return false;
+            }
         }
 
-        public RoomSmallSeatsChoice(int screeningId, User user)
+        public RoomSmallSeatsChoice(int screeningId, User user, int numberOfSeatsForReservation)
         {
             _screeningId = screeningId;
             _user = user;
+            _numberOfSeatsForReservation = numberOfSeatsForReservation;
 
             InitializeComponent();
             listOfButtonsInitialization();
+
+            labelMessage.Hide();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -88,247 +99,301 @@ namespace GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button1.Text))
+            if (buttonClicked(buttonA1.Text))
             {
-                button1.BackColor = Color.Blue;
+                buttonA1.BackColor = Color.Blue;
             }
             else
             {
-                button1.BackColor = Color.FromArgb(128, 255, 128);
+                buttonA1.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button2.Text))
+            if (buttonClicked(buttonA2.Text))
             {
-                button2.BackColor = Color.Blue;
+                buttonA2.BackColor = Color.Blue;
             }
             else
             {
-                button2.BackColor = Color.FromArgb(128, 255, 128);
+                buttonA2.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button3.Text))
+            if (buttonClicked(buttonA3.Text))
             {
-                button3.BackColor = Color.Blue;
+                buttonA3.BackColor = Color.Blue;
             }
             else
             {
-                button3.BackColor = Color.FromArgb(128, 255, 128);
+                buttonA3.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button4.Text))
+            if (buttonClicked(buttonA4.Text))
             {
-                button4.BackColor = Color.Blue;
+                buttonA4.BackColor = Color.Blue;
             }
             else
             {
-                button4.BackColor = Color.FromArgb(128, 255, 128);
+                buttonA4.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button5.Text))
+            if (buttonClicked(buttonA5.Text))
             {
-                button5.BackColor = Color.Blue;
+                buttonA5.BackColor = Color.Blue;
             }
             else
             {
-                button5.BackColor = Color.FromArgb(128, 255, 128);
+                buttonA5.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button6.Text))
+            if (buttonClicked(buttonB6.Text))
             {
-                button6.BackColor = Color.Blue;
+                buttonB6.BackColor = Color.Blue;
             }
             else
             {
-                button6.BackColor = Color.FromArgb(128, 255, 128);
+                buttonB6.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button7.Text))
+            if (buttonClicked(buttonB7.Text))
             {
-                button7.BackColor = Color.Blue;
+                buttonB7.BackColor = Color.Blue;
             }
             else
             {
-                button7.BackColor = Color.FromArgb(128, 255, 128);
+                buttonB7.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button8.Text))
+            if (buttonClicked(buttonB8.Text))
             {
-                button8.BackColor = Color.Blue;
+                buttonB8.BackColor = Color.Blue;
             }
             else
             {
-                button8.BackColor = Color.FromArgb(128, 255, 128);
+                buttonB8.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button9.Text))
+            if (buttonClicked(buttonB9.Text))
             {
-                button9.BackColor = Color.Blue;
+                buttonB9.BackColor = Color.Blue;
             }
             else
             {
-                button9.BackColor = Color.FromArgb(128, 255, 128);
+                buttonB9.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button10.Text))
+            if (buttonClicked(buttonB10.Text))
             {
-                button10.BackColor = Color.Blue;
+                buttonB10.BackColor = Color.Blue;
             }
             else
             {
-                button10.BackColor = Color.FromArgb(128, 255, 128);
+                buttonB10.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button11.Text))
+            if (buttonClicked(buttonC11.Text))
             {
-                button11.BackColor = Color.Blue;
+                buttonC11.BackColor = Color.Blue;
             }
             else
             {
-                button11.BackColor = Color.FromArgb(128, 255, 128);
+                buttonC11.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button12.Text))
+            if (buttonClicked(buttonC12.Text))
             {
-                button12.BackColor = Color.Blue;
+                buttonC12.BackColor = Color.Blue;
             }
             else
             {
-                button12.BackColor = Color.FromArgb(128, 255, 128);
+                buttonC12.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button13.Text))
+            if (buttonClicked(buttonC13.Text))
             {
-                button13.BackColor = Color.Blue;
+                buttonC13.BackColor = Color.Blue;
             }
             else
             {
-                button13.BackColor = Color.FromArgb(128, 255, 128);
+                buttonC13.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button14.Text))
+            if (buttonClicked(buttonC14.Text))
             {
-                button14.BackColor = Color.Blue;
+                buttonC14.BackColor = Color.Blue;
             }
             else
             {
-                button14.BackColor = Color.FromArgb(128, 255, 128);
+                buttonC14.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button15.Text))
+            if (buttonClicked(buttonC15.Text))
             {
-                button15.BackColor = Color.Blue;
+                buttonC15.BackColor = Color.Blue;
             }
             else
             {
-                button15.BackColor = Color.FromArgb(128, 255, 128);
+                buttonC15.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button16.Text))
+            if (buttonClicked(buttonD16.Text))
             {
-                button16.BackColor = Color.Blue;
+                buttonD16.BackColor = Color.Blue;
             }
             else
             {
-                button16.BackColor = Color.FromArgb(128, 255, 128);
+                buttonD16.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button17.Text))
+            if (buttonClicked(buttonD17.Text))
             {
-                button17.BackColor = Color.Blue;
+                buttonD17.BackColor = Color.Blue;
             }
             else
             {
-                button17.BackColor = Color.FromArgb(128, 255, 128);
+                buttonD17.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button18.Text))
+            if (buttonClicked(buttonD18.Text))
             {
-                button18.BackColor = Color.Blue;
+                buttonD18.BackColor = Color.Blue;
             }
             else
             {
-                button18.BackColor = Color.FromArgb(128, 255, 128);
+                buttonD18.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button19.Text))
+            if (buttonClicked(buttonD19.Text))
             {
-                button19.BackColor = Color.Blue;
+                buttonD19.BackColor = Color.Blue;
             }
             else
             {
-                button19.BackColor = Color.FromArgb(128, 255, 128);
+                buttonD19.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            if (buttonClicked(button20.Text))
+            if (buttonClicked(buttonD20.Text))
             {
-                button20.BackColor = Color.Blue;
+                buttonD20.BackColor = Color.Blue;
             }
             else
             {
-                button20.BackColor = Color.FromArgb(128, 255, 128);
+                buttonD20.BackColor = Color.FromArgb(128, 255, 128);
             }
         }
 
         private void buttonChooseBook_Click(object sender, EventArgs e)
         {
+            int numberOfSelectedSeats = _buttonStatusList.Count(status => status);
 
+            if (numberOfSelectedSeats != _numberOfSeatsForReservation)
+            {
+                labelMessage.Show();
+                return;
+            }
+            try
+            {
+                Reservation.MakeReservationForScreening(Client.GetClient(_user.Id).Id, _screeningId, getSelectedSeats());
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to make reservation. " + ex.Message);    
+            }
+        }
+
+        private List<string> getSelectedSeats()
+        {
+            List<string> listOfSeats = new List<string>();
+
+            try
+            {
+                List<int> selectedButtonsIndexes = _buttonStatusList
+                    .Select((status, index) => new { Status = status, Index = index })
+                    .Where(item => item.Status)
+                    .Select(item => item.Index + 1)
+                    .ToList();
+
+                foreach (int index in selectedButtonsIndexes)
+                {
+                    switch ((index - 1) / 5)
+                    {
+                        case 0:
+                            listOfSeats.Add("A" + index.ToString());
+                            break;
+                        case 1:
+                            listOfSeats.Add("B" + index.ToString());
+                            break;
+                        case 2:
+                            listOfSeats.Add("C" + index.ToString());
+                            break;
+                        case 3:
+                            listOfSeats.Add("D" + index.ToString());
+                            break;
+                    }
+                }
+
+                return listOfSeats;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to get selected seats. " + ex.Message);
+                return listOfSeats;
+            }
         }
     }
 }

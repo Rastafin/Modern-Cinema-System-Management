@@ -43,5 +43,32 @@ namespace Backend.Model
                 }
             }
         }
+
+        public static void MakeReservationForScreening(int clientId, int screeningId, List<string> listOfSeats)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    foreach(string seat in listOfSeats)
+                    {
+                        Reservation reservation = new Reservation
+                        {
+                            ClientId = clientId,
+                            ScreeningId = screeningId,
+                            Seat = seat
+                        };
+
+                        context.Reservations.Add(reservation);
+                    }
+
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

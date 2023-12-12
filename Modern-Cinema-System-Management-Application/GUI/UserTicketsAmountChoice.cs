@@ -76,7 +76,8 @@ namespace GUI
                     //MessageBox.Show(Screening.GetScreeningIdFromDateAndMovie(dateWithHour, _movie.Id).ToString());    
                     labelMessage.Visible = false;
                     RoomSmallSeatsChoice roomSmallSeatsChoice 
-                        = new RoomSmallSeatsChoice(Screening.GetScreeningIdFromDateAndMovie(dateWithHour, _movie.Id), _user);
+                        = new RoomSmallSeatsChoice(Screening.GetScreeningIdFromDateAndMovie(dateWithHour, _movie.Id), _user, 
+                        (int)(numericUpDownHalfprice.Value + numericUpDownRegular.Value));
 
                     roomSmallSeatsChoice.ShowDialog();
                 }
