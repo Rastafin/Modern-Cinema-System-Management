@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Backend.Model
                 try
                 {
                     return context.Reservations
-                        .Where(s => s.ScreeningId == screeningId)
+                        .Where(s => s.ScreeningId == screeningId && s.IsDeleted == false)
                         .Select(s => s.Seat)
                         .ToList();
                 }
@@ -66,6 +67,64 @@ namespace Backend.Model
                     context.SaveChanges();
                 }
                 catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public static List<(string Title, string StartTime, string RoomNumber, string Seat)> GetUserReseervations(int userId)
+        {
+            using(var context = new DataContext())
+            {
+                try
+                {
+                    deleteOldReservations();
+
+                    var userReservations = context.Reservations
+                        .Where(r => r.UserId == userId && r.IsDeleted == false)
+                        .Select(r => new
+                        {
+                            Title = r.Screening.Movie.Title,
+                            StartTime = r.Screening.StartTime,
+                            RoomNumber = r.Screening.Room.RoomNumber,
+                            Seat = r.Seat
+                        })
+                        .ToList();
+
+                    return userReservations
+                        .Select(r => (r.Title, r.StartTime, r.RoomNumber, r.Seat))
+                        .ToList();
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        private static void deleteOldReservations()
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    List<Reservation> reservations = context.Reservations.Include(r => r.Screening).ToList();
+
+                    foreach (var reservation in reservations)
+                    {
+                        DateTime startTime = ParsingService.ParseStringToDateTime(
+                            ParsingService.ParseStartDate(reservation.Screening.StartTime));
+
+                        if (startTime < DateTime.Today && reservation.IsDeleted == false)
+                        {
+                            reservation.IsDeleted = true;
+                        }
+                    }
+
+                    context.SaveChanges();
+                }
+                catch(Exception ex)
                 {
                     throw;
                 }

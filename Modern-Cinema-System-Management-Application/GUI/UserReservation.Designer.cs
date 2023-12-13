@@ -212,6 +212,8 @@
             dataGridViewReservations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewReservations.Size = new Size(1500, 950);
             dataGridViewReservations.TabIndex = 7;
+            dataGridViewReservations.CellFormatting += dataGridViewReservations_CellFormatting;
+            dataGridViewReservations.SelectionChanged += dataGridViewReservations_SelectionChanged;
             // 
             // UserReservation
             // 
