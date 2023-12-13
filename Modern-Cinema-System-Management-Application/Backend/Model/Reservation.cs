@@ -25,6 +25,7 @@ namespace Backend.Model
         public Screening? Screening { get; set; }
 
         public string? Seat { get; set; }
+        public bool? IsDeleted { get; set; } = false;
 
         public static List<string> GetReservedSeatsForScreening(int screeningId)
         {

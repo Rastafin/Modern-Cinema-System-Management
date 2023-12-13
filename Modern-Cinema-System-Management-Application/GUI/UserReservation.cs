@@ -22,6 +22,11 @@ namespace GUI
             InitializeComponent();
         }
 
+        private void refreshData()
+        {
+            dataGridViewReservations.Rows.Clear();
+        }
+
         private void UserReservation_Load(object sender, EventArgs e)
         {
             buttonReservations.Enabled = false;
@@ -36,6 +41,24 @@ namespace GUI
             dataGridViewReservations.Columns.Add("StartTime", "Start Time");
             dataGridViewReservations.Columns.Add("RoomNumber", "Room Number");
             dataGridViewReservations.Columns.Add("Seats", "Seats");
+
+            DataGridViewButtonColumn buttonColumnCancel = new DataGridViewButtonColumn();
+            buttonColumnCancel.HeaderText = "Cancel Reservation";
+            buttonColumnCancel.Text = "Cancel";
+            buttonColumnCancel.UseColumnTextForButtonValue = true;
+
+            DataGridViewButtonColumn buttonColumnGenerateFile = new DataGridViewButtonColumn();
+            buttonColumnGenerateFile.HeaderText = "Generate Confirmation";
+            buttonColumnGenerateFile.Text = "Generate";
+            buttonColumnGenerateFile.UseColumnTextForButtonValue = true;
+
+            dataGridViewReservations.Columns.Add(buttonColumnCancel);
+            dataGridViewReservations.Columns.Add(buttonColumnGenerateFile);
+
+            DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
+            cellStyle.Padding = new Padding(50, 120, 50, 120);
+            buttonColumnCancel.DefaultCellStyle = cellStyle;
+            buttonColumnGenerateFile.DefaultCellStyle = cellStyle;
         }
 
         private void buttonWhatsOn_Click(object sender, EventArgs e)
