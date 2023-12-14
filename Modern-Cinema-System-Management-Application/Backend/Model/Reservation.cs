@@ -130,5 +130,30 @@ namespace Backend.Model
                 }
             }
         }
+
+        public static void CancelReservation(int userId, string movieTitle, string screeningStartTime)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    List<Reservation> reservations = context.Reservations
+                        .Include(r => r.Screening.Movie)
+                        .Where(r => r.UserId == userId && r.Screening.Movie.Title == movieTitle && r.Screening.StartTime == screeningStartTime)
+                        .ToList();
+
+                    foreach(var reservation in reservations)
+                    {
+                        if(reservation.IsDeleted == false) reservation.IsDeleted = true;
+                    }
+
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

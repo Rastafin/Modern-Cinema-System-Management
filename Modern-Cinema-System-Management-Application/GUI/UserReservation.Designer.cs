@@ -40,6 +40,7 @@
             pictureBox1 = new PictureBox();
             buttonLogout = new Button();
             dataGridViewReservations = new DataGridView();
+            labelMessage = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).BeginInit();
@@ -212,8 +213,19 @@
             dataGridViewReservations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewReservations.Size = new Size(1500, 950);
             dataGridViewReservations.TabIndex = 7;
+            dataGridViewReservations.CellContentClick += dataGridViewReservations_CellContentClick;
             dataGridViewReservations.CellFormatting += dataGridViewReservations_CellFormatting;
             dataGridViewReservations.SelectionChanged += dataGridViewReservations_SelectionChanged;
+            // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(860, 77);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 9;
             // 
             // UserReservation
             // 
@@ -221,6 +233,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(labelMessage);
             Controls.Add(dataGridViewReservations);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -248,5 +261,6 @@
         private PictureBox pictureBox1;
         private Button buttonLogout;
         private DataGridView dataGridViewReservations;
+        private Label labelMessage;
     }
 }

@@ -231,7 +231,7 @@ namespace GUI
             {
                 labelMessage.Invoke((MethodInvoker)(() => labelMessage.Text = ""));
                 timer.Dispose();
-            }, null, 4000, System.Threading.Timeout.Infinite);
+            }, null, 2000, System.Threading.Timeout.Infinite);
         }
 
         private void buttonReservations_Click(object sender, EventArgs e)

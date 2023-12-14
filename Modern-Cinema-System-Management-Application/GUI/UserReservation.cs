@@ -28,7 +28,16 @@ namespace GUI
 
             try
             {
-                foreach (var reservation in Reservation.GetUserReseervations(_user.Id))
+                var reservations = Reservation.GetUserReseervations(_user.Id);
+
+                if (reservations == null || reservations.Count == 0)
+                {
+                    dataGridViewReservations.Hide();
+                    labelMessage.Text = "You do not have any reservations";
+                    return;
+                }
+
+                foreach (var reservation in reservations)
                 {
                     DataGridViewRow? existingRow = dataGridViewReservations.Rows
                             .Cast<DataGridViewRow>()
@@ -124,6 +133,36 @@ namespace GUI
         private void dataGridViewReservations_SelectionChanged(object sender, EventArgs e)
         {
             dataGridViewReservations.ClearSelection();
+        }
+
+        private void dataGridViewReservations_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 4)
+            {
+                if (dataGridViewReservations.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex != -1)
+                {
+                    try
+                    {
+                        var movieTitle = dataGridViewReservations.Rows[e.RowIndex].Cells["Title"].Value.ToString();
+                        var startTime = dataGridViewReservations.Rows[e.RowIndex].Cells["StartTime"].Value.ToString();
+
+                        if (movieTitle== null || startTime == null) throw new Exception();
+
+                        ConfirmationForm confirmationForm = new ConfirmationForm();
+                        confirmationForm.ShowDialog();
+
+                        if (confirmationForm.WasYesClicked)
+                        {
+                            Reservation.CancelReservation(_user.Id, movieTitle, startTime);
+                            refreshData();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error occured while trying to cancel your reservation. " + ex.Message);
+                    }
+                }
+            }
         }
     }
 }
