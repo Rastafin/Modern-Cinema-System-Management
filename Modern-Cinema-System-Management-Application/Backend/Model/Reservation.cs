@@ -103,6 +103,24 @@ namespace Backend.Model
             }
         }
 
+        public static Reservation GetUserReservation(int userId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    return context.Reservations
+                        .Include(r => r.Screening.Movie)
+                        .Include(r => r.Screening.Room)
+                        .FirstOrDefault(r => r.UserId == userId);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
         private static void deleteOldReservations()
         {
             using (var context = new DataContext())

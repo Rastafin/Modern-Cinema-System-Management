@@ -1,4 +1,5 @@
 ﻿using Backend.Model;
+using Backend.Services;
 using GUI.Functions;
 using System;
 using System.Collections.Generic;
@@ -137,6 +138,40 @@ namespace GUI
 
         private void dataGridViewReservations_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+            if (e.RowIndex >= 0 && e.ColumnIndex == 5)
+            {
+                if (dataGridViewReservations.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex != -1)
+                {
+                    try
+                    {
+                        using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                        {
+                            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+                            saveFileDialog.RestoreDirectory = true;
+
+                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                if (dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString() == "") throw new Exception();  
+                                if (dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString() == null) throw new Exception();  
+
+                                string filePath = saveFileDialog.FileName;
+                                GenerateFilesService.GeneratePDFWithReservation(Client.GetClient(_user.Id)
+                                    , Reservation.GetUserReservation(_user.Id)
+                                    , dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString()
+                                    , filePath);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error occured while trying to generate confirmation file. " + ex.Message);
+                    }
+                }
+            }
+
+
+
             if (e.RowIndex >= 0 && e.ColumnIndex == 4)
             {
                 if (dataGridViewReservations.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex != -1)
