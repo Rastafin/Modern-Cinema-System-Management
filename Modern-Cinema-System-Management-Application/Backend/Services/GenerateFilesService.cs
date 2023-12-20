@@ -13,9 +13,6 @@ namespace Backend.Services
     {
         public static void GeneratePDFWithReservation(Client client, Reservation reservation, string seats, string filePath)
         {
-            Random random = new Random();
-            int generatedCode = random.Next(100000, 999999);
-
             try
             {
                 Document document = new Document();
@@ -52,7 +49,7 @@ namespace Backend.Services
                 document.Add(table);
 
                 Paragraph codeParagraph = new Paragraph("To confirm your reservation with ID " + reservation.Id +
-                " you need to enter this code: " + generatedCode + " before payment.", new Font(Font.FontFamily.HELVETICA, 25))
+                " you need to enter this code: " + reservation.ConfirmationNumber + " before payment.", new Font(Font.FontFamily.HELVETICA, 25))
                 {
                     SpacingBefore = 50f 
                 };

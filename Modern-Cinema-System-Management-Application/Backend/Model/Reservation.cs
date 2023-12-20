@@ -27,7 +27,7 @@ namespace Backend.Model
 
         public string? Seat { get; set; }
         public bool? IsDeleted { get; set; } = false;
-
+        public string? ConfirmationNumber { get; set; }
         public static List<string> GetReservedSeatsForScreening(int screeningId)
         {
             using (var context = new DataContext())
@@ -48,18 +48,29 @@ namespace Backend.Model
 
         public static void MakeReservationForScreening(int userId, int screeningId, List<string> listOfSeats)
         {
+            Random random = new Random();
+            string confirmationNumber = random.Next(100000, 999999).ToString();
+
             using (var context = new DataContext())
             {
                 try
                 {
-                    foreach(string seat in listOfSeats)
+                    foreach (string seat in listOfSeats)
                     {
+                        Reservation? currentReservation = (GetUserReservation(userId, screeningId));
+
+                        if (currentReservation != null && currentReservation.ConfirmationNumber != null)
+                        {
+                            confirmationNumber = currentReservation.ConfirmationNumber;
+                        }
+
                         Reservation reservation = new Reservation
                         {
                             UserId = userId,
                             ScreeningId = screeningId,
-                            Seat = seat
-                        };
+                            Seat = seat, 
+                            ConfirmationNumber = confirmationNumber
+                    };
 
                         context.Reservations.Add(reservation);
                     }
@@ -103,7 +114,7 @@ namespace Backend.Model
             }
         }
 
-        public static Reservation GetUserReservation(int userId)
+        public static Reservation GetUserReservation(int userId, int screeningId)
         {
             using (var context = new DataContext())
             {
@@ -112,7 +123,8 @@ namespace Backend.Model
                     return context.Reservations
                         .Include(r => r.Screening.Movie)
                         .Include(r => r.Screening.Room)
-                        .FirstOrDefault(r => r.UserId == userId);
+                        .Where(r => r.UserId == userId && r.ScreeningId == screeningId && r.IsDeleted == false)
+                        .FirstOrDefault();
                 }
                 catch (Exception ex)
                 {

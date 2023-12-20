@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class UserReservation
+    partial class UserProfileForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             buttonAdminPanel = new Button();
             buttonEmployeePanel = new Button();
@@ -39,11 +37,8 @@
             buttonProfile = new Button();
             pictureBox1 = new PictureBox();
             buttonLogout = new Button();
-            dataGridViewReservations = new DataGridView();
-            labelMessage = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -58,10 +53,10 @@
             panel1.Controls.Add(buttonProfile);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(buttonLogout);
-            panel1.Location = new Point(0, 3);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(230, 1215);
-            panel1.TabIndex = 6;
+            panel1.TabIndex = 7;
             // 
             // buttonAdminPanel
             // 
@@ -104,6 +99,7 @@
             buttonReservations.TabIndex = 11;
             buttonReservations.Text = "RESERVATIONS";
             buttonReservations.UseVisualStyleBackColor = false;
+            buttonReservations.Click += buttonReservations_Click;
             // 
             // buttonComingSoon
             // 
@@ -147,7 +143,6 @@
             buttonProfile.TabIndex = 8;
             buttonProfile.Text = "YOUR PROFILE";
             buttonProfile.UseVisualStyleBackColor = false;
-            buttonProfile.Click += buttonProfile_Click;
             // 
             // pictureBox1
             // 
@@ -174,78 +169,21 @@
             buttonLogout.UseVisualStyleBackColor = false;
             buttonLogout.Click += buttonLogout_Click;
             // 
-            // dataGridViewReservations
-            // 
-            dataGridViewReservations.AllowUserToAddRows = false;
-            dataGridViewReservations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewReservations.BackgroundColor = Color.Black;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.Coral;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Coral;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewReservations.ColumnHeadersHeight = 50;
-            dataGridViewReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewReservations.EnableHeadersVisualStyles = false;
-            dataGridViewReservations.GridColor = Color.Snow;
-            dataGridViewReservations.Location = new Point(332, 180);
-            dataGridViewReservations.Name = "dataGridViewReservations";
-            dataGridViewReservations.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.Coral;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Black;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Coral;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewReservations.RowHeadersVisible = false;
-            dataGridViewReservations.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.BackColor = Color.Black;
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.ForeColor = Color.Coral;
-            dataGridViewReservations.RowTemplate.Height = 300;
-            dataGridViewReservations.RowTemplate.ReadOnly = true;
-            dataGridViewReservations.RowTemplate.Resizable = DataGridViewTriState.False;
-            dataGridViewReservations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewReservations.Size = new Size(1500, 950);
-            dataGridViewReservations.TabIndex = 7;
-            dataGridViewReservations.CellContentClick += dataGridViewReservations_CellContentClick;
-            dataGridViewReservations.CellFormatting += dataGridViewReservations_CellFormatting;
-            dataGridViewReservations.SelectionChanged += dataGridViewReservations_SelectionChanged;
-            // 
-            // labelMessage
-            // 
-            labelMessage.AutoSize = true;
-            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelMessage.ForeColor = Color.Coral;
-            labelMessage.Location = new Point(797, 78);
-            labelMessage.Name = "labelMessage";
-            labelMessage.Size = new Size(0, 40);
-            labelMessage.TabIndex = 9;
-            // 
-            // UserReservation
+            // UserProfileForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
-            Controls.Add(labelMessage);
-            Controls.Add(dataGridViewReservations);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "UserReservation";
+            Name = "UserProfileForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "UserReservation";
+            Text = "UserProfileForm";
             WindowState = FormWindowState.Maximized;
-            Load += UserReservation_Load;
+            Load += UserProfileForm_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -261,7 +199,5 @@
         private Button buttonProfile;
         private PictureBox pictureBox1;
         private Button buttonLogout;
-        private DataGridView dataGridViewReservations;
-        private Label labelMessage;
     }
 }

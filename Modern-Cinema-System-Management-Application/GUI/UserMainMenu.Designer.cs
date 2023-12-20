@@ -149,6 +149,7 @@
             buttonProfile.TabIndex = 8;
             buttonProfile.Text = "YOUR PROFILE";
             buttonProfile.UseVisualStyleBackColor = false;
+            buttonProfile.Click += buttonProfile_Click;
             // 
             // pictureBox1
             // 

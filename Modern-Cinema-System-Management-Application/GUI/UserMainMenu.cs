@@ -34,6 +34,7 @@ namespace GUI
             catch
             {
                 MessageBox.Show("Error occured in UserMainMenu after trying to log you in");
+                this.Close();  
             }
         }
 
@@ -70,6 +71,7 @@ namespace GUI
 
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "";
+            buttonColumn.Name = "Action";
             buttonColumn.Text = "Book";
             buttonColumn.UseColumnTextForButtonValue = true;
 
@@ -87,6 +89,8 @@ namespace GUI
 
         private void loadScreeningsByDate()
         {
+            dataGridViewMovies.Columns["Action"].Visible = true;
+
             try
             {
                 string selectedDateFromPicker = dateTimePicker1.Value.ToString("yyyy-MM-dd");
@@ -152,6 +156,11 @@ namespace GUI
                 {
                     labelMessage.Text = "All screenings for that day have ended";
                 }
+
+                if(ParsingService.ParseStringToDateTime(selectedDateFromPicker) < DateTime.Today)
+                {
+                    dataGridViewMovies.Columns["Action"].Visible = false;
+                }
             }
             catch (Exception ex)
             {
@@ -172,6 +181,7 @@ namespace GUI
 
         private void dataGridViewMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
             string selectedDateFromPicker = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && ParsingService.ParseStringToDateTime(selectedDateFromPicker) >= DateTime.Today)
@@ -238,6 +248,13 @@ namespace GUI
         {
             UserReservation userReservation = new UserReservation(_user!);
             userReservation.Show();
+            Hide();
+        }
+
+        private void buttonProfile_Click(object sender, EventArgs e)
+        {
+            UserProfileForm userProfileForm = new UserProfileForm(_user!);
+            userProfileForm.Show();
             Hide();
         }
     }

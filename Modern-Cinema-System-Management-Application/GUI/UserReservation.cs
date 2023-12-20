@@ -152,14 +152,18 @@ namespace GUI
 
                             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                             {
-                                if (dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString() == "") throw new Exception();  
-                                if (dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString() == null) throw new Exception();  
+                                if (dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString() == "") throw new Exception();
+                                if (dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString() == null) throw new Exception();
 
                                 string filePath = saveFileDialog.FileName;
                                 GenerateFilesService.GeneratePDFWithReservation(Client.GetClient(_user.Id)
-                                    , Reservation.GetUserReservation(_user.Id)
+                                    , Reservation.GetUserReservation(_user.Id, Screening.GetScreeningIdFromDateAndMovie(
+                                        dataGridViewReservations.Rows[e.RowIndex].Cells["StartTime"].Value.ToString(),
+                                        Movie.GetMovieByTitle(dataGridViewReservations.Rows[e.RowIndex].Cells["Title"].Value.ToString()).Id))
                                     , dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString()
                                     , filePath);
+
+                                labelMessage.Text = "Your confirmation has been generated successfully";
                             }
                         }
                     }
@@ -181,7 +185,7 @@ namespace GUI
                         var movieTitle = dataGridViewReservations.Rows[e.RowIndex].Cells["Title"].Value.ToString();
                         var startTime = dataGridViewReservations.Rows[e.RowIndex].Cells["StartTime"].Value.ToString();
 
-                        if (movieTitle== null || startTime == null) throw new Exception();
+                        if (movieTitle == null || startTime == null) throw new Exception();
 
                         ConfirmationForm confirmationForm = new ConfirmationForm();
                         confirmationForm.ShowDialog();
@@ -198,6 +202,13 @@ namespace GUI
                     }
                 }
             }
+        }
+
+        private void buttonProfile_Click(object sender, EventArgs e)
+        {
+            UserProfileForm userProfileForm = new UserProfileForm(_user);
+            userProfileForm.Show();
+            Close();
         }
     }
 }
