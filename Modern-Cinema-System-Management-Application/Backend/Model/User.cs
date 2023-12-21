@@ -1,6 +1,7 @@
 ﻿using Backend.Data;
 using Backend.Model.Enums;
 using Backend.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,29 @@ namespace Backend.Model
                     return user!;
                 }
                 catch(Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public static void ChangePassword(User user, string newPassword)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    if (user == null) throw new Exception();
+
+                    var userToUpdate = context.Users.FirstOrDefault(u => u.Id == user.Id);
+
+                    if (userToUpdate != null)
+                    {
+                        userToUpdate.Password = newPassword;
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception)
                 {
                     throw;
                 }

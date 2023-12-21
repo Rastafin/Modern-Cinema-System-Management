@@ -1,5 +1,8 @@
 ﻿using Backend.Model;
+using Backend.Model.Enums;
+using Backend.Services;
 using GUI.Functions;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +17,10 @@ namespace GUI
 {
     public partial class UserProfileForm : Form
     {
-        private readonly User _user;
+        private readonly Client _client;
         public UserProfileForm(User user)
         {
-            _user = user;
+            _client = Client.GetClient(user.Id);
             InitializeComponent();
         }
 
@@ -35,8 +38,29 @@ namespace GUI
             buttonProfile.Enabled = false;
             buttonProfile.BackColor = Color.SlateGray;
 
-            NavBarManager.SetAdminButtonVisibility(buttonAdminPanel, _user!.Role);
-            NavBarManager.SetEmployeeButtonVisibility(buttonEmployeePanel, _user!.Role);
+            NavBarManager.SetAdminButtonVisibility(buttonAdminPanel, _client.User!.Role);
+            NavBarManager.SetEmployeeButtonVisibility(buttonEmployeePanel, _client.User.Role);
+
+            try
+            {
+                textBoxLogin.Text = _client.User.Login;
+                textBoxEmail.Text = _client.User.Email;
+                textBoxName.Text = _client.Name;
+                textBoxLastname.Text = _client.LastName;
+                maskedTextBoxBirthday.Text = _client.Birthday;
+                comboBoxSex.Text = _client.Sex.ToString();
+                textBoxPhoneNumber.Text = _client.PhoneNumber;
+                textBoxCountry.Text = _client.Country;
+                textBoxCity.Text = _client.City;
+                textBoxStreet.Text = _client.Street;
+                textBoxHouseNumber.Text = _client.HouseNumber;
+                maskedTextBoxZipCode.Text = _client.ZipCode;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to load user data. " + ex.Message);
+                return;
+            }
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -48,9 +72,74 @@ namespace GUI
 
         private void buttonReservations_Click(object sender, EventArgs e)
         {
-            UserReservation userReservation = new UserReservation(_user!);
+            UserReservation userReservation = new UserReservation(_client.User!);
             userReservation.Show();
             Close();
+        }
+
+        private void buttonSaveChanges_Click(object sender, EventArgs e)
+        {
+            Sex parsedSex;
+
+            if (!Enum.TryParse(comboBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
+            {
+                labelMessage.Text = "Bad Sex format";
+                return;
+            }
+
+            if (!ValidationService.ValidatePersonalDataChange(_client, textBoxLogin.Text, textBoxEmail.Text, textBoxName.Text, textBoxLastname.Text, maskedTextBoxBirthday.Text, comboBoxSex.Text, textBoxPhoneNumber.Text,
+                textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, maskedTextBoxZipCode.Text, out string message))
+            {
+                labelMessage.Text = message;
+                return;
+            }
+
+            if (!Enum.TryParse(comboBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
+            {
+                labelMessage.Text = "Bad Sex format";
+                return;
+            }
+
+            try
+            {
+                _client.User.Login = textBoxLogin.Text;
+                _client.User.Email = textBoxEmail.Text;
+                _client.Name = textBoxName.Text;
+                _client.LastName = textBoxLastname.Text;
+                _client.Birthday = maskedTextBoxBirthday.Text;
+                _client.Sex = parsedSex;
+                _client.PhoneNumber = textBoxPhoneNumber.Text;
+                _client.Country = textBoxCountry.Text;
+                _client.City = textBoxCity.Text;
+                _client.Street = textBoxStreet.Text;
+                _client.HouseNumber = textBoxHouseNumber.Text;
+                _client.ZipCode = maskedTextBoxZipCode.Text;
+
+                Client.UpdateClient(_client);
+                labelMessageSuccess.Text = "Your data has been changed successfully";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to save changed data. " + ex.Message);
+            }
+        }
+
+        private void buttonChangePassword_Click(object sender, EventArgs e)
+        {
+            ChangePasswordForm changePasswordForm = new ChangePasswordForm(_client.User);
+            changePasswordForm.ShowDialog();
+        }
+
+        public void ChangeLabelMessage(string message)
+        {
+            if (message != null) labelMessageSuccess.Text = message;
+
+            System.Threading.Timer timer = null;
+            timer = new System.Threading.Timer((state) =>
+            {
+                labelMessage.Invoke((MethodInvoker)(() => labelMessageSuccess.Text = ""));
+                timer.Dispose();
+            }, null, 1500, System.Threading.Timeout.Infinite);
         }
     }
 }

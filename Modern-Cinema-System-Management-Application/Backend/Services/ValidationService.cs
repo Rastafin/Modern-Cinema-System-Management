@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Model;
 using Backend.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -117,7 +118,7 @@ namespace Backend.Services
                 return false;
             }
 
-            if (login.Length > 20)
+            if (password.Length > 20)
             {
                 message = "Password can contain max 20 characters";
                 return false;
@@ -154,7 +155,7 @@ namespace Backend.Services
             return true;
         }
 
-        public static bool IsValidEmail(string email)
+        private static bool IsValidEmail(string email)
         {
             try
             {
@@ -165,6 +166,110 @@ namespace Backend.Services
             {
                 return false;
             }
+        }
+
+        public static bool ValidatePersonalDataChange(Client _client, string login, string email, string name, string lastName, string birthday,
+            string sex, string phoneNumber, string country, string city, string street, string houseNumber, string zipCode, out string message)
+        {
+            if (login == _client.User.Login &&
+            email == _client.User.Email &&
+            name == _client.Name &&
+            lastName == _client.LastName &&
+            birthday == _client.Birthday &&
+            sex == _client.Sex.ToString() &&
+            phoneNumber == _client.PhoneNumber &&
+            country == _client.Country &&
+            city == _client.City &&
+            street == _client.Street &&
+            houseNumber == _client.HouseNumber &&
+            zipCode == _client.ZipCode)
+            {
+                message = "No value has been changed";
+                return false;
+            }
+
+            if(!ValidateClientRegisterProcess(name, lastName, birthday, phoneNumber, country, city, street, houseNumber, zipCode, out message))
+            {
+                return false;
+            }
+
+
+            if (login == null || login.Length == 0 || email == null || email.Length == 0)
+            {
+                message = "Not every form field is filled";
+                return false;
+            }
+
+            if (login.Length < 5)
+            {
+                message = "Login must contain at least 5 characters";
+                return false;
+
+            }
+
+            if (login.Length > 20)
+            {
+                message = "Login can contain max 20 characters";
+                return false;
+
+            }
+
+
+
+            if (!IsValidEmail(email))
+            {
+                message = "Invalid email format";
+                return false;
+            }
+
+            using (var context = new DataContext())
+            {
+                if(login != _client.User.Login)
+                {
+                    if (context.Users.Any(u => u.Login == login))
+                    {
+                        message = "Login already exists";
+                        return false;
+                    }
+                }
+
+                if(email != _client.User.Email)
+                {
+                    if (context.Users.Any(u => u.Email == email))
+                    {
+                        message = "Email already exists";
+                        return false;
+                    }
+                }
+            }
+
+            message = String.Empty;
+            return true;
+        }
+
+        public static bool ValidateUserPassword(string password, out string message)
+        {
+            if (password.Length < 5)
+            {
+                message = "Password must contain min 5 characters";
+                return false;
+            }
+
+            if (!password.Any(char.IsDigit))
+            {
+                message = "Password must contain at least one digit";
+                return false;
+            }
+
+            if (password.Length > 20)
+            {
+                message = "Password can contain max 20 characters";
+                return false;
+
+            }
+
+            message = String.Empty;
+            return true; 
         }
     }
 }

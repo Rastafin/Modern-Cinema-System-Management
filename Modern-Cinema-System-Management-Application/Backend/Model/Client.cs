@@ -51,9 +51,30 @@ namespace Backend.Model
 
                     transaction.Commit();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public static void UpdateClient(Client updatedClient)
+        {
+            using (var context = new DataContext())
+            {       
+                try
+                {
+                    Client? existingClient = context.Clients.Include(r => r.User).FirstOrDefault(c => c.Id == updatedClient.Id);
+
+                    if (existingClient == null) throw new Exception();
+
+                    context.Entry(existingClient).CurrentValues.SetValues(updatedClient);
+                    context.Entry(existingClient.User).CurrentValues.SetValues(updatedClient.User);
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
                     throw;
                 }
             }
@@ -65,10 +86,10 @@ namespace Backend.Model
             {
                 try
                 {
-                    var client = context.Clients.FirstOrDefault(c => c.User.Id == userId);
-                    return client;
+                    return context.Clients.Include(r => r.User)
+                        .FirstOrDefault(c => c.User.Id == userId);
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     throw;
                 }
