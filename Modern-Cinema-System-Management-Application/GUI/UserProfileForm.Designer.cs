@@ -99,6 +99,7 @@
             buttonAdminPanel.TabIndex = 13;
             buttonAdminPanel.Text = "ADMIN PANEL";
             buttonAdminPanel.UseVisualStyleBackColor = false;
+            buttonAdminPanel.Click += buttonAdminPanel_Click;
             // 
             // buttonEmployeePanel
             // 

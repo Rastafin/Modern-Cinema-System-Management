@@ -96,5 +96,21 @@ namespace Backend.Model
             }
         }
 
+        public static List<Client> GetClients()
+        {
+            using(var context = new DataContext())
+            {
+                try
+                {
+                    return context.Clients.Include(r => r.User)
+                        .ToList();
+                }
+                catch(Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
     }
 }

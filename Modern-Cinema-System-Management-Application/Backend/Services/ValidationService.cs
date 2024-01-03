@@ -251,19 +251,19 @@ namespace Backend.Services
         {
             if (password.Length < 5)
             {
-                message = "Password must contain min 5 characters";
+                message = "Password must contain \nmin 5 characters";
                 return false;
             }
 
             if (!password.Any(char.IsDigit))
             {
-                message = "Password must contain at least one digit";
+                message = "Password must contain \nat least one digit";
                 return false;
             }
 
             if (password.Length > 20)
             {
-                message = "Password can contain max 20 characters";
+                message = "Password can contain \nmax 20 characters";
                 return false;
 
             }

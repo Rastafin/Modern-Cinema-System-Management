@@ -94,12 +94,6 @@ namespace GUI
                 return;
             }
 
-            if (!Enum.TryParse(comboBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
-            {
-                labelMessage.Text = "Bad Sex format";
-                return;
-            }
-
             try
             {
                 _client.User.Login = textBoxLogin.Text;
@@ -140,6 +134,13 @@ namespace GUI
                 labelMessage.Invoke((MethodInvoker)(() => labelMessageSuccess.Text = ""));
                 timer.Dispose();
             }, null, 1500, System.Threading.Timeout.Infinite);
+        }
+
+        private void buttonAdminPanel_Click(object sender, EventArgs e)
+        {
+            AdminPanelMainMenu adminPanelMainMenu = new AdminPanelMainMenu(_client.User!);
+            adminPanelMainMenu.Show();
+            Hide();
         }
     }
 }

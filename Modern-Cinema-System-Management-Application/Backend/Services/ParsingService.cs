@@ -38,5 +38,16 @@ namespace Backend.Services
 
             throw new ArgumentException("Bad date format");
         }
+
+        public static DateTime ParseStringToDateTimeWithTime(string dateString)
+        {
+            DateTime parsedDate;
+            if (DateTime.TryParseExact(dateString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
+            {
+                return parsedDate;
+            }
+
+            throw new ArgumentException("Bad date format");
+        }
     }
 }

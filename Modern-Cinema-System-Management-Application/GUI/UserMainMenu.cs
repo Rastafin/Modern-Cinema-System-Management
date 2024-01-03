@@ -155,10 +155,6 @@ namespace GUI
                 if (ParsingService.ParseStringToDateTime(selectedDateFromPicker) < DateTime.Today)
                 {
                     labelMessage.Text = "All screenings for that day have ended";
-                }
-
-                if(ParsingService.ParseStringToDateTime(selectedDateFromPicker) < DateTime.Today)
-                {
                     dataGridViewMovies.Columns["Action"].Visible = false;
                 }
             }
@@ -176,7 +172,9 @@ namespace GUI
 
         private void buttonAdminPanel_Click(object sender, EventArgs e)
         {
-
+            AdminPanelMainMenu adminPanelMainMenu = new AdminPanelMainMenu(_user!);
+            adminPanelMainMenu.Show();
+            Hide();
         }
 
         private void dataGridViewMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)

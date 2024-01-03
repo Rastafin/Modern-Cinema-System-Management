@@ -52,9 +52,14 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured while trying to change password");
+                MessageBox.Show("Error occured while trying to change password. " + ex.Message);
                 Close();
             }
+        }
+
+        private void ChangePasswordForm_Load(object sender, EventArgs e)
+        {
+            this.ActiveControl = labelMessage;
         }
     }
 }

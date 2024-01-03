@@ -210,5 +210,12 @@ namespace GUI
             userProfileForm.Show();
             Close();
         }
+
+        private void buttonAdminPanel_Click(object sender, EventArgs e)
+        {
+            AdminPanelMainMenu adminPanelMainMenu = new AdminPanelMainMenu(_user!);
+            adminPanelMainMenu.Show();
+            Close();
+        }
     }
 }

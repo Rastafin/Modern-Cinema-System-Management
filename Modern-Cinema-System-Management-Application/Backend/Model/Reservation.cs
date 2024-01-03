@@ -28,6 +28,7 @@ namespace Backend.Model
         public string? Seat { get; set; }
         public bool? IsDeleted { get; set; } = false;
         public string? ConfirmationNumber { get; set; }
+        public bool? IsReceived { get; set; } = false;
         public static List<string> GetReservedSeatsForScreening(int screeningId)
         {
             using (var context = new DataContext())
@@ -90,8 +91,6 @@ namespace Backend.Model
             {
                 try
                 {
-                    deleteOldReservations();
-
                     var userReservations = context.Reservations
                         .Where(r => r.UserId == userId && r.IsDeleted == false)
                         .Select(r => new
@@ -133,7 +132,7 @@ namespace Backend.Model
             }
         }
 
-        private static void deleteOldReservations()
+        public static void DeleteOldReservations()
         {
             using (var context = new DataContext())
             {
@@ -143,10 +142,11 @@ namespace Backend.Model
 
                     foreach (var reservation in reservations)
                     {
-                        DateTime startTime = ParsingService.ParseStringToDateTime(
-                            ParsingService.ParseStartDate(reservation.Screening.StartTime));
+                        DateTime now = ParsingService.ParseStringToDateTimeWithTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
 
-                        if (startTime < DateTime.Today && reservation.IsDeleted == false)
+                        DateTime startTime = ParsingService.ParseStringToDateTimeWithTime(reservation.Screening.StartTime);
+
+                        if (startTime.AddMinutes(-30) < now && reservation.IsDeleted == false && reservation.IsReceived != true)
                         {
                             reservation.IsDeleted = true;
                         }

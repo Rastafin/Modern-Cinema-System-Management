@@ -109,6 +109,7 @@
             Name = "ChangePasswordForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ChangePasswordForm";
+            Load += ChangePasswordForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
