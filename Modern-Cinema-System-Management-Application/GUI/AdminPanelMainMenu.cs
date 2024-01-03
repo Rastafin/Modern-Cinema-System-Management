@@ -52,6 +52,9 @@ namespace GUI
 
         private void loadUsersToDGV(string filter = "")
         {
+            dataGridViewUsers.Show();
+            labelMessage.Text = String.Empty;
+
             try
             {
                 List<Client> clients = Client.GetClients();
@@ -67,7 +70,7 @@ namespace GUI
 
                 foreach (Client client in clients)
                 {
-                    if(string.IsNullOrEmpty(filter)
+                    if (string.IsNullOrEmpty(filter)
                         || (client.Name != null && client.Name.Contains(filter, StringComparison.OrdinalIgnoreCase))
                         || (client.LastName != null && client.LastName.Contains(filter, StringComparison.OrdinalIgnoreCase))
                         || (client.User.Login != null && client.User.Login.Contains(filter, StringComparison.OrdinalIgnoreCase))
@@ -85,7 +88,13 @@ namespace GUI
                         row.Cells["Role"].Value = client.User.Role;
                     }
 
-                    
+
+                }
+
+                if (dataGridViewUsers.Rows.Count < 1)
+                {
+                    labelMessage.Text = "Cannot find any user";
+                    dataGridViewUsers.Hide();
                 }
             }
             catch (Exception ex)

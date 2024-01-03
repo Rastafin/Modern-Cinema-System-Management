@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
-            labelMessage = new Label();
+            labelAdminPanel = new Label();
             buttonStatistics = new Button();
             buttonUsers = new Button();
             pictureBox1 = new PictureBox();
             buttonBack = new Button();
             dataGridViewUsers = new DataGridView();
             textBoxFilter = new TextBox();
+            buttonChangeStatus = new Button();
+            labelMessage = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
@@ -49,7 +51,7 @@
             // 
             panel1.AutoSize = true;
             panel1.BackColor = Color.Coral;
-            panel1.Controls.Add(labelMessage);
+            panel1.Controls.Add(labelAdminPanel);
             panel1.Controls.Add(buttonStatistics);
             panel1.Controls.Add(buttonUsers);
             panel1.Controls.Add(pictureBox1);
@@ -59,17 +61,17 @@
             panel1.Size = new Size(230, 1215);
             panel1.TabIndex = 6;
             // 
-            // labelMessage
+            // labelAdminPanel
             // 
-            labelMessage.AutoSize = true;
-            labelMessage.BackColor = Color.Coral;
-            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelMessage.ForeColor = Color.Black;
-            labelMessage.Location = new Point(5, 139);
-            labelMessage.Name = "labelMessage";
-            labelMessage.Size = new Size(207, 40);
-            labelMessage.TabIndex = 9;
-            labelMessage.Text = "ADMIN PANEL";
+            labelAdminPanel.AutoSize = true;
+            labelAdminPanel.BackColor = Color.Coral;
+            labelAdminPanel.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelAdminPanel.ForeColor = Color.Black;
+            labelAdminPanel.Location = new Point(5, 139);
+            labelAdminPanel.Name = "labelAdminPanel";
+            labelAdminPanel.Size = new Size(207, 40);
+            labelAdminPanel.TabIndex = 9;
+            labelAdminPanel.Text = "ADMIN PANEL";
             // 
             // buttonStatistics
             // 
@@ -127,38 +129,39 @@
             // dataGridViewUsers
             // 
             dataGridViewUsers.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.BackColor = Color.White;
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewUsers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewUsers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewUsers.BackgroundColor = Color.Black;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = Color.Coral;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.Coral;
-            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dataGridViewUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.Coral;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Coral;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridViewUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridViewUsers.ColumnHeadersHeight = 50;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewUsers.EnableHeadersVisualStyles = false;
             dataGridViewUsers.GridColor = Color.Snow;
             dataGridViewUsers.Location = new Point(332, 180);
+            dataGridViewUsers.MultiSelect = false;
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.Black;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = Color.Coral;
-            dataGridViewCellStyle7.SelectionBackColor = Color.Black;
-            dataGridViewCellStyle7.SelectionForeColor = Color.Coral;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dataGridViewUsers.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.Black;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.Coral;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Black;
+            dataGridViewCellStyle3.SelectionForeColor = Color.Coral;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridViewUsers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewUsers.RowHeadersVisible = false;
             dataGridViewUsers.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.GrayText;
-            dataGridViewUsers.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.GrayText;
+            dataGridViewUsers.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewUsers.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewUsers.RowTemplate.DefaultCellStyle.BackColor = Color.Black;
             dataGridViewUsers.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -183,12 +186,38 @@
             textBoxFilter.TextAlign = HorizontalAlignment.Center;
             textBoxFilter.TextChanged += textBoxFilter_TextChanged;
             // 
+            // buttonChangeStatus
+            // 
+            buttonChangeStatus.BackColor = Color.Coral;
+            buttonChangeStatus.FlatAppearance.BorderColor = Color.Black;
+            buttonChangeStatus.FlatAppearance.BorderSize = 2;
+            buttonChangeStatus.FlatStyle = FlatStyle.Flat;
+            buttonChangeStatus.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonChangeStatus.Location = new Point(1590, 49);
+            buttonChangeStatus.Name = "buttonChangeStatus";
+            buttonChangeStatus.Size = new Size(200, 77);
+            buttonChangeStatus.TabIndex = 26;
+            buttonChangeStatus.Text = "CHANGE STATUS";
+            buttonChangeStatus.UseVisualStyleBackColor = false;
+            // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(944, 128);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 27;
+            // 
             // AdminPanelMainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(labelMessage);
+            Controls.Add(buttonChangeStatus);
             Controls.Add(textBoxFilter);
             Controls.Add(dataGridViewUsers);
             Controls.Add(panel1);
@@ -214,7 +243,9 @@
         private PictureBox pictureBox1;
         private Button buttonBack;
         private DataGridView dataGridViewUsers;
-        private Label labelMessage;
+        private Label labelAdminPanel;
         private TextBox textBoxFilter;
+        private Button buttonChangeStatus;
+        private Label labelMessage;
     }
 }
