@@ -87,6 +87,7 @@
             Name = "ConfirmationForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ConfirmationForm";
+            Load += ConfirmationForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

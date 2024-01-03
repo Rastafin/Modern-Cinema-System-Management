@@ -48,6 +48,11 @@ namespace GUI
             dataGridViewUsers.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 
             loadUsersToDGV();
+
+            if (dataGridViewUsers.Rows.Count > 0 && dataGridViewUsers.SelectedRows.Count > 0)
+            {
+                //setUserRoleInComboBox();
+            }
         }
 
         private void loadUsersToDGV(string filter = "")
@@ -62,7 +67,7 @@ namespace GUI
                 if (clients == null || clients.Count == 0)
                 {
                     dataGridViewUsers.Hide();
-                    //labelMessage.Text = "There are not any users";
+                    labelMessage.Text = "There are not any users";
                     return;
                 }
 
@@ -86,9 +91,16 @@ namespace GUI
                         row.Cells["Login"].Value = client.User.Login;
                         row.Cells["Email"].Value = client.User.Email;
                         row.Cells["Role"].Value = client.User.Role;
+                        row.Cells["Status"].Value = client.User.Status;
                     }
 
 
+                }
+
+                if(dataGridViewUsers.Rows.Count > 0)
+                {
+                    DataGridViewRow firstRow = dataGridViewUsers.Rows[0];
+                    changeComboBoxRoleValue(firstRow);
                 }
 
                 if (dataGridViewUsers.Rows.Count < 1)
@@ -99,9 +111,11 @@ namespace GUI
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show("Error occured while trying to load users. " + ex.Message);
             }
         }
+
         private void buttonBack_Click(object sender, EventArgs e)
         {
             UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>().FirstOrDefault();
@@ -123,6 +137,82 @@ namespace GUI
         {
             string filter = textBoxFilter.Text.Trim();
             loadUsersToDGV(filter);
+        }
+
+        private void buttonChangeStatus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewUsers.SelectedRows.Count > 0
+                    && dataGridViewUsers.SelectedRows[0].Cells["Login"].Value != null)
+                {
+                    User user = User.GetUserByLogin(dataGridViewUsers.SelectedRows[0].Cells["Login"].Value.ToString());
+
+                    ConfirmationForm confirmationForm = new ConfirmationForm();
+                    confirmationForm.ShowDialog();
+
+                    if (confirmationForm.WasYesClicked)
+                    {
+                        User.ChangeUserStatus(user);
+                        loadUsersToDGV();
+                        textBoxFilter.Text = string.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to change user status. " + ex.Message);
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewUsers_SelectionChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void dataGridViewUsers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    DataGridViewRow clickedRow = dataGridViewUsers.Rows[e.RowIndex];
+
+                    changeComboBoxRoleValue(clickedRow);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to set role in comboBox. " + ex.Message);
+            }
+        }
+
+        private void changeComboBoxRoleValue(DataGridViewRow clickedRow)
+        {
+            if (clickedRow.Cells["Role"].Value != null && !clickedRow.Cells["Role"].Value.Equals(DBNull.Value))
+            {
+                string role = clickedRow.Cells["Role"].Value.ToString();
+
+                if (comboBoxRole.Items.Contains(role))
+                {
+                    comboBoxRole.SelectedItem = role;
+                }
+                else
+                {
+                    throw new Exception("Role not found in ComboBox.");
+                }
+            }
+            else
+            {
+                throw new Exception("Invalid role cell or value is null.");
+            }
+        }
+
+        private void dataGridViewUsers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
         }
     }
 }

@@ -30,5 +30,10 @@ namespace GUI
             WasYesClicked = false;
             Close();
         }
+
+        private void ConfirmationForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

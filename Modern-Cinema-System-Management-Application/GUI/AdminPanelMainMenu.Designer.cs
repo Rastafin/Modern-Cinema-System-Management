@@ -42,6 +42,8 @@
             textBoxFilter = new TextBox();
             buttonChangeStatus = new Button();
             labelMessage = new Label();
+            buttonChangeRole = new Button();
+            comboBoxRole = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
@@ -110,6 +112,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // buttonBack
             // 
@@ -172,7 +175,10 @@
             dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewUsers.Size = new Size(1500, 950);
             dataGridViewUsers.TabIndex = 7;
+            dataGridViewUsers.CellClick += dataGridViewUsers_CellClick;
             dataGridViewUsers.CellFormatting += dataGridViewUsers_CellFormatting;
+            dataGridViewUsers.RowHeaderMouseClick += dataGridViewUsers_RowHeaderMouseClick;
+            dataGridViewUsers.SelectionChanged += dataGridViewUsers_SelectionChanged;
             // 
             // textBoxFilter
             // 
@@ -193,12 +199,13 @@
             buttonChangeStatus.FlatAppearance.BorderSize = 2;
             buttonChangeStatus.FlatStyle = FlatStyle.Flat;
             buttonChangeStatus.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonChangeStatus.Location = new Point(1590, 49);
+            buttonChangeStatus.Location = new Point(1475, 49);
             buttonChangeStatus.Name = "buttonChangeStatus";
             buttonChangeStatus.Size = new Size(200, 77);
             buttonChangeStatus.TabIndex = 26;
             buttonChangeStatus.Text = "CHANGE STATUS";
             buttonChangeStatus.UseVisualStyleBackColor = false;
+            buttonChangeStatus.Click += buttonChangeStatus_Click;
             // 
             // labelMessage
             // 
@@ -210,12 +217,41 @@
             labelMessage.Size = new Size(0, 40);
             labelMessage.TabIndex = 27;
             // 
+            // buttonChangeRole
+            // 
+            buttonChangeRole.BackColor = Color.Coral;
+            buttonChangeRole.FlatAppearance.BorderColor = Color.Black;
+            buttonChangeRole.FlatAppearance.BorderSize = 2;
+            buttonChangeRole.FlatStyle = FlatStyle.Flat;
+            buttonChangeRole.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonChangeRole.Location = new Point(347, 47);
+            buttonChangeRole.Name = "buttonChangeRole";
+            buttonChangeRole.Size = new Size(200, 77);
+            buttonChangeRole.TabIndex = 28;
+            buttonChangeRole.Text = "CHANGE ROLE";
+            buttonChangeRole.UseVisualStyleBackColor = false;
+            // 
+            // comboBoxRole
+            // 
+            comboBoxRole.BackColor = Color.LightSalmon;
+            comboBoxRole.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxRole.FlatStyle = FlatStyle.Flat;
+            comboBoxRole.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            comboBoxRole.FormattingEnabled = true;
+            comboBoxRole.Items.AddRange(new object[] { "User", "Employee", "Admin" });
+            comboBoxRole.Location = new Point(588, 60);
+            comboBoxRole.Name = "comboBoxRole";
+            comboBoxRole.Size = new Size(220, 48);
+            comboBoxRole.TabIndex = 40;
+            // 
             // AdminPanelMainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(comboBoxRole);
+            Controls.Add(buttonChangeRole);
             Controls.Add(labelMessage);
             Controls.Add(buttonChangeStatus);
             Controls.Add(textBoxFilter);
@@ -247,5 +283,7 @@
         private TextBox textBoxFilter;
         private Button buttonChangeStatus;
         private Label labelMessage;
+        private Button buttonChangeRole;
+        private ComboBox comboBoxRole;
     }
 }

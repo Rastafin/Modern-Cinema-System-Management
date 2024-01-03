@@ -97,5 +97,44 @@ namespace Backend.Model
                 }
             }
         }
+
+        public static void ChangeUserStatus(User user)
+        {
+            using(var context = new DataContext())
+            {
+                try
+                {
+                    var userToUpdate = context.Users.FirstOrDefault(u => u.Id == user.Id);
+
+                    if(userToUpdate != null)
+                    {
+                        if (userToUpdate.Status == Status.Active) { userToUpdate.Status = Status.Inactive; }
+                        else if (userToUpdate.Status == Status.Inactive) { userToUpdate.Status = Status.Active; }
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public static User GetUserByLogin(string login)
+        {
+            using(var context = new DataContext())
+            {
+                try
+                {
+                    var user = context.Users.FirstOrDefault(x => x.Login == login);
+                    if (user == null) throw new Exception();
+                    return user;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }
