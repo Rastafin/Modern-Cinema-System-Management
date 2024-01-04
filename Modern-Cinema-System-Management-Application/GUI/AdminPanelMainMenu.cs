@@ -1,4 +1,5 @@
 ﻿using Backend.Model;
+using Backend.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,11 +49,6 @@ namespace GUI
             dataGridViewUsers.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 
             loadUsersToDGV();
-
-            if (dataGridViewUsers.Rows.Count > 0 && dataGridViewUsers.SelectedRows.Count > 0)
-            {
-                //setUserRoleInComboBox();
-            }
         }
 
         private void loadUsersToDGV(string filter = "")
@@ -93,11 +89,9 @@ namespace GUI
                         row.Cells["Role"].Value = client.User.Role;
                         row.Cells["Status"].Value = client.User.Status;
                     }
-
-
                 }
 
-                if(dataGridViewUsers.Rows.Count > 0)
+                if (dataGridViewUsers.Rows.Count > 0)
                 {
                     DataGridViewRow firstRow = dataGridViewUsers.Rows[0];
                     changeComboBoxRoleValue(firstRow);
@@ -112,7 +106,7 @@ namespace GUI
             catch (Exception ex)
             {
 
-                MessageBox.Show("Error occured while trying to load users. " + ex.Message);
+                MessageBox.Show("Error occurred while trying to load users. " + ex.Message);
             }
         }
 
@@ -148,6 +142,12 @@ namespace GUI
                 {
                     User user = User.GetUserByLogin(dataGridViewUsers.SelectedRows[0].Cells["Login"].Value.ToString());
 
+                    if (dataGridViewUsers.SelectedRows[0].Cells["Login"].Value.ToString() == _user.Login)
+                    {
+                        labelMessage.Text = "You cannot modify your own status";
+                        return;
+                    }
+
                     ConfirmationForm confirmationForm = new ConfirmationForm();
                     confirmationForm.ShowDialog();
 
@@ -156,12 +156,13 @@ namespace GUI
                         User.ChangeUserStatus(user);
                         loadUsersToDGV();
                         textBoxFilter.Text = string.Empty;
+                        labelMessage.Text = string.Empty;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured while trying to change user status. " + ex.Message);
+                MessageBox.Show("Error occurred while trying to change user status. " + ex.Message);
             }
         }
 
@@ -184,9 +185,10 @@ namespace GUI
 
                     changeComboBoxRoleValue(clickedRow);
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Error occured while trying to set role in comboBox. " + ex.Message);
+                MessageBox.Show("Error occurred while trying to set role in comboBox. " + ex.Message);
             }
         }
 
@@ -213,6 +215,72 @@ namespace GUI
 
         private void dataGridViewUsers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+        }
+
+        private void buttonChangeRole_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewUsers.SelectedRows.Count > 0)
+                {
+                    var selectedRow = dataGridViewUsers.SelectedRows[0];
+
+                    if (selectedRow.Cells["Role"].Value != null && !selectedRow.Cells["Role"].Value.Equals(DBNull.Value))
+                    {
+                        string? selectedRoleInGrid = selectedRow.Cells["Role"].Value.ToString();
+                        string? selectedRoleInComboBox = comboBoxRole.SelectedItem.ToString();
+
+                        if (selectedRow.Cells["Login"].Value.ToString() == _user.Login)
+                        {
+                            labelMessage.Text = "You cannot modify your own role";
+                            return;
+                        }
+
+                        if (selectedRoleInComboBox != null && !selectedRoleInGrid!.Equals(selectedRoleInComboBox))
+                        {
+                            if (Enum.TryParse(selectedRoleInComboBox, out Role parsedRole))
+                            {
+                                if (selectedRow.Cells["Login"].Value == null || selectedRow.Cells["Login"].Value.Equals(DBNull.Value))
+                                    throw new Exception("Invalid login cell or value is null.");
+
+                                ConfirmationForm confirmationForm = new ConfirmationForm();
+                                confirmationForm.ShowDialog();
+
+                                if (confirmationForm.WasYesClicked)
+                                {
+                                    User.ChangeUserRole(User.GetUserByLogin(selectedRow.Cells["Login"].Value.ToString()), parsedRole);
+                                    loadUsersToDGV();
+                                    textBoxFilter.Text = string.Empty;
+                                    labelMessage.Text = string.Empty;
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("Failed parsing comboBoxRole value");
+                            }
+                        }
+                        else
+                        {
+                            labelMessage.Text = "You must change the value firstly";
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid role cell or value is null.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred while trying to change user role. " + ex.Message);
+            }
+        }
+
+        private void buttonStatistics_Click(object sender, EventArgs e)
+        {
+            AdminPanelStatistics adminPanelStatistics = new AdminPanelStatistics(_user);
+            adminPanelStatistics.Show();
+            Hide();
         }
     }
 }

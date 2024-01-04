@@ -88,6 +88,7 @@
             buttonStatistics.TabIndex = 10;
             buttonStatistics.Text = "STATISTICS";
             buttonStatistics.UseVisualStyleBackColor = false;
+            buttonStatistics.Click += buttonStatistics_Click;
             // 
             // buttonUsers
             // 
@@ -199,7 +200,7 @@
             buttonChangeStatus.FlatAppearance.BorderSize = 2;
             buttonChangeStatus.FlatStyle = FlatStyle.Flat;
             buttonChangeStatus.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonChangeStatus.Location = new Point(1475, 49);
+            buttonChangeStatus.Location = new Point(1605, 47);
             buttonChangeStatus.Name = "buttonChangeStatus";
             buttonChangeStatus.Size = new Size(200, 77);
             buttonChangeStatus.TabIndex = 26;
@@ -212,7 +213,7 @@
             labelMessage.AutoSize = true;
             labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelMessage.ForeColor = Color.Coral;
-            labelMessage.Location = new Point(944, 128);
+            labelMessage.Location = new Point(911, 127);
             labelMessage.Name = "labelMessage";
             labelMessage.Size = new Size(0, 40);
             labelMessage.TabIndex = 27;
@@ -230,6 +231,7 @@
             buttonChangeRole.TabIndex = 28;
             buttonChangeRole.Text = "CHANGE ROLE";
             buttonChangeRole.UseVisualStyleBackColor = false;
+            buttonChangeRole.Click += buttonChangeRole_Click;
             // 
             // comboBoxRole
             // 
