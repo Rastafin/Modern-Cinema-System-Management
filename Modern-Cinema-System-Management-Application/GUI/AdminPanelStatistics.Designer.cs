@@ -31,15 +31,21 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             panel1 = new Panel();
             labelAdminPanel = new Label();
             buttonStatistics = new Button();
             buttonUsers = new Button();
             pictureBox1 = new PictureBox();
             buttonBack = new Button();
+            chartSex = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            labelMessage = new Label();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartSex).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
             // 
@@ -123,28 +129,73 @@
             buttonBack.UseVisualStyleBackColor = false;
             buttonBack.Click += buttonBack_Click;
             // 
-            // chart1
+            // chartSex
             // 
-            chart1.BackColor = Color.FromArgb(14, 14, 14);
+            chartSex.BackColor = Color.FromArgb(14, 14, 14);
+            chartSex.BorderlineColor = Color.Coral;
+            chartSex.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartSex.BorderlineWidth = 3;
             chartArea1.BackColor = Color.FromArgb(14, 14, 14);
             chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
+            chartSex.ChartAreas.Add(chartArea1);
             legend1.BackColor = Color.FromArgb(14, 14, 14);
             legend1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             legend1.ForeColor = Color.White;
             legend1.IsTextAutoFit = false;
             legend1.Name = "Legend1";
-            chart1.Legends.Add(legend1);
-            chart1.Location = new Point(504, 139);
-            chart1.Name = "chart1";
+            legend1.TitleFont = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            chartSex.Legends.Add(legend1);
+            chartSex.Location = new Point(504, 139);
+            chartSex.Name = "chartSex";
             series1.BackSecondaryColor = Color.FromArgb(14, 14, 14);
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            chart1.Series.Add(series1);
+            chartSex.Series.Add(series1);
+            chartSex.Size = new Size(447, 559);
+            chartSex.TabIndex = 8;
+            chartSex.Text = "chart1";
+            chartSex.MouseClick += chartSex_MouseClick;
+            // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(843, 43);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 9;
+            // 
+            // chart1
+            // 
+            chart1.BackColor = Color.FromArgb(14, 14, 14);
+            chart1.BorderlineColor = Color.Coral;
+            chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chart1.BorderlineWidth = 3;
+            chartArea2.BackColor = Color.FromArgb(14, 14, 14);
+            chartArea2.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea2);
+            legend2.BackColor = Color.FromArgb(14, 14, 14);
+            legend2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            legend2.ForeColor = Color.White;
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            chart1.Legends.Add(legend2);
+            chart1.Location = new Point(1103, 139);
+            chart1.Name = "chart1";
+            series2.BackSecondaryColor = Color.FromArgb(14, 14, 14);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chart1.Series.Add(series2);
             chart1.Size = new Size(447, 559);
-            chart1.TabIndex = 8;
+            chart1.TabIndex = 10;
             chart1.Text = "chart1";
             // 
             // AdminPanelStatistics
@@ -154,6 +205,8 @@
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
             Controls.Add(chart1);
+            Controls.Add(labelMessage);
+            Controls.Add(chartSex);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AdminPanelStatistics";
@@ -164,6 +217,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartSex).EndInit();
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -177,6 +231,8 @@
         private Button buttonUsers;
         private PictureBox pictureBox1;
         private Button buttonBack;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartSex;
+        private Label labelMessage;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

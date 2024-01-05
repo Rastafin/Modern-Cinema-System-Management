@@ -9,6 +9,7 @@ namespace Backend.Model.Enums
     public enum Sex
     {
         Man,
-        Woman
+        Woman,
+        Other
     }
 }

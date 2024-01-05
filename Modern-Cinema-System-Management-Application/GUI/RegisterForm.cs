@@ -53,7 +53,7 @@ namespace GUI
                 labelMessage.Text = secondMessage;
                 return;
             }
-     
+
             if (!Enum.TryParse(comboBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
             {
                 labelMessage.Text = "Bad Sex format";

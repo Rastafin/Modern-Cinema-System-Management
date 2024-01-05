@@ -1,4 +1,5 @@
 ﻿using Backend.Model;
+using Backend.Services;
 using Org.BouncyCastle.Asn1.Crmf;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace GUI
         {
             AdminPanelStatistics_Load(sender, e, Controls);
 
-            CreateChart();
+            CreateChartSexCount();
         }
 
         private void AdminPanelStatistics_Load(object sender, EventArgs e, Control.ControlCollection controls)
@@ -34,12 +35,9 @@ namespace GUI
             buttonStatistics.Enabled = false;
             buttonStatistics.BackColor = Color.SlateGray;
 
-            // Stwórz wykres
-            //LiveCharts.WinForms.CartesianChart cartesianChart = new LiveCharts.WinForms.CartesianChart();
-
         }
 
-        private void CreateChart()
+        private void CreateChartSexCount()
         {
             // Tworzenie nowego obszaru wykresu
             ChartArea chartArea = new ChartArea();
@@ -48,29 +46,35 @@ namespace GUI
             chartArea.Position.Width = 80; // Szerokość obszaru w procentach
             chartArea.Position.Height = 80; // Wysokość obszaru w procentach
             chartArea.Position.X = 10; // Ustawienie położenia X
+
             chartArea.Position.Y = 10; // Ustawienie położenia Y
             chartArea.BackColor = Color.FromArgb(14, 14, 14);
 
-            chart1.ChartAreas.Add(chartArea);
+            chartSex.ChartAreas.Add(chartArea);
 
-            // Tworzenie serii danych
-            Series series = new Series("Example Series");
-            series.ChartType = SeriesChartType.Pie;
-            series.Points.Add(20);
-            series.Points.Add(40);
-            series.Points.Add(30);
-            series.Points.Add(10);
-            chart1.Series.Add(series);
-            series.ChartArea = "PieChartArea";
+            try
+            {
+                var (malePercentage, femalePercentage, otherPercentage) = ChartDataCalculator.GetUsersSexDataCounts();
+
+                // Tworzenie serii danych
+                Series series = new Series("Sex count");
+                series.ChartType = SeriesChartType.Pie;
+                series.Points.AddXY("Males", malePercentage);
+                series.Points.AddXY("Females", femalePercentage);
+                series.Points.AddXY("Others", otherPercentage);
+                series.Font = new Font("Arial", 12f, FontStyle.Bold);
+
+                chartSex.Series.Add(series);
+                series.ChartArea = "PieChartArea";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred while trying to load chart data. " + ex.Message);
+            }
 
             // Ustawienie pozycji legendy wykresu
-            chart1.Legends.Add(new Legend("Legend"));
-            chart1.Legends[0].Docking = Docking.Bottom;
-            //chart1.Legends[0].BackColor = Color.FromArgb(14, 14, 14);
-
-            //chart1.BackColor = Color.FromArgb(14, 14, 14);
-
-
+            chartSex.Legends.Add(new Legend("Legend"));
+            chartSex.Legends[0].Docking = Docking.Bottom;
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -89,6 +93,35 @@ namespace GUI
             if (adminPanelMainMenu != null) { adminPanelMainMenu.Show(); }
 
             this.Close();
+        }
+
+        private void chartSex_MouseClick(object sender, MouseEventArgs e)
+        {
+            resetChartSexFonts();
+
+            var results = chartSex.HitTest(e.X, e.Y, false, ChartElementType.DataPoint);
+
+            foreach (var result in results)
+            {
+                if (result.ChartElementType == ChartElementType.DataPoint)
+                {
+                    var dataPoint = chartSex.Series[result.Series.Name].Points[result.PointIndex];
+                    labelMessage.Text = $"{dataPoint.AxisLabel} make up {dataPoint.YValues[0]:F2} percent \nof all app users";
+                    dataPoint.Font = new Font(dataPoint.Font.FontFamily, dataPoint.Font.Size + 4, dataPoint.Font.Style);
+                    //MessageBox.Show($"Cliecked: {dataPoint.AxisLabel} - Value: {dataPoint.YValues[0]}");
+                }
+            }
+        }
+
+        private void resetChartSexFonts()
+        {
+            foreach (var series in chartSex.Series)
+            {
+                foreach (var point in series.Points)
+                {
+                    point.Font = new Font("Arial", 12f, FontStyle.Bold);
+                }
+            }
         }
     }
 }

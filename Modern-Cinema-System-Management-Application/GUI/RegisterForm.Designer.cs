@@ -285,7 +285,7 @@
             comboBoxSex.FlatStyle = FlatStyle.Flat;
             comboBoxSex.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             comboBoxSex.FormattingEnabled = true;
-            comboBoxSex.Items.AddRange(new object[] { "Man", "Woman" });
+            comboBoxSex.Items.AddRange(new object[] { "Man", "Woman", "Other" });
             comboBoxSex.Location = new Point(782, 606);
             comboBoxSex.Name = "comboBoxSex";
             comboBoxSex.Size = new Size(431, 48);
