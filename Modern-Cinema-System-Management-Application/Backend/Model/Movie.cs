@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,7 @@ namespace Backend.Model
         public string? WithdrawalDate { get; set; }
         public string? ImageFileName { get; set; }
         public bool IsArchived { get; set; } = false;
+        public MovieCategory? Category { get; set; }
         public List<Screening> Screenings { get; set; }
 
         public static Movie GetMovieByTitle(string title)

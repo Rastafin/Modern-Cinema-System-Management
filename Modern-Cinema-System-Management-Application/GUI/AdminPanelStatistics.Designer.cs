@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             panel1 = new Panel();
             labelAdminPanel = new Label();
             buttonStatistics = new Button();
@@ -42,11 +45,16 @@
             buttonBack = new Button();
             chartSex = new System.Windows.Forms.DataVisualization.Charting.Chart();
             labelMessage = new Label();
-            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            chartMovieCategory = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            label1 = new Label();
+            labelMovieCategory = new Label();
+            chartAge = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            labelAge = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chartSex).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartMovieCategory).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartAge).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -135,25 +143,25 @@
             chartSex.BorderlineColor = Color.Coral;
             chartSex.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             chartSex.BorderlineWidth = 3;
-            chartArea1.BackColor = Color.FromArgb(14, 14, 14);
-            chartArea1.Name = "ChartArea1";
-            chartSex.ChartAreas.Add(chartArea1);
-            legend1.BackColor = Color.FromArgb(14, 14, 14);
-            legend1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            legend1.ForeColor = Color.White;
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.TitleFont = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            chartSex.Legends.Add(legend1);
+            chartArea4.BackColor = Color.FromArgb(14, 14, 14);
+            chartArea4.Name = "ChartArea1";
+            chartSex.ChartAreas.Add(chartArea4);
+            legend4.BackColor = Color.FromArgb(14, 14, 14);
+            legend4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            legend4.ForeColor = Color.White;
+            legend4.IsTextAutoFit = false;
+            legend4.Name = "Legend1";
+            legend4.TitleFont = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            chartSex.Legends.Add(legend4);
             chartSex.Location = new Point(504, 139);
             chartSex.Name = "chartSex";
-            series1.BackSecondaryColor = Color.FromArgb(14, 14, 14);
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chartSex.Series.Add(series1);
+            series4.BackSecondaryColor = Color.FromArgb(14, 14, 14);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series4.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chartSex.Series.Add(series4);
             chartSex.Size = new Size(447, 559);
             chartSex.TabIndex = 8;
             chartSex.Text = "chart1";
@@ -169,34 +177,99 @@
             labelMessage.Size = new Size(0, 40);
             labelMessage.TabIndex = 9;
             // 
-            // chart1
+            // chartMovieCategory
             // 
-            chart1.BackColor = Color.FromArgb(14, 14, 14);
-            chart1.BorderlineColor = Color.Coral;
-            chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chart1.BorderlineWidth = 3;
-            chartArea2.BackColor = Color.FromArgb(14, 14, 14);
-            chartArea2.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea2);
-            legend2.BackColor = Color.FromArgb(14, 14, 14);
-            legend2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            legend2.ForeColor = Color.White;
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.TitleFont = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            chart1.Legends.Add(legend2);
-            chart1.Location = new Point(1103, 139);
-            chart1.Name = "chart1";
-            series2.BackSecondaryColor = Color.FromArgb(14, 14, 14);
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chart1.Series.Add(series2);
-            chart1.Size = new Size(447, 559);
-            chart1.TabIndex = 10;
-            chart1.Text = "chart1";
+            chartMovieCategory.BackColor = Color.FromArgb(14, 14, 14);
+            chartMovieCategory.BorderlineColor = Color.Coral;
+            chartMovieCategory.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartMovieCategory.BorderlineWidth = 3;
+            chartArea5.BackColor = Color.FromArgb(14, 14, 14);
+            chartArea5.Name = "ChartArea1";
+            chartMovieCategory.ChartAreas.Add(chartArea5);
+            legend5.BackColor = Color.FromArgb(14, 14, 14);
+            legend5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            legend5.ForeColor = Color.White;
+            legend5.IsTextAutoFit = false;
+            legend5.Name = "Legend1";
+            legend5.TitleFont = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            chartMovieCategory.Legends.Add(legend5);
+            chartMovieCategory.Location = new Point(1093, 139);
+            chartMovieCategory.Name = "chartMovieCategory";
+            chartMovieCategory.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
+            series5.BackSecondaryColor = Color.FromArgb(14, 14, 14);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series5.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            chartMovieCategory.Series.Add(series5);
+            chartMovieCategory.Size = new Size(447, 559);
+            chartMovieCategory.TabIndex = 10;
+            chartMovieCategory.Text = "chart1";
+            chartMovieCategory.MouseClick += chartMovieCategory_MouseClick;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Coral;
+            label1.Location = new Point(651, 169);
+            label1.Name = "label1";
+            label1.Size = new Size(163, 30);
+            label1.TabIndex = 11;
+            label1.Text = "ALL USERS SEX";
+            // 
+            // labelMovieCategory
+            // 
+            labelMovieCategory.AutoSize = true;
+            labelMovieCategory.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMovieCategory.ForeColor = Color.Coral;
+            labelMovieCategory.Location = new Point(1209, 169);
+            labelMovieCategory.Name = "labelMovieCategory";
+            labelMovieCategory.Size = new Size(212, 30);
+            labelMovieCategory.TabIndex = 12;
+            labelMovieCategory.Text = "MOVIE CATEGORIES";
+            // 
+            // chartAge
+            // 
+            chartAge.BackColor = Color.FromArgb(14, 14, 14);
+            chartAge.BorderlineColor = Color.Coral;
+            chartAge.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartAge.BorderlineWidth = 3;
+            chartArea6.BackColor = Color.FromArgb(14, 14, 14);
+            chartArea6.Name = "ChartArea1";
+            chartAge.ChartAreas.Add(chartArea6);
+            legend6.BackColor = Color.FromArgb(14, 14, 14);
+            legend6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            legend6.ForeColor = Color.White;
+            legend6.IsTextAutoFit = false;
+            legend6.Name = "Legend1";
+            legend6.TitleFont = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            chartAge.Legends.Add(legend6);
+            chartAge.Location = new Point(504, 728);
+            chartAge.Name = "chartAge";
+            chartAge.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+            series6.BackSecondaryColor = Color.FromArgb(14, 14, 14);
+            series6.ChartArea = "ChartArea1";
+            series6.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            chartAge.Series.Add(series6);
+            chartAge.Size = new Size(1036, 382);
+            chartAge.TabIndex = 13;
+            chartAge.Text = "chart1";
+            chartAge.MouseClick += chartAge_MouseClick;
+            // 
+            // labelAge
+            // 
+            labelAge.AutoSize = true;
+            labelAge.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            labelAge.ForeColor = Color.Coral;
+            labelAge.Location = new Point(911, 737);
+            labelAge.Name = "labelAge";
+            labelAge.Size = new Size(216, 30);
+            labelAge.TabIndex = 14;
+            labelAge.Text = "USERS AGE GROUPS";
             // 
             // AdminPanelStatistics
             // 
@@ -204,7 +277,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
-            Controls.Add(chart1);
+            Controls.Add(labelAge);
+            Controls.Add(chartAge);
+            Controls.Add(labelMovieCategory);
+            Controls.Add(label1);
+            Controls.Add(chartMovieCategory);
             Controls.Add(labelMessage);
             Controls.Add(chartSex);
             Controls.Add(panel1);
@@ -218,7 +295,8 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)chartSex).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartMovieCategory).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartAge).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,6 +311,10 @@
         private Button buttonBack;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartSex;
         private Label labelMessage;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartMovieCategory;
+        private Label label1;
+        private Label labelMovieCategory;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartAge;
+        private Label labelAge;
     }
 }
