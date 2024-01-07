@@ -32,7 +32,6 @@
             buttonAdminPanel = new Button();
             buttonEmployeePanel = new Button();
             buttonReservations = new Button();
-            buttonComingSoon = new Button();
             buttonWhatsOn = new Button();
             buttonProfile = new Button();
             pictureBox1 = new PictureBox();
@@ -76,7 +75,6 @@
             panel1.Controls.Add(buttonAdminPanel);
             panel1.Controls.Add(buttonEmployeePanel);
             panel1.Controls.Add(buttonReservations);
-            panel1.Controls.Add(buttonComingSoon);
             panel1.Controls.Add(buttonWhatsOn);
             panel1.Controls.Add(buttonProfile);
             panel1.Controls.Add(pictureBox1);
@@ -93,7 +91,7 @@
             buttonAdminPanel.FlatAppearance.BorderSize = 2;
             buttonAdminPanel.FlatStyle = FlatStyle.Flat;
             buttonAdminPanel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonAdminPanel.Location = new Point(12, 612);
+            buttonAdminPanel.Location = new Point(12, 559);
             buttonAdminPanel.Name = "buttonAdminPanel";
             buttonAdminPanel.Size = new Size(200, 77);
             buttonAdminPanel.TabIndex = 13;
@@ -108,12 +106,13 @@
             buttonEmployeePanel.FlatAppearance.BorderSize = 2;
             buttonEmployeePanel.FlatStyle = FlatStyle.Flat;
             buttonEmployeePanel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonEmployeePanel.Location = new Point(12, 500);
+            buttonEmployeePanel.Location = new Point(12, 431);
             buttonEmployeePanel.Name = "buttonEmployeePanel";
             buttonEmployeePanel.Size = new Size(200, 86);
             buttonEmployeePanel.TabIndex = 12;
             buttonEmployeePanel.Text = "EMPLOYEE PANEL";
             buttonEmployeePanel.UseVisualStyleBackColor = false;
+            buttonEmployeePanel.Click += buttonEmployeePanel_Click;
             // 
             // buttonReservations
             // 
@@ -122,27 +121,13 @@
             buttonReservations.FlatAppearance.BorderSize = 2;
             buttonReservations.FlatStyle = FlatStyle.Flat;
             buttonReservations.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonReservations.Location = new Point(12, 409);
+            buttonReservations.Location = new Point(12, 327);
             buttonReservations.Name = "buttonReservations";
             buttonReservations.Size = new Size(200, 56);
             buttonReservations.TabIndex = 11;
             buttonReservations.Text = "RESERVATIONS";
             buttonReservations.UseVisualStyleBackColor = false;
             buttonReservations.Click += buttonReservations_Click;
-            // 
-            // buttonComingSoon
-            // 
-            buttonComingSoon.BackColor = Color.Coral;
-            buttonComingSoon.FlatAppearance.BorderColor = Color.Black;
-            buttonComingSoon.FlatAppearance.BorderSize = 2;
-            buttonComingSoon.FlatStyle = FlatStyle.Flat;
-            buttonComingSoon.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonComingSoon.Location = new Point(12, 319);
-            buttonComingSoon.Name = "buttonComingSoon";
-            buttonComingSoon.Size = new Size(200, 56);
-            buttonComingSoon.TabIndex = 10;
-            buttonComingSoon.Text = "COMING SOON";
-            buttonComingSoon.UseVisualStyleBackColor = false;
             // 
             // buttonWhatsOn
             // 
@@ -585,7 +570,6 @@
         private Button buttonAdminPanel;
         private Button buttonEmployeePanel;
         private Button buttonReservations;
-        private Button buttonComingSoon;
         private Button buttonWhatsOn;
         private Button buttonProfile;
         private PictureBox pictureBox1;

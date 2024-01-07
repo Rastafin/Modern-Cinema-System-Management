@@ -38,11 +38,6 @@ namespace GUI
             dataGridViewUsers.Columns.Add("Role", "Role");
             dataGridViewUsers.Columns.Add("Status", "Status");
 
-            //dataGridViewUsers.Columns.Add("Country", "Country");
-            //dataGridViewUsers.Columns.Add("City", "City");
-            //dataGridViewUsers.Columns.Add("Street", "Street");
-            //dataGridViewUsers.Columns.Add("HouseNumber", "House number");
-            //dataGridViewUsers.Columns.Add("Zip code", "ZipCode");
 
             dataGridViewUsers.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewUsers.Columns["Lastname"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;

@@ -138,7 +138,10 @@ namespace Backend.Model
             {
                 try
                 {
-                    List<Reservation> reservations = context.Reservations.Include(r => r.Screening).ToList();
+                    List<Reservation> reservations = context.Reservations
+                        .Include(r => r.Screening)
+                        .Include(r => r.Screening.Movie)
+                        .ToList();
 
                     foreach (var reservation in reservations)
                     {
@@ -147,6 +150,10 @@ namespace Backend.Model
                         DateTime startTime = ParsingService.ParseStringToDateTimeWithTime(reservation.Screening.StartTime);
 
                         if (startTime.AddMinutes(-30) < now && reservation.IsDeleted == false && reservation.IsReceived != true)
+                        {
+                            reservation.IsDeleted = true;
+                        } 
+                        else if (startTime.AddMinutes(Double.Parse(reservation.Screening.Movie.Duaration.ToString())) < now)
                         {
                             reservation.IsDeleted = true;
                         }
@@ -182,6 +189,29 @@ namespace Backend.Model
                 catch (Exception ex)
                 {
                     throw;
+                }
+            }
+        }
+
+        public static List<Reservation> GetNotDeletedReservations()
+        {
+            using(var context = new DataContext())
+            {
+                try
+                {
+                    List<Reservation> reservations = context.Reservations
+                        .Where(r => r.IsDeleted == false)
+                        .Include(r => r.User)
+                        .Include(r => r.Screening)
+                        .Include(r => r.Screening!.Movie)
+                        .Include(r => r.Screening!.Room)
+                        .ToList();
+
+                    return reservations;
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception("Error in GetNotDeletedReservations method. ");
                 }
             }
         }

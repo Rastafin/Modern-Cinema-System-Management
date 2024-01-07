@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,5 +113,38 @@ namespace Backend.Model
             }
         }
 
+        public static List<(Client client, int age)> GetClientsWithAge()
+        {
+            using(var context = new DataContext())
+            {
+                try
+                {
+                    var clients = context.Clients.Include(c => c.User).ToList();
+                    var clientsWithAge = new List<(Client client, int age)>();
+
+                    foreach(var client in clients)
+                    {
+                        DateTime birthDate = DateTime.ParseExact(client.Birthday, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+
+                        DateTime now = DateTime.Today;
+
+                        int age = now.Year - birthDate.Year;
+
+                        if(now < birthDate.AddYears(age))
+                        {
+                            age--;
+                        }
+
+                        clientsWithAge.Add((client, age));
+                    }
+
+                    return clientsWithAge;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetClientsWithAge method. " + ex.Message);
+                }
+            }
+        }
     }
 }

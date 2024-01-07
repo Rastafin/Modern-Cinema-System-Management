@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             panel1 = new Panel();
             buttonAdminPanel = new Button();
             buttonEmployeePanel = new Button();
             buttonReservations = new Button();
-            buttonComingSoon = new Button();
             buttonWhatsOn = new Button();
             buttonProfile = new Button();
             pictureBox1 = new PictureBox();
@@ -53,7 +52,6 @@
             panel1.Controls.Add(buttonAdminPanel);
             panel1.Controls.Add(buttonEmployeePanel);
             panel1.Controls.Add(buttonReservations);
-            panel1.Controls.Add(buttonComingSoon);
             panel1.Controls.Add(buttonWhatsOn);
             panel1.Controls.Add(buttonProfile);
             panel1.Controls.Add(pictureBox1);
@@ -70,7 +68,7 @@
             buttonAdminPanel.FlatAppearance.BorderSize = 2;
             buttonAdminPanel.FlatStyle = FlatStyle.Flat;
             buttonAdminPanel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonAdminPanel.Location = new Point(12, 612);
+            buttonAdminPanel.Location = new Point(12, 559);
             buttonAdminPanel.Name = "buttonAdminPanel";
             buttonAdminPanel.Size = new Size(200, 77);
             buttonAdminPanel.TabIndex = 13;
@@ -85,12 +83,13 @@
             buttonEmployeePanel.FlatAppearance.BorderSize = 2;
             buttonEmployeePanel.FlatStyle = FlatStyle.Flat;
             buttonEmployeePanel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonEmployeePanel.Location = new Point(12, 500);
+            buttonEmployeePanel.Location = new Point(12, 431);
             buttonEmployeePanel.Name = "buttonEmployeePanel";
             buttonEmployeePanel.Size = new Size(200, 86);
             buttonEmployeePanel.TabIndex = 12;
             buttonEmployeePanel.Text = "EMPLOYEE PANEL";
             buttonEmployeePanel.UseVisualStyleBackColor = false;
+            buttonEmployeePanel.Click += buttonEmployeePanel_Click;
             // 
             // buttonReservations
             // 
@@ -99,26 +98,12 @@
             buttonReservations.FlatAppearance.BorderSize = 2;
             buttonReservations.FlatStyle = FlatStyle.Flat;
             buttonReservations.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonReservations.Location = new Point(12, 409);
+            buttonReservations.Location = new Point(12, 327);
             buttonReservations.Name = "buttonReservations";
             buttonReservations.Size = new Size(200, 56);
             buttonReservations.TabIndex = 11;
             buttonReservations.Text = "RESERVATIONS";
             buttonReservations.UseVisualStyleBackColor = false;
-            // 
-            // buttonComingSoon
-            // 
-            buttonComingSoon.BackColor = Color.Coral;
-            buttonComingSoon.FlatAppearance.BorderColor = Color.Black;
-            buttonComingSoon.FlatAppearance.BorderSize = 2;
-            buttonComingSoon.FlatStyle = FlatStyle.Flat;
-            buttonComingSoon.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonComingSoon.Location = new Point(12, 319);
-            buttonComingSoon.Name = "buttonComingSoon";
-            buttonComingSoon.Size = new Size(200, 56);
-            buttonComingSoon.TabIndex = 10;
-            buttonComingSoon.Text = "COMING SOON";
-            buttonComingSoon.UseVisualStyleBackColor = false;
             // 
             // buttonWhatsOn
             // 
@@ -180,14 +165,14 @@
             dataGridViewReservations.AllowUserToAddRows = false;
             dataGridViewReservations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewReservations.BackgroundColor = Color.Black;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.Coral;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Coral;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = Color.Coral;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = Color.Coral;
+            dataGridViewCellStyle9.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dataGridViewReservations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dataGridViewReservations.ColumnHeadersHeight = 50;
             dataGridViewReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewReservations.EnableHeadersVisualStyles = false;
@@ -195,14 +180,14 @@
             dataGridViewReservations.Location = new Point(332, 180);
             dataGridViewReservations.Name = "dataGridViewReservations";
             dataGridViewReservations.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.Coral;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Black;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Coral;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.Black;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = Color.Coral;
+            dataGridViewCellStyle10.SelectionBackColor = Color.Black;
+            dataGridViewCellStyle10.SelectionForeColor = Color.Coral;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            dataGridViewReservations.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             dataGridViewReservations.RowHeadersVisible = false;
             dataGridViewReservations.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewReservations.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -257,7 +242,6 @@
         private Button buttonAdminPanel;
         private Button buttonEmployeePanel;
         private Button buttonReservations;
-        private Button buttonComingSoon;
         private Button buttonWhatsOn;
         private Button buttonProfile;
         private PictureBox pictureBox1;

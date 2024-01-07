@@ -140,7 +140,14 @@ namespace GUI
         {
             AdminPanelMainMenu adminPanelMainMenu = new AdminPanelMainMenu(_client.User!);
             adminPanelMainMenu.Show();
-            Hide();
+            Close();
+        }
+
+        private void buttonEmployeePanel_Click(object sender, EventArgs e)
+        {
+            EmployeePanelMainMenu employeePanelMainMenu = new EmployeePanelMainMenu(_client.User!);
+            employeePanelMainMenu.Show();
+            Close();
         }
     }
 }

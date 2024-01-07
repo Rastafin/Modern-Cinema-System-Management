@@ -217,5 +217,12 @@ namespace GUI
             adminPanelMainMenu.Show();
             Close();
         }
+
+        private void buttonEmployeePanel_Click(object sender, EventArgs e)
+        {
+            EmployeePanelMainMenu employeePanelMainMenu = new EmployeePanelMainMenu(_user!);
+            employeePanelMainMenu.Show();
+            Close();
+        }
     }
 }

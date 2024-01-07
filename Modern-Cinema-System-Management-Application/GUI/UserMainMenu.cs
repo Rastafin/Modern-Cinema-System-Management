@@ -34,7 +34,7 @@ namespace GUI
             catch
             {
                 MessageBox.Show("Error occured in UserMainMenu after trying to log you in");
-                this.Close();  
+                this.Close();
             }
         }
 
@@ -254,6 +254,23 @@ namespace GUI
             UserProfileForm userProfileForm = new UserProfileForm(_user!);
             userProfileForm.Show();
             Hide();
+        }
+
+        private void buttonEmployeePanel_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void buttonEmployeePanel_Click_1(object sender, EventArgs e)
+        {
+            EmployeePanelMainMenu employeePanelMainMenu = new EmployeePanelMainMenu(_user!);
+            employeePanelMainMenu.Show();
+            Hide();
+        }
+
+        private void buttonWhatsOn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
