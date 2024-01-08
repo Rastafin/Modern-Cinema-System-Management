@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -71,7 +72,7 @@ namespace Backend.Model
                             ScreeningId = screeningId,
                             Seat = seat, 
                             ConfirmationNumber = confirmationNumber
-                    };
+                        };
 
                         context.Reservations.Add(reservation);
                     }
@@ -131,6 +132,7 @@ namespace Backend.Model
                 }
             }
         }
+
 
         public static void DeleteOldReservations()
         {
@@ -212,6 +214,110 @@ namespace Backend.Model
                 catch(Exception ex)
                 {
                     throw new Exception("Error in GetNotDeletedReservations method. ");
+                }
+            }
+        }
+
+        public static bool CheckConfirmationNumber(int reservationId, string givenConfirmationNumber)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    string correctConfirmationNumber = context.Reservations.FirstOrDefault(r => r.Id == reservationId).ConfirmationNumber;
+
+                    if (correctConfirmationNumber == null) return false;                
+
+                    if(correctConfirmationNumber == givenConfirmationNumber)    
+                    {
+                        return true;
+                    }
+                    else
+                    {       
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in CheckConfirmationNumber method. " + ex);
+                }
+            }
+        }
+
+        public static void ConfirmReservation(int reservationId)
+        {
+            using(var context = new DataContext())
+            {
+                try
+                {
+                    Reservation reservation = context.Reservations.FirstOrDefault(r => r.Id == reservationId);
+
+                    if (reservation == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    if ((bool)reservation.IsReceived!) return;
+
+                    reservation.IsReceived = true;
+
+                    context.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception("Error in ConfirmReservation method. " + ex);
+                }
+            }
+        }
+
+        public static Reservation GetReservationById(int reservationId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    Reservation reservation = context.Reservations.FirstOrDefault(r => r.Id.Equals(reservationId));
+
+                    if(reservation == null) throw new Exception();
+
+                    return reservation;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetReservationById method. " + ex);
+                }
+            }
+        }
+
+        public static List<Reservation> GetUserReservationsListByStartTimeAndRoomNumber(string email, string startTime, string roomNumber)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    List<Reservation> allReservations = context.Reservations
+                        .Include(r => r.User)
+                        .Include(r => r.Screening)
+                        .Include(r => r.Screening!.Room)
+                        .Where(r => r.IsDeleted == false && r.IsReceived == false)
+                        .ToList();
+
+                    List<Reservation> allUserReservationsForScreening = new List<Reservation>();
+
+                    foreach (var item in allReservations)
+                    {
+                        if(item.Screening!.StartTime == startTime && item.Screening.Room.RoomNumber == roomNumber
+                            && item.User!.Email == email)
+                        {
+                            allUserReservationsForScreening.Add(item);
+                        }
+                    }
+
+                    return allUserReservationsForScreening;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetReservationsListByStartTimeAndRoomNumber method. " + ex);
                 }
             }
         }

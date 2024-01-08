@@ -26,11 +26,13 @@ namespace GUI
 
         private void buttonWhatsOn_Click(object sender, EventArgs e)
         {
-            UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>().FirstOrDefault();
+            UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>()
+                .Where(r => r.GetLoggedInUser().Id == _client.UserId)
+                .FirstOrDefault();
 
             if (userMainMenu != null) { userMainMenu.Show(); }
 
-            Close();
+            this.Close();
         }
 
         private void UserProfileForm_Load(object sender, EventArgs e)
@@ -126,12 +128,17 @@ namespace GUI
 
         public void ChangeLabelMessage(string message)
         {
-            if (message != null) labelMessageSuccess.Text = message;
+            if (message != null)
+            {
+                labelMessageSuccess.Text = message;
+                buttonLogout.Enabled = false;
+            }
 
             System.Threading.Timer timer = null;
             timer = new System.Threading.Timer((state) =>
             {
                 labelMessage.Invoke((MethodInvoker)(() => labelMessageSuccess.Text = ""));
+                buttonLogout.Invoke((MethodInvoker)(() => buttonLogout.Enabled = true));
                 timer.Dispose();
             }, null, 1500, System.Threading.Timeout.Infinite);
         }

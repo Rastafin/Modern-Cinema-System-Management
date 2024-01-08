@@ -38,6 +38,10 @@ namespace GUI
             }
         }
 
+        public User GetLoggedInUser()
+        {
+            return _user!;
+        }
         private void buttonExit_Click(object sender, EventArgs e)
         {
             StartFormLogin startFormLogin = new StartFormLogin("");
@@ -232,14 +236,23 @@ namespace GUI
 
         public void ChangeLabelMessage(string message)
         {
-            if (message != null) labelMessage.Text = message;
-
-            System.Threading.Timer timer = null;
-            timer = new System.Threading.Timer((state) =>
+            try
             {
-                labelMessage.Invoke((MethodInvoker)(() => labelMessage.Text = ""));
-                timer.Dispose();
-            }, null, 2000, System.Threading.Timeout.Infinite);
+                if (message != null) labelMessage.Text = message;
+                buttonLogout.Enabled = false;
+
+                System.Threading.Timer timer = null;
+                timer = new System.Threading.Timer((state) =>
+                {
+                    labelMessage.Invoke((MethodInvoker)(() => labelMessage.Text = ""));
+                    buttonLogout.Invoke((MethodInvoker)(() => buttonLogout.Enabled = true));
+                    timer.Dispose();
+                }, null, 2000, System.Threading.Timeout.Infinite);
+            }
+            catch (Exception)
+            {
+                // there is no need to log this exception, it happens when user log out too fast after reservation
+            }
         }
 
         private void buttonReservations_Click(object sender, EventArgs e)

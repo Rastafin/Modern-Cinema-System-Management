@@ -18,7 +18,7 @@ namespace GUI
         public ChangePasswordForm(User user)
         {
             InitializeComponent();
-            _user = user;
+            _user = User.GetUserByUserId(user.Id);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

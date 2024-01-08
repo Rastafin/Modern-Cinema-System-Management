@@ -14,6 +14,7 @@ namespace GUI
     public partial class EmployeePanelMainMenu : Form
     {
         private readonly User _user;
+        private readonly string _imagesPath = @"..\..\..\..\Backend\Data\Pictures\";
         public EmployeePanelMainMenu(User user)
         {
             InitializeComponent();
@@ -36,9 +37,24 @@ namespace GUI
             dataGridViewReservations.Columns.Add("RoomNumber", "Room number");
             dataGridViewReservations.Columns.Add("Seats", "Seats");
 
+            DataGridViewImageColumn dataGridViewImageColumn = new DataGridViewImageColumn();
+            dataGridViewImageColumn.HeaderText = "Received";
+            dataGridViewImageColumn.Name = "IsReceived";
+            dataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch;
+
+            DataGridViewColumn column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "IsReceivedValueColumn";
+            column.Name = "IsReceivedValueColumn";
+            column.Visible = false;
+
+            dataGridViewReservations.Columns.Add(column);
+
+            dataGridViewReservations.Columns.Add(dataGridViewImageColumn);
+
             dataGridViewReservations.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewReservations.Columns["StartTime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewReservations.Columns["Seats"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewReservations.Columns["IsReceived"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
             loadReservationsToDGV();
         }
@@ -77,7 +93,8 @@ namespace GUI
                             .Where(row => row.Cells["Title"].Value.ToString() == reservation.Screening!.Movie.Title
                             && row.Cells["StartTime"].Value.ToString() == reservation.Screening.StartTime
                             && row.Cells["Email"].Value.ToString() == client.User.Email
-                            && row.Cells["RoomNumber"].Value.ToString() == reservation.Screening.Room.RoomNumber)
+                            && row.Cells["RoomNumber"].Value.ToString() == reservation.Screening.Room.RoomNumber
+                            && row.Cells["IsReceivedValueColumn"].Value.ToString() == reservation.IsReceived.ToString())
                             .FirstOrDefault();
 
                         if (existingRow == null)
@@ -92,8 +109,19 @@ namespace GUI
                             row.Cells["Title"].Value = reservation.Screening.Movie.Title;
                             row.Cells["RoomNumber"].Value = reservation.Screening.Room.RoomNumber;
                             row.Cells["Seats"].Value = reservation.Seat;
+                            row.Cells["IsReceivedValueColumn"].Value = reservation.IsReceived.ToString();
+
+                            if (reservation.IsReceived == false)
+                            {
+                                row.Cells["IsReceived"].Value = Image.FromFile(_imagesPath + "NotReceived.png");
+                            }
+                            else if (reservation.IsReceived == true)
+                            {
+                                row.Cells["IsReceived"].Value = Image.FromFile(_imagesPath + "Received.png");
+                            }
+
                         }
-                        else
+                        else if (existingRow != null)
                         {
                             existingRow.Cells["Seats"].Value += $", {reservation.Seat}";
                         }
@@ -115,7 +143,9 @@ namespace GUI
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>().FirstOrDefault();
+            UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>()
+                .Where(r => r.GetLoggedInUser().Id == _user.Id)
+                .FirstOrDefault();
 
             if (userMainMenu != null) { userMainMenu.Show(); }
 
@@ -126,6 +156,64 @@ namespace GUI
         {
             string filter = textBoxFilter.Text.Trim();
             loadReservationsToDGV(filter);
+        }
+
+        private void buttonConfirmReservation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewReservations.SelectedRows.Count > 0)
+                {
+                    var selectedRow = dataGridViewReservations.SelectedRows[0];
+
+                    if (selectedRow.Cells["Email"].Value != null &&
+                        selectedRow.Cells["StartTime"].Value != null &&
+                        selectedRow.Cells["RoomNumber"].Value != null &&
+                        selectedRow.Cells["IsReceivedValueColumn"].Value != null)
+                    {
+                        if (selectedRow.Cells["IsReceivedValueColumn"].Value.ToString() == "True")
+                        {
+                            labelMessage.Text = "This reservation has been \nalready received";
+                            return;
+                        }
+
+                        List<Reservation> reservations = Reservation.GetUserReservationsListByStartTimeAndRoomNumber(
+                            selectedRow.Cells["Email"].Value.ToString(), selectedRow.Cells["StartTime"].Value.ToString(),
+                            selectedRow.Cells["RoomNumber"].Value.ToString());
+
+                        ConfirmReservationForm confirmReservationForm = new ConfirmReservationForm();
+                        confirmReservationForm.ShowDialog();
+
+                        if (confirmReservationForm.ConfrimationNumber == string.Empty) return;
+
+                        string inputConfirmationNumber = confirmReservationForm.ConfrimationNumber;
+
+                        foreach (var reservation in reservations)
+                        {
+                            if (inputConfirmationNumber != string.Empty && inputConfirmationNumber != null
+                            && inputConfirmationNumber == reservation.ConfirmationNumber)
+                            {
+                                Reservation.ConfirmReservation(reservation.Id);
+                                labelMessageConfirmation.Text = string.Empty;
+                            }
+                            else
+                            {
+                                labelMessageConfirmation.Text = "Wrong Confirmation Number";
+                            }
+                        }
+
+                        loadReservationsToDGV();
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid role cell or value is null. ");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error occurred while trying to confirm your reservation. " + ex.Message);
+            }
         }
     }
 }

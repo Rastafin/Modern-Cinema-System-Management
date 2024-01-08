@@ -166,7 +166,9 @@ namespace GUI
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>().FirstOrDefault();
+            UserMainMenu? userMainMenu = Application.OpenForms.OfType<UserMainMenu>()
+                .Where(r => r.GetLoggedInUser().Id == _user.Id)
+                .FirstOrDefault();
 
             if (userMainMenu != null) { userMainMenu.Show(); }
 

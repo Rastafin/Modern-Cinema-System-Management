@@ -42,6 +42,9 @@
             dataGridViewReservations = new DataGridView();
             labelMessage = new Label();
             textBoxFilter = new TextBox();
+            buttonConfirmReservation = new Button();
+            buttonDeleteReservation = new Button();
+            labelMessageConfirmation = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).BeginInit();
@@ -162,7 +165,7 @@
             dataGridViewReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewReservations.EnableHeadersVisualStyles = false;
             dataGridViewReservations.GridColor = Color.Snow;
-            dataGridViewReservations.Location = new Point(332, 180);
+            dataGridViewReservations.Location = new Point(332, 220);
             dataGridViewReservations.MultiSelect = false;
             dataGridViewReservations.Name = "dataGridViewReservations";
             dataGridViewReservations.ReadOnly = true;
@@ -194,7 +197,7 @@
             labelMessage.AutoSize = true;
             labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelMessage.ForeColor = Color.Coral;
-            labelMessage.Location = new Point(911, 127);
+            labelMessage.Location = new Point(911, 121);
             labelMessage.Name = "labelMessage";
             labelMessage.Size = new Size(0, 40);
             labelMessage.TabIndex = 28;
@@ -211,12 +214,54 @@
             textBoxFilter.TextAlign = HorizontalAlignment.Center;
             textBoxFilter.TextChanged += textBoxFilter_TextChanged;
             // 
+            // buttonConfirmReservation
+            // 
+            buttonConfirmReservation.BackColor = Color.Coral;
+            buttonConfirmReservation.FlatAppearance.BorderColor = Color.Black;
+            buttonConfirmReservation.FlatAppearance.BorderSize = 2;
+            buttonConfirmReservation.FlatStyle = FlatStyle.Flat;
+            buttonConfirmReservation.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonConfirmReservation.Location = new Point(576, 50);
+            buttonConfirmReservation.Name = "buttonConfirmReservation";
+            buttonConfirmReservation.Size = new Size(200, 77);
+            buttonConfirmReservation.TabIndex = 30;
+            buttonConfirmReservation.Text = "CONFIRM\r\nRESERVATION";
+            buttonConfirmReservation.UseVisualStyleBackColor = false;
+            buttonConfirmReservation.Click += buttonConfirmReservation_Click;
+            // 
+            // buttonDeleteReservation
+            // 
+            buttonDeleteReservation.BackColor = Color.Coral;
+            buttonDeleteReservation.FlatAppearance.BorderColor = Color.Black;
+            buttonDeleteReservation.FlatAppearance.BorderSize = 2;
+            buttonDeleteReservation.FlatStyle = FlatStyle.Flat;
+            buttonDeleteReservation.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonDeleteReservation.Location = new Point(1411, 50);
+            buttonDeleteReservation.Name = "buttonDeleteReservation";
+            buttonDeleteReservation.Size = new Size(200, 77);
+            buttonDeleteReservation.TabIndex = 31;
+            buttonDeleteReservation.Text = "DELETE\r\nRESERVATION";
+            buttonDeleteReservation.UseVisualStyleBackColor = false;
+            // 
+            // labelMessageConfirmation
+            // 
+            labelMessageConfirmation.AutoSize = true;
+            labelMessageConfirmation.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessageConfirmation.ForeColor = Color.Coral;
+            labelMessageConfirmation.Location = new Point(891, 9);
+            labelMessageConfirmation.Name = "labelMessageConfirmation";
+            labelMessageConfirmation.Size = new Size(0, 40);
+            labelMessageConfirmation.TabIndex = 32;
+            // 
             // EmployeePanelMainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(labelMessageConfirmation);
+            Controls.Add(buttonDeleteReservation);
+            Controls.Add(buttonConfirmReservation);
             Controls.Add(textBoxFilter);
             Controls.Add(labelMessage);
             Controls.Add(dataGridViewReservations);
@@ -247,5 +292,8 @@
         private DataGridView dataGridViewReservations;
         private Label labelMessage;
         private TextBox textBoxFilter;
+        private Button buttonConfirmReservation;
+        private Button buttonDeleteReservation;
+        private Label labelMessageConfirmation;
     }
 }
