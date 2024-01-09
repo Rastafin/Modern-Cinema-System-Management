@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             panel1 = new Panel();
             buttonScreenings = new Button();
             labelEmployeePanel = new Label();
-            buttonMovies = new Button();
+            buttonAddMovieForm = new Button();
             buttonUsersReservations = new Button();
             pictureBox1 = new PictureBox();
             buttonBack = new Button();
@@ -56,7 +56,7 @@
             panel1.BackColor = Color.Coral;
             panel1.Controls.Add(buttonScreenings);
             panel1.Controls.Add(labelEmployeePanel);
-            panel1.Controls.Add(buttonMovies);
+            panel1.Controls.Add(buttonAddMovieForm);
             panel1.Controls.Add(buttonUsersReservations);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(buttonBack);
@@ -92,19 +92,20 @@
             labelEmployeePanel.Text = "EMPLOYEE\r\nPANEL";
             labelEmployeePanel.TextAlign = ContentAlignment.TopCenter;
             // 
-            // buttonMovies
+            // buttonAddMovieForm
             // 
-            buttonMovies.BackColor = Color.Coral;
-            buttonMovies.FlatAppearance.BorderColor = Color.Black;
-            buttonMovies.FlatAppearance.BorderSize = 2;
-            buttonMovies.FlatStyle = FlatStyle.Flat;
-            buttonMovies.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonMovies.Location = new Point(12, 354);
-            buttonMovies.Name = "buttonMovies";
-            buttonMovies.Size = new Size(200, 56);
-            buttonMovies.TabIndex = 10;
-            buttonMovies.Text = "MOVIES";
-            buttonMovies.UseVisualStyleBackColor = false;
+            buttonAddMovieForm.BackColor = Color.Coral;
+            buttonAddMovieForm.FlatAppearance.BorderColor = Color.Black;
+            buttonAddMovieForm.FlatAppearance.BorderSize = 2;
+            buttonAddMovieForm.FlatStyle = FlatStyle.Flat;
+            buttonAddMovieForm.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonAddMovieForm.Location = new Point(12, 354);
+            buttonAddMovieForm.Name = "buttonAddMovieForm";
+            buttonAddMovieForm.Size = new Size(200, 56);
+            buttonAddMovieForm.TabIndex = 10;
+            buttonAddMovieForm.Text = "ADD MOVIE";
+            buttonAddMovieForm.UseVisualStyleBackColor = false;
+            buttonAddMovieForm.Click += buttonMovies_Click;
             // 
             // buttonUsersReservations
             // 
@@ -148,19 +149,19 @@
             // dataGridViewReservations
             // 
             dataGridViewReservations.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewReservations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = Color.White;
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewReservations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dataGridViewReservations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewReservations.BackgroundColor = Color.Black;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.Coral;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Coral;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = Color.Coral;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.Coral;
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dataGridViewReservations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dataGridViewReservations.ColumnHeadersHeight = 50;
             dataGridViewReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewReservations.EnableHeadersVisualStyles = false;
@@ -169,18 +170,18 @@
             dataGridViewReservations.MultiSelect = false;
             dataGridViewReservations.Name = "dataGridViewReservations";
             dataGridViewReservations.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.Black;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.Coral;
-            dataGridViewCellStyle3.SelectionBackColor = Color.Black;
-            dataGridViewCellStyle3.SelectionForeColor = Color.Coral;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.Coral;
+            dataGridViewCellStyle7.SelectionBackColor = Color.Black;
+            dataGridViewCellStyle7.SelectionForeColor = Color.Coral;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dataGridViewReservations.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewReservations.RowHeadersVisible = false;
             dataGridViewReservations.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.GrayText;
-            dataGridViewReservations.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.GrayText;
+            dataGridViewReservations.RowsDefaultCellStyle = dataGridViewCellStyle8;
             dataGridViewReservations.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewReservations.RowTemplate.DefaultCellStyle.BackColor = Color.Black;
             dataGridViewReservations.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -284,7 +285,7 @@
 
         private Panel panel1;
         private Label labelEmployeePanel;
-        private Button buttonMovies;
+        private Button buttonAddMovieForm;
         private Button buttonUsersReservations;
         private PictureBox pictureBox1;
         private Button buttonBack;

@@ -215,5 +215,12 @@ namespace GUI
                 throw new Exception("Error occurred while trying to confirm your reservation. " + ex.Message);
             }
         }
+
+        private void buttonMovies_Click(object sender, EventArgs e)
+        {
+            EmployeePanelMovies employeePanelMovies = new EmployeePanelMovies(_user);
+            employeePanelMovies.Show();
+            Hide();
+        }
     }
 }

@@ -86,6 +86,7 @@
             textBoxConfirmationNumber.Size = new Size(386, 46);
             textBoxConfirmationNumber.TabIndex = 35;
             textBoxConfirmationNumber.TextAlign = HorizontalAlignment.Center;
+            textBoxConfirmationNumber.KeyPress += textBoxConfirmationNumber_KeyPress;
             // 
             // labelWarning
             // 

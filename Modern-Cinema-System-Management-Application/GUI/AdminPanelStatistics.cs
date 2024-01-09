@@ -177,10 +177,8 @@ namespace GUI
 
         private void buttonUsers_Click(object sender, EventArgs e)
         {
-            AdminPanelMainMenu? adminPanelMainMenu = Application.OpenForms.OfType<AdminPanelMainMenu>().FirstOrDefault();
-
-            if (adminPanelMainMenu != null) { adminPanelMainMenu.Show(); }
-
+            AdminPanelMainMenu adminPanelMainMenu = new AdminPanelMainMenu(_user);
+            adminPanelMainMenu.Show();
             this.Close();
         }
 
