@@ -271,5 +271,10 @@ namespace Backend.Services
             message = String.Empty;
             return true; 
         }
+
+        public static bool ValidateMovieAddProcess()
+        {
+            return true;
+        }
     }
 }

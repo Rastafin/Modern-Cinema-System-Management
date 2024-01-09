@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,22 @@ namespace Backend.Model
                 catch (Exception ex)
                 {
                     throw;
+                }
+            }
+        }
+
+        public static void AddNewMovie(Movie movie)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    context.Movies.Add(movie);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in AddNewMovie method. " + ex.Message);
                 }
             }
         }

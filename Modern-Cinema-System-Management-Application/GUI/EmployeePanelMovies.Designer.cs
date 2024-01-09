@@ -46,7 +46,8 @@
             dateTimePickerReleaseDate = new DateTimePicker();
             textBoxReleaseDate = new TextBox();
             textBoxWithdrawalDate = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            dateTimePickerWithdrawalDate = new DateTimePicker();
+            buttonAddMovie = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMoviePicture).BeginInit();
@@ -230,6 +231,7 @@
             textBoxDuration.Size = new Size(431, 46);
             textBoxDuration.TabIndex = 53;
             textBoxDuration.TextAlign = HorizontalAlignment.Center;
+            textBoxDuration.KeyPress += textBoxDuration_KeyPress;
             // 
             // textBoxDescription
             // 
@@ -280,19 +282,34 @@
             textBoxWithdrawalDate.TabIndex = 57;
             textBoxWithdrawalDate.TextAlign = HorizontalAlignment.Center;
             // 
-            // dateTimePicker1
+            // dateTimePickerWithdrawalDate
             // 
-            dateTimePicker1.CalendarForeColor = Color.White;
-            dateTimePicker1.CalendarMonthBackground = Color.Black;
-            dateTimePicker1.CalendarTitleBackColor = Color.Black;
-            dateTimePicker1.CalendarTitleForeColor = Color.White;
-            dateTimePicker1.CalendarTrailingForeColor = Color.White;
-            dateTimePicker1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(1417, 621);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(431, 43);
-            dateTimePicker1.TabIndex = 58;
+            dateTimePickerWithdrawalDate.CalendarForeColor = Color.White;
+            dateTimePickerWithdrawalDate.CalendarMonthBackground = Color.Black;
+            dateTimePickerWithdrawalDate.CalendarTitleBackColor = Color.Black;
+            dateTimePickerWithdrawalDate.CalendarTitleForeColor = Color.White;
+            dateTimePickerWithdrawalDate.CalendarTrailingForeColor = Color.White;
+            dateTimePickerWithdrawalDate.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            dateTimePickerWithdrawalDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerWithdrawalDate.Location = new Point(1417, 621);
+            dateTimePickerWithdrawalDate.Name = "dateTimePickerWithdrawalDate";
+            dateTimePickerWithdrawalDate.Size = new Size(431, 43);
+            dateTimePickerWithdrawalDate.TabIndex = 58;
+            // 
+            // buttonAddMovie
+            // 
+            buttonAddMovie.BackColor = Color.Coral;
+            buttonAddMovie.FlatAppearance.BorderColor = Color.Black;
+            buttonAddMovie.FlatAppearance.BorderSize = 2;
+            buttonAddMovie.FlatStyle = FlatStyle.Flat;
+            buttonAddMovie.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonAddMovie.Location = new Point(1276, 970);
+            buttonAddMovie.Name = "buttonAddMovie";
+            buttonAddMovie.Size = new Size(226, 73);
+            buttonAddMovie.TabIndex = 59;
+            buttonAddMovie.Text = "ADD MOVIE";
+            buttonAddMovie.UseVisualStyleBackColor = false;
+            buttonAddMovie.Click += buttonAddMovie_Click;
             // 
             // EmployeePanelMovies
             // 
@@ -300,7 +317,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(buttonAddMovie);
+            Controls.Add(dateTimePickerWithdrawalDate);
             Controls.Add(textBoxWithdrawalDate);
             Controls.Add(textBoxReleaseDate);
             Controls.Add(dateTimePickerReleaseDate);
@@ -347,6 +365,7 @@
         private DateTimePicker dateTimePickerReleaseDate;
         private TextBox textBoxReleaseDate;
         private TextBox textBoxWithdrawalDate;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePickerWithdrawalDate;
+        private Button buttonAddMovie;
     }
 }

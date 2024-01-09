@@ -1,4 +1,5 @@
 ﻿using Backend.Model;
+using Backend.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace GUI
     {
         private readonly User _user;
         private Movie _newMovie;
+        private string _selectedImagePath;
+        private readonly string _imagesPath = @"..\..\..\..\Backend\Data\Pictures\";
         public EmployeePanelMovies(User user)
         {
             InitializeComponent();
@@ -57,16 +60,63 @@ namespace GUI
 
                     if (openFileDialogMoviePictureFile.ShowDialog() == DialogResult.OK)
                     {
-                        string selectedImagePath = openFileDialogMoviePictureFile.FileName;
-                        _newMovie.ImageFileName = Path.GetFileName(selectedImagePath);
+                        _selectedImagePath = openFileDialogMoviePictureFile.FileName;
 
-                        pictureBoxMoviePicture.Image = Image.FromFile(selectedImagePath);
+                        _newMovie.ImageFileName = Path.GetFileName(_selectedImagePath);
+
+                        pictureBoxMoviePicture.Image = Image.FromFile(_selectedImagePath);
                     }
                 }
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Error occurred while trying to add new movie picture. " + ex.Message);
+            }
+        }
+
+        private void buttonAddMovie_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MovieCategory parsedMovieCategory;
+
+                if (!Enum.TryParse(comboBoxCategory.Text, out parsedMovieCategory))  // need to make some change and put it to validationService
+                {
+                    //labelMessage.Text = "Bad Sex format";
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(_newMovie.ImageFileName) && !string.IsNullOrEmpty(_selectedImagePath))
+                {
+                    string targetImagePath = Path.Combine(_imagesPath, _newMovie.ImageFileName);
+                    File.Copy(_selectedImagePath, targetImagePath);
+                }
+                else
+                {
+                    throw new Exception("Error occurred while uploading photo");
+                }
+
+                _newMovie.Title = textBoxTitle.Text;
+                _newMovie.Description = textBoxDescription.Text;
+                _newMovie.Duaration = int.Parse(textBoxDuration.Text);
+                _newMovie.Director = textBoxDirector.Text;
+                _newMovie.ReleaseDate = dateTimePickerReleaseDate.Text;
+                _newMovie.WithdrawalDate = dateTimePickerWithdrawalDate.Text;
+                _newMovie.Category = parsedMovieCategory;
+
+                Movie.AddNewMovie(_newMovie);
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show("Error occurred while trying to add new movie. " + ex.Message);
+            }
+        }
+
+        private void textBoxDuration_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }
