@@ -272,9 +272,62 @@ namespace Backend.Services
             return true; 
         }
 
-        public static bool ValidateMovieAddProcess()
+        public static bool ValidateMovieAddProcess(string title, string description, string duration, string director, string releaseDate,
+            string withdrawalDate, string imageFileName, out string message)
         {
-            return true;
+            try
+            {
+                if (title == null || title.Length == 0 || description == null || description.Length == 0 ||
+                    director == null || director.Length == 0 || releaseDate == null || releaseDate.Length == 0 ||
+                    withdrawalDate == null || withdrawalDate.Length == 0 || imageFileName == null || imageFileName.Length == 0)
+                {
+                    message = "Not every form field is filled";
+                    return false;
+                }
+
+                if (!int.TryParse(duration, out int parsedDuration) || parsedDuration <= 0)
+                {
+                    message = "Invalid duration format.\nPlease enter a valid positive integer.";
+                    return false;
+                }
+
+                try
+                {
+                    if (ParsingService.ParseStringToDateTime(releaseDate) >= ParsingService.ParseStringToDateTime(withdrawalDate))
+                    {
+                        message = "Withdrawal date must be later than release date";
+                        return false;
+                    }
+
+                    List<string> allMovieTitles = Movie.GetAllMovieTitles();
+
+                    if (allMovieTitles.Contains(title))
+                    {
+                        message = "Movie title must be unique";
+                        return false;
+                    }
+
+                    List<string> imageFileNames = Movie.GetAllImageFileNames();
+
+                    if (imageFileNames.Contains(imageFileName))
+                    {
+                        message = "Change your image file name";
+                        return false;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                message = String.Empty;
+                return true;
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error in ValidateMovieAddProccess. " + ex.Message);
+            }
         }
     }
 }

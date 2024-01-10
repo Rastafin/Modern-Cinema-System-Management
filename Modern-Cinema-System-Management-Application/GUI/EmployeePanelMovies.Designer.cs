@@ -48,9 +48,13 @@
             textBoxWithdrawalDate = new TextBox();
             dateTimePickerWithdrawalDate = new DateTimePicker();
             buttonAddMovie = new Button();
+            labelMessage = new Label();
+            panel2 = new Panel();
+            labelMovieDetails = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMoviePicture).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -152,7 +156,7 @@
             // pictureBoxMoviePicture
             // 
             pictureBoxMoviePicture.BackColor = Color.FromArgb(14, 14, 14);
-            pictureBoxMoviePicture.Location = new Point(371, 245);
+            pictureBoxMoviePicture.Location = new Point(333, 247);
             pictureBoxMoviePicture.Name = "pictureBoxMoviePicture";
             pictureBoxMoviePicture.Size = new Size(402, 542);
             pictureBoxMoviePicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -166,7 +170,7 @@
             buttonAddPicture.FlatAppearance.BorderSize = 2;
             buttonAddPicture.FlatStyle = FlatStyle.Flat;
             buttonAddPicture.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonAddPicture.Location = new Point(479, 862);
+            buttonAddPicture.Location = new Point(441, 864);
             buttonAddPicture.Name = "buttonAddPicture";
             buttonAddPicture.Size = new Size(194, 45);
             buttonAddPicture.TabIndex = 31;
@@ -182,7 +186,7 @@
             comboBoxCategory.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             comboBoxCategory.FormattingEnabled = true;
             comboBoxCategory.Items.AddRange(new object[] { "Comedy", "Action", "Adventure", "Drama", "Horror", "Thriller" });
-            comboBoxCategory.Location = new Point(1417, 310);
+            comboBoxCategory.Location = new Point(531, 107);
             comboBoxCategory.Name = "comboBoxCategory";
             comboBoxCategory.Size = new Size(431, 48);
             comboBoxCategory.TabIndex = 41;
@@ -192,7 +196,7 @@
             textBoxCategory.BackColor = Color.Coral;
             textBoxCategory.Enabled = false;
             textBoxCategory.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxCategory.Location = new Point(1417, 267);
+            textBoxCategory.Location = new Point(531, 64);
             textBoxCategory.Name = "textBoxCategory";
             textBoxCategory.PlaceholderText = "CATEGORY";
             textBoxCategory.Size = new Size(431, 46);
@@ -203,7 +207,7 @@
             // 
             textBoxTitle.BackColor = Color.Coral;
             textBoxTitle.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxTitle.Location = new Point(906, 292);
+            textBoxTitle.Location = new Point(20, 89);
             textBoxTitle.Name = "textBoxTitle";
             textBoxTitle.PlaceholderText = "TITLE";
             textBoxTitle.Size = new Size(431, 46);
@@ -214,7 +218,7 @@
             // 
             textBoxDirector.BackColor = Color.Coral;
             textBoxDirector.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxDirector.Location = new Point(906, 449);
+            textBoxDirector.Location = new Point(20, 246);
             textBoxDirector.Name = "textBoxDirector";
             textBoxDirector.PlaceholderText = "DIRECTOR";
             textBoxDirector.Size = new Size(431, 46);
@@ -225,7 +229,7 @@
             // 
             textBoxDuration.BackColor = Color.Coral;
             textBoxDuration.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxDuration.Location = new Point(906, 604);
+            textBoxDuration.Location = new Point(20, 401);
             textBoxDuration.Name = "textBoxDuration";
             textBoxDuration.PlaceholderText = "DURATION (MIN)";
             textBoxDuration.Size = new Size(431, 46);
@@ -237,7 +241,7 @@
             // 
             textBoxDescription.BackColor = Color.Coral;
             textBoxDescription.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxDescription.Location = new Point(906, 756);
+            textBoxDescription.Location = new Point(20, 553);
             textBoxDescription.Name = "textBoxDescription";
             textBoxDescription.PlaceholderText = "DESCRIPTION";
             textBoxDescription.Size = new Size(431, 46);
@@ -253,7 +257,7 @@
             dateTimePickerReleaseDate.CalendarTrailingForeColor = Color.White;
             dateTimePickerReleaseDate.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
             dateTimePickerReleaseDate.Format = DateTimePickerFormat.Custom;
-            dateTimePickerReleaseDate.Location = new Point(1417, 467);
+            dateTimePickerReleaseDate.Location = new Point(531, 264);
             dateTimePickerReleaseDate.Name = "dateTimePickerReleaseDate";
             dateTimePickerReleaseDate.Size = new Size(431, 43);
             dateTimePickerReleaseDate.TabIndex = 55;
@@ -263,7 +267,7 @@
             textBoxReleaseDate.BackColor = Color.Coral;
             textBoxReleaseDate.Enabled = false;
             textBoxReleaseDate.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxReleaseDate.Location = new Point(1417, 424);
+            textBoxReleaseDate.Location = new Point(531, 221);
             textBoxReleaseDate.Name = "textBoxReleaseDate";
             textBoxReleaseDate.PlaceholderText = "RELEASE DATE";
             textBoxReleaseDate.Size = new Size(431, 46);
@@ -275,7 +279,7 @@
             textBoxWithdrawalDate.BackColor = Color.Coral;
             textBoxWithdrawalDate.Enabled = false;
             textBoxWithdrawalDate.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxWithdrawalDate.Location = new Point(1417, 579);
+            textBoxWithdrawalDate.Location = new Point(531, 376);
             textBoxWithdrawalDate.Name = "textBoxWithdrawalDate";
             textBoxWithdrawalDate.PlaceholderText = "WITHDRAWAL DATE";
             textBoxWithdrawalDate.Size = new Size(431, 46);
@@ -291,7 +295,7 @@
             dateTimePickerWithdrawalDate.CalendarTrailingForeColor = Color.White;
             dateTimePickerWithdrawalDate.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
             dateTimePickerWithdrawalDate.Format = DateTimePickerFormat.Custom;
-            dateTimePickerWithdrawalDate.Location = new Point(1417, 621);
+            dateTimePickerWithdrawalDate.Location = new Point(531, 418);
             dateTimePickerWithdrawalDate.Name = "dateTimePickerWithdrawalDate";
             dateTimePickerWithdrawalDate.Size = new Size(431, 43);
             dateTimePickerWithdrawalDate.TabIndex = 58;
@@ -303,7 +307,7 @@
             buttonAddMovie.FlatAppearance.BorderSize = 2;
             buttonAddMovie.FlatStyle = FlatStyle.Flat;
             buttonAddMovie.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonAddMovie.Location = new Point(1276, 970);
+            buttonAddMovie.Location = new Point(1202, 1015);
             buttonAddMovie.Name = "buttonAddMovie";
             buttonAddMovie.Size = new Size(226, 73);
             buttonAddMovie.TabIndex = 59;
@@ -311,23 +315,58 @@
             buttonAddMovie.UseVisualStyleBackColor = false;
             buttonAddMovie.Click += buttonAddMovie_Click;
             // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Red;
+            labelMessage.Location = new Point(1114, 890);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 60;
+            labelMessage.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(14, 14, 14);
+            panel2.BorderStyle = BorderStyle.Fixed3D;
+            panel2.Controls.Add(textBoxTitle);
+            panel2.Controls.Add(textBoxCategory);
+            panel2.Controls.Add(comboBoxCategory);
+            panel2.Controls.Add(dateTimePickerWithdrawalDate);
+            panel2.Controls.Add(textBoxDirector);
+            panel2.Controls.Add(textBoxWithdrawalDate);
+            panel2.Controls.Add(textBoxDuration);
+            panel2.Controls.Add(textBoxReleaseDate);
+            panel2.Controls.Add(textBoxDescription);
+            panel2.Controls.Add(dateTimePickerReleaseDate);
+            panel2.Location = new Point(809, 156);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1005, 713);
+            panel2.TabIndex = 61;
+            // 
+            // labelMovieDetails
+            // 
+            labelMovieDetails.AutoSize = true;
+            labelMovieDetails.Font = new Font("Segoe UI Semibold", 28F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMovieDetails.ForeColor = Color.Coral;
+            labelMovieDetails.Location = new Point(1158, 53);
+            labelMovieDetails.Name = "labelMovieDetails";
+            labelMovieDetails.Size = new Size(293, 51);
+            labelMovieDetails.TabIndex = 62;
+            labelMovieDetails.Text = "MOVIE DETAILS";
+            labelMovieDetails.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // EmployeePanelMovies
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(labelMovieDetails);
+            Controls.Add(panel2);
+            Controls.Add(labelMessage);
             Controls.Add(buttonAddMovie);
-            Controls.Add(dateTimePickerWithdrawalDate);
-            Controls.Add(textBoxWithdrawalDate);
-            Controls.Add(textBoxReleaseDate);
-            Controls.Add(dateTimePickerReleaseDate);
-            Controls.Add(textBoxDescription);
-            Controls.Add(textBoxDuration);
-            Controls.Add(textBoxDirector);
-            Controls.Add(textBoxTitle);
-            Controls.Add(comboBoxCategory);
-            Controls.Add(textBoxCategory);
             Controls.Add(buttonAddPicture);
             Controls.Add(pictureBoxMoviePicture);
             Controls.Add(panel1);
@@ -341,6 +380,8 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMoviePicture).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -367,5 +408,8 @@
         private TextBox textBoxWithdrawalDate;
         private DateTimePicker dateTimePickerWithdrawalDate;
         private Button buttonAddMovie;
+        private Label labelMessage;
+        private Panel panel2;
+        private Label labelMovieDetails;
     }
 }

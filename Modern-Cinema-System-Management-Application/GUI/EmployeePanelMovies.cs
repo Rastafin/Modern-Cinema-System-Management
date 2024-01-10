@@ -1,5 +1,6 @@
 ﻿using Backend.Model;
 using Backend.Model.Enums;
+using Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,9 +81,23 @@ namespace GUI
             {
                 MovieCategory parsedMovieCategory;
 
-                if (!Enum.TryParse(comboBoxCategory.Text, out parsedMovieCategory))  // need to make some change and put it to validationService
+                if (!Enum.TryParse(comboBoxCategory.Text, out parsedMovieCategory))
                 {
-                    //labelMessage.Text = "Bad Sex format";
+                    labelMessage.Text = "Bad Movie Category format";
+                    return;
+                }
+
+                if (_newMovie.ImageFileName == null || _newMovie.ImageFileName.Length == 0)
+                {
+                    labelMessage.Text = "You need to add movie photo file";
+                    return;
+                }
+
+                if (!ValidationService.ValidateMovieAddProcess(textBoxTitle.Text, textBoxDescription.Text, textBoxDuration.Text,
+                    textBoxDirector.Text, dateTimePickerReleaseDate.Value.ToString("yyyy-MM-dd"),
+                    dateTimePickerWithdrawalDate.Value.ToString("yyyy-MM-dd"), _newMovie.ImageFileName!, out string message))
+                {
+                    labelMessage.Text = message;
                     return;
                 }
 
@@ -93,18 +108,22 @@ namespace GUI
                 }
                 else
                 {
-                    throw new Exception("Error occurred while uploading photo");
+                    labelMessage.Text = "Incorrect movie photo file";
+                    return;
                 }
+
 
                 _newMovie.Title = textBoxTitle.Text;
                 _newMovie.Description = textBoxDescription.Text;
                 _newMovie.Duaration = int.Parse(textBoxDuration.Text);
                 _newMovie.Director = textBoxDirector.Text;
-                _newMovie.ReleaseDate = dateTimePickerReleaseDate.Text;
-                _newMovie.WithdrawalDate = dateTimePickerWithdrawalDate.Text;
+                _newMovie.ReleaseDate = dateTimePickerReleaseDate.Value.ToString("yyyy-MM-dd");
+                _newMovie.WithdrawalDate = dateTimePickerWithdrawalDate.Value.ToString("yyyy-MM-dd");
                 _newMovie.Category = parsedMovieCategory;
 
                 Movie.AddNewMovie(_newMovie);
+                labelMessage.Text = "New movie has been added";
+                RefreshFormContent();
             }
             catch (Exception ex)
             {
@@ -118,6 +137,24 @@ namespace GUI
             {
                 e.Handled = true;
             }
+        }
+
+        public void RefreshFormContent()
+        {
+            _newMovie = new Movie();
+            _selectedImagePath = string.Empty;
+
+            comboBoxCategory.SelectedIndex = -1;
+
+            textBoxTitle.Clear();
+            textBoxDescription.Clear();
+            textBoxDuration.Clear();
+            textBoxDirector.Clear();
+
+            pictureBoxMoviePicture.Image = null;
+
+            dateTimePickerReleaseDate.Value = DateTime.Today;
+            dateTimePickerWithdrawalDate.Value = DateTime.Today;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Backend.Data;
 using Backend.Model.Enums;
+using iTextSharp.text.pdf.qrcode;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -54,6 +55,54 @@ namespace Backend.Model
                 catch (Exception ex)
                 {
                     throw new Exception("Error in AddNewMovie method. " + ex.Message);
+                }
+            }
+        }
+
+        public static List<string> GetAllMovieTitles()
+        {
+            List<string> movieTitles = new List<string>();
+
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    var movies = context.Movies.ToList();
+
+                    foreach(var movie in movies)
+                    {
+                        movieTitles.Add(movie.Title!);
+                    }
+
+                    return movieTitles;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetAllMoviesTitles method. " + ex.Message);
+                }
+            }
+        }
+
+        public static List<string> GetAllImageFileNames()
+        {
+            List<string> imageFileNames = new List<string>();
+
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    var movies = context.Movies.ToList();
+
+                    foreach (var movie in movies)
+                    {
+                        imageFileNames.Add(movie.ImageFileName!);
+                    }
+
+                    return imageFileNames;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetAllMoviesTitles method. " + ex.Message);
                 }
             }
         }

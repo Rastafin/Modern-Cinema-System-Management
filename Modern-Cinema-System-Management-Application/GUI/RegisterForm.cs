@@ -54,7 +54,7 @@ namespace GUI
                 return;
             }
 
-            if (!Enum.TryParse(comboBoxSex.Text, out parsedSex))  // need to make some change and put it to validationService
+            if (!Enum.TryParse(comboBoxSex.Text, out parsedSex))
             {
                 labelMessage.Text = "Bad Sex format";
                 return;
