@@ -1,5 +1,6 @@
 ﻿using Backend.Data;
 using Backend.Model.Enums;
+using Backend.Services;
 using iTextSharp.text.pdf.qrcode;
 using System;
 using System.Collections.Generic;
@@ -103,6 +104,35 @@ namespace Backend.Model
                 catch (Exception ex)
                 {
                     throw new Exception("Error in GetAllMoviesTitles method. " + ex.Message);
+                }
+            }
+        }
+
+        public static void ArchiveMoviesToWithdraw()
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    DateTime today = ParsingService.ParseStringToDateTime(DateTime.Today.ToString("yyyy-MM-dd"));
+
+                    List<Movie> moviesToArchive = context.Movies
+                        .Where(movie => movie.WithdrawalDate != null)
+                        .ToList();
+
+                    foreach(Movie movie in moviesToArchive)
+                    {
+                        if(ParsingService.ParseStringToDateTime(movie.WithdrawalDate!) <= today)
+                        {
+                            movie.IsArchived = true;
+                        }
+                    }
+
+                    context.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception("Error in ArchiveMoviesToWithdraw method. " + ex.Message);
                 }
             }
         }

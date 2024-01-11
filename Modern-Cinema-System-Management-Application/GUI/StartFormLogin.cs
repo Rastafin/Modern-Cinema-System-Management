@@ -15,7 +15,15 @@ namespace GUI
         private void Form1_Load(object sender, EventArgs e)
         {
             labelMessage.Text = _message;
-            Reservation.DeleteOldReservations();
+            try
+            {
+                Reservation.DeleteOldReservations();
+                Movie.ArchiveMoviesToWithdraw();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred while trying to\ncarry out starting jobs. " + ex.Message);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
