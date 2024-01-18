@@ -56,6 +56,8 @@ namespace GUI
             dataGridViewReservations.Columns["Seats"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewReservations.Columns["IsReceived"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
+            dataGridViewReservations.Columns["Seats"].MinimumWidth = 100;
+
             loadReservationsToDGV();
         }
 
@@ -199,6 +201,16 @@ namespace GUI
                             else
                             {
                                 labelMessageConfirmation.Text = "Wrong Confirmation Number";
+                                buttonBack.Enabled = false;
+
+                                System.Threading.Timer timer = null;
+                                timer = new System.Threading.Timer((state) =>
+                                {
+                                    labelMessageConfirmation.Invoke((MethodInvoker)(() => labelMessageConfirmation.Text = ""));
+                                    buttonBack.Invoke((MethodInvoker)(() => buttonBack.Enabled = true));
+                                    timer.Dispose();
+                                }, null, 3000, System.Threading.Timeout.Infinite);
+
                             }
                         }
 
@@ -221,6 +233,17 @@ namespace GUI
             EmployeePanelMovies employeePanelMovies = new EmployeePanelMovies(_user);
             employeePanelMovies.Show();
             Hide();
+        }
+
+        private void dataGridViewReservations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewReservations.Columns[e.ColumnIndex].Name == "Seats")
+            {
+                if (e.Value != null)
+                {
+                    dataGridViewReservations.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.WrapMode = DataGridViewTriState.True;
+                }
+            }
         }
     }
 }

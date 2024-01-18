@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Model.Enums;
 using Backend.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,6 +29,27 @@ namespace Backend.Model
         public int RoomId { get; set; }
         public Room Room { get; set; }
 
+        public static Screening GetScreeningFromId(int screeningId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    var screening = context.Screenings
+                        .Include(r => r.Room)
+                        .FirstOrDefault(r => r.Id == screeningId);
+
+                    if (screening == null) throw new Exception();
+
+                    return screening;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetScreeningFromId method. " + ex.Message);
+                }
+            }
+        }
+
         public static List<Screening> GetAllScreeningsWithRoomsAndMovies()
         {
             using (var context = new DataContext())
@@ -47,7 +69,7 @@ namespace Backend.Model
             }
         }
 
-        public static List<string> GetMovieHoursOnSelectedDate(int movieId, string date)
+        public static List<string> GetMovieHoursOnSelectedDate(int movieId, string date, User user)
         {
             using (var context = new DataContext())
             {
@@ -60,13 +82,27 @@ namespace Backend.Model
                         .OrderBy(s => s.StartTime)
                         .ToList();
 
-                    var movieHours = screenings
+                    var currentTime = DateTime.Now.TimeOfDay;
+
+                    if(user.Role == Role.Employee || user.Role == Role.Admin)
+                    {
+                        var movieHours = screenings
                         .Where(s => ParsingService.ParseStartDate(s.StartTime) == date)
                         .Select(s => ParsingService.ParseStartTime(s.StartTime))
                         .ToList();
 
-                    return movieHours;
+                        return movieHours;
+                    }
+                    else
+                    {
+                        var movieHours = screenings
+                        .Where(s => ParsingService.ParseStartDate(s.StartTime) == date)
+                        .Select(s => ParsingService.ParseStartTime(s.StartTime))
+                        .Where(movieHour => TimeSpan.Parse(movieHour) >= currentTime.Add(TimeSpan.FromMinutes(30)))
+                        .ToList();
 
+                        return movieHours;
+                    }              
                 }
                 catch (Exception ex)
                 {
@@ -107,6 +143,29 @@ namespace Backend.Model
                 catch
                 {
                     throw;
+                }
+            }
+        }
+
+        public static bool CheckIfEverySeatForScreeningIsBooked(int screeningId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    List<string> seatsForScreening = Reservation.GetReservedSeatsForScreening(screeningId); 
+                    Screening screening = GetScreeningFromId(screeningId);
+
+                    if(seatsForScreening.Count == ((int)screening.Room.Capacity))
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception("Error in CkechIfEverySeatForScreeningIsBooked method. " + ex.Message);
                 }
             }
         }

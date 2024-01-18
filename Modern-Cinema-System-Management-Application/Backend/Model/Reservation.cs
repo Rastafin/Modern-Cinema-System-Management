@@ -43,7 +43,7 @@ namespace Backend.Model
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new Exception("Error in GetReservedSeatsForScreening method. " + ex.Message);
                 }
             }
         }

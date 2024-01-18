@@ -29,12 +29,29 @@ namespace GUI
 
         private void comboBoxSex_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            CheckSeatsAvailability();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void CheckSeatsAvailability()
+        {
+            labelMessage.Visible = false;
+            labelMessage.Text = "At least one ticket need to be selected";
+            buttonChooseSeats.Enabled = true;
+
+            string dateWithHour = _movieDate + " " + comboBoxMovieHours.SelectedItem.ToString();
+
+            if(Screening.CheckIfEverySeatForScreeningIsBooked(Screening.GetScreeningIdFromDateAndMovie(dateWithHour, _movie.Id)))
+            {
+                labelMessage.Visible = true;
+                labelMessage.Text = "All seats for this screening are taken";
+                buttonChooseSeats.Enabled = false;
+                return;
+            }
         }
 
         private void UserTicketsAmountChoice_Load(object sender, EventArgs e)
@@ -50,8 +67,22 @@ namespace GUI
             }
             try
             {
-                comboBoxMovieHours.Items.AddRange(Screening.GetMovieHoursOnSelectedDate(_movie.Id, _movieDate).ToArray());
-                comboBoxMovieHours.SelectedIndex = 0;
+                List<string> movieHours = Screening.GetMovieHoursOnSelectedDate(_movie.Id, _movieDate, _user);
+
+                if(movieHours.Count > 0)
+                {
+                    comboBoxMovieHours.Items.AddRange(movieHours.ToArray());
+                    comboBoxMovieHours.SelectedIndex = 0;
+                }
+                else
+                {
+                    labelMessage.Visible = true;
+                    labelMessage.Text = "There is not any avaliable hour for\n this screening. Ask employee for help";
+                    buttonChooseSeats.Enabled = false;
+                    return;
+                }
+
+                CheckSeatsAvailability();
             }
             catch (Exception ex)
             {

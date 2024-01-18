@@ -195,6 +195,9 @@ namespace GUI
                     var dataPoint = chartSex.Series[result.Series.Name].Points[result.PointIndex];
                     labelMessage.Text = $"{dataPoint.AxisLabel} make up {dataPoint.YValues[0]:F2} percent \nof all app users";
                     dataPoint.Font = new Font(dataPoint.Font.FontFamily, dataPoint.Font.Size + 4, dataPoint.Font.Style);
+
+                    dataPoint.BorderColor = Color.White;
+                    dataPoint.BorderWidth = 6;
                 }
             }
         }
@@ -208,6 +211,8 @@ namespace GUI
                 foreach (var point in series.Points)
                 {
                     point.Font = new Font("Arial", 12f, FontStyle.Bold);
+                    point.BorderColor = Color.Empty;
+                    point.BorderWidth = 0;
                 }
             }
 
@@ -216,6 +221,17 @@ namespace GUI
                 foreach (var point in series.Points)
                 {
                     point.Font = new Font("Arial", 12f, FontStyle.Bold);
+                    point.BorderColor = Color.Empty;
+                    point.BorderWidth = 0;
+                }
+            }
+
+            foreach (var series in chartAge.Series)
+            {
+                foreach (var point in series.Points)
+                {
+                    point.BorderColor = Color.Empty;
+                    point.BorderWidth = 0;
                 }
             }
         }
@@ -233,6 +249,9 @@ namespace GUI
                     var dataPoint = chartMovieCategory.Series[result.Series.Name].Points[result.PointIndex];
                     labelMessage.Text = $"{dataPoint.AxisLabel} makes up {dataPoint.YValues[0]:F2} percent \nof all movie categories";
                     dataPoint.Font = new Font(dataPoint.Font.FontFamily, dataPoint.Font.Size + 4, dataPoint.Font.Style);
+
+                    dataPoint.BorderColor = Color.White;
+                    dataPoint.BorderWidth = 6;
                 }
             }
         }
@@ -249,6 +268,9 @@ namespace GUI
                 {
                     var dataPoint = chartAge.Series[result.Series.Name].Points[result.PointIndex];
                     labelMessage.Text = $"There is/are {dataPoint.YValues[0]} user/s in this\n group of age";
+
+                    dataPoint.BorderColor = Color.White;
+                    dataPoint.BorderWidth = 6;
                 }
             }
         }
