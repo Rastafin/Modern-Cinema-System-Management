@@ -149,7 +149,7 @@ namespace GUI
                             else
                             {
                                 return;
-                            }                          
+                            }
                         }
                         else
                         {
@@ -179,6 +179,12 @@ namespace GUI
             {
                 throw new Exception("Error occurred while trying to delete selected screening. " + ex.Message);
             }
+        }
+
+        private void buttonAddNewScreening_Click(object sender, EventArgs e)
+        {
+            EmployeePanelScreeningsAdd employeePanelScreeningsAdd = new EmployeePanelScreeningsAdd();
+            employeePanelScreeningsAdd.ShowDialog();
         }
     }
 }

@@ -244,6 +244,7 @@
             buttonAddNewScreening.TabIndex = 33;
             buttonAddNewScreening.Text = "ADD NEW\r\nSCREENING";
             buttonAddNewScreening.UseVisualStyleBackColor = false;
+            buttonAddNewScreening.Click += buttonAddNewScreening_Click;
             // 
             // labelMessageConfirmation
             // 
