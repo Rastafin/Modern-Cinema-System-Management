@@ -91,7 +91,7 @@ namespace GUI
             loadScreeningsByDate();
         }
 
-        private void loadScreeningsByDate()
+        public void loadScreeningsByDate()
         {
             dataGridViewMovies.Columns["Action"].Visible = true;
 

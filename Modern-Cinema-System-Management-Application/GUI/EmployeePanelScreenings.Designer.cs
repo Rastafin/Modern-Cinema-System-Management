@@ -44,6 +44,7 @@
             labelMessage = new Label();
             buttonDeleteScreening = new Button();
             buttonAddNewScreening = new Button();
+            labelMessageConfirmation = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewScreenings).BeginInit();
@@ -228,6 +229,7 @@
             buttonDeleteScreening.TabIndex = 32;
             buttonDeleteScreening.Text = "DELETE\r\nSCREENING";
             buttonDeleteScreening.UseVisualStyleBackColor = false;
+            buttonDeleteScreening.Click += buttonDeleteScreening_Click;
             // 
             // buttonAddNewScreening
             // 
@@ -243,12 +245,23 @@
             buttonAddNewScreening.Text = "ADD NEW\r\nSCREENING";
             buttonAddNewScreening.UseVisualStyleBackColor = false;
             // 
+            // labelMessageConfirmation
+            // 
+            labelMessageConfirmation.AutoSize = true;
+            labelMessageConfirmation.Font = new Font("Segoe UI Semibold", 28F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessageConfirmation.ForeColor = Color.Red;
+            labelMessageConfirmation.Location = new Point(803, 9);
+            labelMessageConfirmation.Name = "labelMessageConfirmation";
+            labelMessageConfirmation.Size = new Size(0, 51);
+            labelMessageConfirmation.TabIndex = 34;
+            // 
             // EmployeePanelScreenings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(labelMessageConfirmation);
             Controls.Add(buttonAddNewScreening);
             Controls.Add(buttonDeleteScreening);
             Controls.Add(textBoxFilter);
@@ -283,5 +296,6 @@
         private Label labelMessage;
         private Button buttonDeleteScreening;
         private Button buttonAddNewScreening;
+        private Label labelMessageConfirmation;
     }
 }

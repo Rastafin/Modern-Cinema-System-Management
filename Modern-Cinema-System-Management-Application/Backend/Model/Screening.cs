@@ -207,5 +207,38 @@ namespace Backend.Model
                 }
             }
         }
+
+        public static void DeleteScreeningWithReservations(int screeningId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    Screening screening = context.Screenings.FirstOrDefault(r => r.Id == screeningId && r.IsManuallyDeleted == false)!;
+
+                    if (screening == null) throw new Exception("This screening does not exist. ");
+
+                    List<Reservation> reservationsToDelete = context.Reservations
+                        .Where(r => r.ScreeningId == screening.Id && r.IsDeleted == false)
+                        .ToList();
+
+                    foreach(Reservation reservation in reservationsToDelete)
+                    {
+                        if(reservation.IsDeleted == false)
+                        {
+                            reservation.IsDeleted = true;
+                        }
+                    }
+
+                    screening.IsManuallyDeleted = true;
+
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in DeleteScreeningWithReservations method. " + ex.Message);
+                }
+            }
+        }
     }
 }

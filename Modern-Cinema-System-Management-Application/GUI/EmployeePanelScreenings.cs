@@ -94,7 +94,11 @@ namespace GUI
                             .Where(r => r.GetLoggedInUser().Id == _user.Id)
                             .FirstOrDefault();
 
-            if (userMainMenu != null) { userMainMenu.Show(); }
+            if (userMainMenu != null)
+            {
+                userMainMenu.loadScreeningsByDate();
+                userMainMenu.Show();
+            }
 
             this.Close();
         }
@@ -110,6 +114,71 @@ namespace GUI
         {
             string filter = textBoxFilter.Text.Trim();
             loadScreeningsToDGV(filter);
+        }
+
+        private void buttonDeleteScreening_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewScreenings.SelectedRows.Count > 0)
+                {
+                    var selectedRow = dataGridViewScreenings.SelectedRows[0];
+
+                    if (selectedRow.Cells["StartTime"].Value != null &&
+                        selectedRow.Cells["Title"].Value != null &&
+                        selectedRow.Cells["RoomNumber"].Value != null &&
+                        selectedRow.Cells["NumberOfReservedSeats"].Value != null)
+                    {
+                        int screeningId = Screening.GetScreeningIdFromDateAndMovie(
+                            selectedRow.Cells["StartTime"].Value.ToString()!,
+                            Movie.GetMovieByTitle(selectedRow.Cells["Title"].Value.ToString()!).Id);
+
+                        if (screeningId < 0) throw new Exception("Selected screening does not exist. ");
+
+                        if (int.Parse(selectedRow.Cells["NumberOfReservedSeats"].Value.ToString()!) > 0)
+                        {
+                            ConfirmationForm confirmationForm = new ConfirmationForm();
+                            confirmationForm.ActivateSecondMessage("Number of reservations for this screening: " +
+                                selectedRow.Cells["NumberOfReservedSeats"].Value.ToString());
+                            confirmationForm.ShowDialog();
+
+                            if (confirmationForm.WasYesClicked)
+                            {
+                                Screening.DeleteScreeningWithReservations(screeningId);
+                            }
+                            else
+                            {
+                                return;
+                            }                          
+                        }
+                        else
+                        {
+                            Screening.DeleteScreeningWithReservations(screeningId);
+                        }
+
+                        labelMessageConfirmation.Text = "This screening has been deleted";
+                        buttonBack.Enabled = false;
+
+                        System.Threading.Timer timer = null;
+                        timer = new System.Threading.Timer((state) =>
+                        {
+                            labelMessageConfirmation.Invoke((MethodInvoker)(() => labelMessageConfirmation.Text = ""));
+                            buttonBack.Invoke((MethodInvoker)(() => buttonBack.Enabled = true));
+                            timer.Dispose();
+                        }, null, 3000, System.Threading.Timeout.Infinite);
+
+                        loadScreeningsToDGV();
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid role cell or value is null. ");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error occurred while trying to delete selected screening. " + ex.Message);
+            }
         }
     }
 }

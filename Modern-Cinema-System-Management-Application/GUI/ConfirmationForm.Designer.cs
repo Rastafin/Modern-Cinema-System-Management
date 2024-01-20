@@ -31,6 +31,7 @@
             labelMessage = new Label();
             buttonNo = new Button();
             buttonYes = new Button();
+            labelSecondMessage = new Label();
             SuspendLayout();
             // 
             // labelMessage
@@ -74,12 +75,24 @@
             buttonYes.UseVisualStyleBackColor = false;
             buttonYes.Click += buttonYes_Click;
             // 
+            // labelSecondMessage
+            // 
+            labelSecondMessage.AutoSize = true;
+            labelSecondMessage.Font = new Font("Segoe UI Semibold", 17F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSecondMessage.ForeColor = Color.Red;
+            labelSecondMessage.Location = new Point(109, 83);
+            labelSecondMessage.Name = "labelSecondMessage";
+            labelSecondMessage.Size = new Size(0, 31);
+            labelSecondMessage.TabIndex = 33;
+            labelSecondMessage.Visible = false;
+            // 
             // ConfirmationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(14, 14, 14);
             ClientSize = new Size(729, 255);
+            Controls.Add(labelSecondMessage);
             Controls.Add(buttonYes);
             Controls.Add(buttonNo);
             Controls.Add(labelMessage);
@@ -97,5 +110,6 @@
         private Label labelMessage;
         private Button buttonNo;
         private Button buttonYes;
+        private Label labelSecondMessage;
     }
 }

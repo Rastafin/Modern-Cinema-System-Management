@@ -149,7 +149,11 @@ namespace GUI
                 .Where(r => r.GetLoggedInUser().Id == _user.Id)
                 .FirstOrDefault();
 
-            if (userMainMenu != null) { userMainMenu.Show(); }
+            if (userMainMenu != null) 
+            {
+                userMainMenu.loadScreeningsByDate();
+                userMainMenu.Show(); 
+            }
 
             this.Close();
         }

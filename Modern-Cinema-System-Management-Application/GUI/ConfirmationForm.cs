@@ -35,5 +35,11 @@ namespace GUI
         {
 
         }
+
+        public void ActivateSecondMessage(string message)
+        {
+            labelSecondMessage.Text = message;
+            labelSecondMessage.Visible = true;
+        }
     }
 }
