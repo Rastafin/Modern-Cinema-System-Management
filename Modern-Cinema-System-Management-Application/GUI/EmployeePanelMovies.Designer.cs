@@ -85,6 +85,7 @@
             buttonScreenings.TabIndex = 11;
             buttonScreenings.Text = "SCREENINGS";
             buttonScreenings.UseVisualStyleBackColor = false;
+            buttonScreenings.Click += buttonScreenings_Click;
             // 
             // labelEmployeePanel
             // 

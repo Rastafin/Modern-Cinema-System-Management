@@ -321,5 +321,22 @@ namespace Backend.Model
                 }
             }
         }
+
+        public static int GetNumberOfReservedSeatsForScreening(int screeningId)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    return context.Reservations
+                        .Where(r => r.IsDeleted == false)
+                        .Count(r => r.ScreeningId == screeningId);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetNumberOfReservedSeatsForScreening method. " + ex);
+                }
+            }
+        }
     }
 }

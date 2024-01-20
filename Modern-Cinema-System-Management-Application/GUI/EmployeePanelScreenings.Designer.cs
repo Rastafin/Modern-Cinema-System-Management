@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class EmployeePanelMainMenu
+    partial class EmployeePanelScreenings
     {
         /// <summary>
         /// Required designer variable.
@@ -39,14 +39,14 @@
             buttonUsersReservations = new Button();
             pictureBox1 = new PictureBox();
             buttonBack = new Button();
-            dataGridViewReservations = new DataGridView();
-            labelMessage = new Label();
+            dataGridViewScreenings = new DataGridView();
             textBoxFilter = new TextBox();
-            buttonConfirmReservation = new Button();
-            labelMessageConfirmation = new Label();
+            labelMessage = new Label();
+            buttonDeleteScreening = new Button();
+            buttonAddNewScreening = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewScreenings).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -62,7 +62,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(230, 1215);
-            panel1.TabIndex = 8;
+            panel1.TabIndex = 10;
             // 
             // buttonScreenings
             // 
@@ -77,7 +77,6 @@
             buttonScreenings.TabIndex = 11;
             buttonScreenings.Text = "SCREENINGS";
             buttonScreenings.UseVisualStyleBackColor = false;
-            buttonScreenings.Click += buttonScreenings_Click;
             // 
             // labelEmployeePanel
             // 
@@ -105,7 +104,7 @@
             buttonAddMovieForm.TabIndex = 10;
             buttonAddMovieForm.Text = "ADD MOVIE";
             buttonAddMovieForm.UseVisualStyleBackColor = false;
-            buttonAddMovieForm.Click += buttonMovies_Click;
+            buttonAddMovieForm.Click += buttonAddMovieForm_Click;
             // 
             // buttonUsersReservations
             // 
@@ -120,6 +119,7 @@
             buttonUsersReservations.TabIndex = 9;
             buttonUsersReservations.Text = "USERS\r\nRESERVATIONS";
             buttonUsersReservations.UseVisualStyleBackColor = false;
+            buttonUsersReservations.Click += buttonUsersReservations_Click;
             // 
             // pictureBox1
             // 
@@ -146,14 +146,14 @@
             buttonBack.UseVisualStyleBackColor = false;
             buttonBack.Click += buttonBack_Click;
             // 
-            // dataGridViewReservations
+            // dataGridViewScreenings
             // 
-            dataGridViewReservations.AllowUserToAddRows = false;
+            dataGridViewScreenings.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
             dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewReservations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewReservations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewReservations.BackgroundColor = Color.Black;
+            dataGridViewScreenings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewScreenings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewScreenings.BackgroundColor = Color.Black;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.Coral;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
@@ -161,15 +161,15 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.Coral;
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewReservations.ColumnHeadersHeight = 50;
-            dataGridViewReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewReservations.EnableHeadersVisualStyles = false;
-            dataGridViewReservations.GridColor = Color.Snow;
-            dataGridViewReservations.Location = new Point(330, 249);
-            dataGridViewReservations.MultiSelect = false;
-            dataGridViewReservations.Name = "dataGridViewReservations";
-            dataGridViewReservations.ReadOnly = true;
+            dataGridViewScreenings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewScreenings.ColumnHeadersHeight = 50;
+            dataGridViewScreenings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewScreenings.EnableHeadersVisualStyles = false;
+            dataGridViewScreenings.GridColor = Color.Snow;
+            dataGridViewScreenings.Location = new Point(330, 249);
+            dataGridViewScreenings.MultiSelect = false;
+            dataGridViewScreenings.Name = "dataGridViewScreenings";
+            dataGridViewScreenings.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.Black;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -177,32 +177,21 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.Black;
             dataGridViewCellStyle3.SelectionForeColor = Color.Coral;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridViewReservations.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewReservations.RowHeadersVisible = false;
-            dataGridViewReservations.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewScreenings.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewScreenings.RowHeadersVisible = false;
+            dataGridViewScreenings.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.SelectionBackColor = SystemColors.GrayText;
-            dataGridViewReservations.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.BackColor = Color.Black;
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewReservations.RowTemplate.DefaultCellStyle.ForeColor = Color.Coral;
-            dataGridViewReservations.RowTemplate.Height = 100;
-            dataGridViewReservations.RowTemplate.ReadOnly = true;
-            dataGridViewReservations.RowTemplate.Resizable = DataGridViewTriState.False;
-            dataGridViewReservations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewReservations.Size = new Size(1500, 950);
-            dataGridViewReservations.TabIndex = 9;
-            dataGridViewReservations.CellFormatting += dataGridViewReservations_CellFormatting;
-            // 
-            // labelMessage
-            // 
-            labelMessage.AutoSize = true;
-            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelMessage.ForeColor = Color.Coral;
-            labelMessage.Location = new Point(909, 150);
-            labelMessage.Name = "labelMessage";
-            labelMessage.Size = new Size(0, 40);
-            labelMessage.TabIndex = 28;
+            dataGridViewScreenings.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewScreenings.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewScreenings.RowTemplate.DefaultCellStyle.BackColor = Color.Black;
+            dataGridViewScreenings.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewScreenings.RowTemplate.DefaultCellStyle.ForeColor = Color.Coral;
+            dataGridViewScreenings.RowTemplate.Height = 100;
+            dataGridViewScreenings.RowTemplate.ReadOnly = true;
+            dataGridViewScreenings.RowTemplate.Resizable = DataGridViewTriState.False;
+            dataGridViewScreenings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewScreenings.Size = new Size(1500, 950);
+            dataGridViewScreenings.TabIndex = 11;
             // 
             // textBoxFilter
             // 
@@ -212,57 +201,70 @@
             textBoxFilter.Name = "textBoxFilter";
             textBoxFilter.PlaceholderText = "FILTER";
             textBoxFilter.Size = new Size(431, 46);
-            textBoxFilter.TabIndex = 29;
+            textBoxFilter.TabIndex = 31;
             textBoxFilter.TextAlign = HorizontalAlignment.Center;
             textBoxFilter.TextChanged += textBoxFilter_TextChanged;
             // 
-            // buttonConfirmReservation
+            // labelMessage
             // 
-            buttonConfirmReservation.BackColor = Color.Coral;
-            buttonConfirmReservation.FlatAppearance.BorderColor = Color.Black;
-            buttonConfirmReservation.FlatAppearance.BorderSize = 2;
-            buttonConfirmReservation.FlatStyle = FlatStyle.Flat;
-            buttonConfirmReservation.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonConfirmReservation.Location = new Point(574, 79);
-            buttonConfirmReservation.Name = "buttonConfirmReservation";
-            buttonConfirmReservation.Size = new Size(200, 77);
-            buttonConfirmReservation.TabIndex = 30;
-            buttonConfirmReservation.Text = "CONFIRM\r\nRESERVATION";
-            buttonConfirmReservation.UseVisualStyleBackColor = false;
-            buttonConfirmReservation.Click += buttonConfirmReservation_Click;
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(909, 150);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 30;
             // 
-            // labelMessageConfirmation
+            // buttonDeleteScreening
             // 
-            labelMessageConfirmation.AutoSize = true;
-            labelMessageConfirmation.Font = new Font("Segoe UI Semibold", 28F, FontStyle.Bold, GraphicsUnit.Point);
-            labelMessageConfirmation.ForeColor = Color.Red;
-            labelMessageConfirmation.Location = new Point(857, 18);
-            labelMessageConfirmation.Name = "labelMessageConfirmation";
-            labelMessageConfirmation.Size = new Size(0, 51);
-            labelMessageConfirmation.TabIndex = 32;
+            buttonDeleteScreening.BackColor = Color.Coral;
+            buttonDeleteScreening.FlatAppearance.BorderColor = Color.Black;
+            buttonDeleteScreening.FlatAppearance.BorderSize = 2;
+            buttonDeleteScreening.FlatStyle = FlatStyle.Flat;
+            buttonDeleteScreening.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonDeleteScreening.Location = new Point(574, 79);
+            buttonDeleteScreening.Name = "buttonDeleteScreening";
+            buttonDeleteScreening.Size = new Size(200, 77);
+            buttonDeleteScreening.TabIndex = 32;
+            buttonDeleteScreening.Text = "DELETE\r\nSCREENING";
+            buttonDeleteScreening.UseVisualStyleBackColor = false;
             // 
-            // EmployeePanelMainMenu
+            // buttonAddNewScreening
+            // 
+            buttonAddNewScreening.BackColor = Color.Coral;
+            buttonAddNewScreening.FlatAppearance.BorderColor = Color.Black;
+            buttonAddNewScreening.FlatAppearance.BorderSize = 2;
+            buttonAddNewScreening.FlatStyle = FlatStyle.Flat;
+            buttonAddNewScreening.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonAddNewScreening.Location = new Point(1399, 78);
+            buttonAddNewScreening.Name = "buttonAddNewScreening";
+            buttonAddNewScreening.Size = new Size(200, 77);
+            buttonAddNewScreening.TabIndex = 33;
+            buttonAddNewScreening.Text = "ADD NEW\r\nSCREENING";
+            buttonAddNewScreening.UseVisualStyleBackColor = false;
+            // 
+            // EmployeePanelScreenings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
-            Controls.Add(labelMessageConfirmation);
-            Controls.Add(buttonConfirmReservation);
+            Controls.Add(buttonAddNewScreening);
+            Controls.Add(buttonDeleteScreening);
             Controls.Add(textBoxFilter);
             Controls.Add(labelMessage);
-            Controls.Add(dataGridViewReservations);
+            Controls.Add(dataGridViewScreenings);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "EmployeePanelMainMenu";
+            Name = "EmployeePanelScreenings";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "EmployeePanelMainMenu";
+            Text = "EmployeePanelScreenings";
             WindowState = FormWindowState.Maximized;
-            Load += EmployeePanelMainMenu_Load;
+            Load += EmployeePanelScreenings_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewScreenings).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -270,16 +272,16 @@
         #endregion
 
         private Panel panel1;
+        private Button buttonScreenings;
         private Label labelEmployeePanel;
         private Button buttonAddMovieForm;
         private Button buttonUsersReservations;
         private PictureBox pictureBox1;
         private Button buttonBack;
-        private Button buttonScreenings;
-        private DataGridView dataGridViewReservations;
-        private Label labelMessage;
+        private DataGridView dataGridViewScreenings;
         private TextBox textBoxFilter;
-        private Button buttonConfirmReservation;
-        private Label labelMessageConfirmation;
+        private Label labelMessage;
+        private Button buttonDeleteScreening;
+        private Button buttonAddNewScreening;
     }
 }

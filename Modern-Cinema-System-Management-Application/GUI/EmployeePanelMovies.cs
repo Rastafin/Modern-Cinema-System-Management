@@ -156,5 +156,12 @@ namespace GUI
             dateTimePickerReleaseDate.Value = DateTime.Today;
             dateTimePickerWithdrawalDate.Value = DateTime.Today;
         }
+
+        private void buttonScreenings_Click(object sender, EventArgs e)
+        {
+            EmployeePanelScreenings employeePanelScreenings = new EmployeePanelScreenings(_user);
+            employeePanelScreenings.Show();
+            Close();
+        }
     }
 }

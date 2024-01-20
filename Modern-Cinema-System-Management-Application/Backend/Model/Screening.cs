@@ -28,6 +28,7 @@ namespace Backend.Model
         [ForeignKey("RoomId")]
         public int RoomId { get; set; }
         public Room Room { get; set; }
+        public bool? IsManuallyDeleted { get; set; } = false;
 
         public static Screening GetScreeningFromId(int screeningId)
         {
@@ -37,6 +38,7 @@ namespace Backend.Model
                 {
                     var screening = context.Screenings
                         .Include(r => r.Room)
+                        .Where(r => r.IsManuallyDeleted == false)
                         .FirstOrDefault(r => r.Id == screeningId);
 
                     if (screening == null) throw new Exception();
@@ -59,6 +61,7 @@ namespace Backend.Model
                     return context.Screenings
                         .Include(s => s.Room)
                         .Include(s => s.Movie)
+                        .Where(r => r.IsManuallyDeleted == false)
                         .OrderBy(s => s.StartTime)
                         .ToList();
                 }
@@ -78,6 +81,7 @@ namespace Backend.Model
                     var screenings = context.Screenings
                         .Include(s => s.Room)
                         .Include(s => s.Movie)
+                        .Where(r => r.IsManuallyDeleted == false)
                         .Where(s => s.MovieId == movieId)
                         .OrderBy(s => s.StartTime)
                         .ToList();
@@ -118,7 +122,7 @@ namespace Backend.Model
                 try
                 {
                     return context.Screenings
-                        .Where(s => s.StartTime == dateWithHour && s.MovieId == movieId)
+                        .Where(s => s.StartTime == dateWithHour && s.MovieId == movieId && s.IsManuallyDeleted == false)
                         .Select(s => s.RoomId)
                         .FirstOrDefault();
                 }
@@ -136,7 +140,7 @@ namespace Backend.Model
                 try
                 {
                     return context.Screenings
-                        .Where(s => s.StartTime == dateWithHour && s.MovieId == movieId)
+                        .Where(s => s.StartTime == dateWithHour && s.MovieId == movieId && s.IsManuallyDeleted == false)
                         .Select(s => s.Id)
                         .FirstOrDefault();
                 }
@@ -166,6 +170,40 @@ namespace Backend.Model
                 catch(Exception ex)
                 {
                     throw new Exception("Error in CkechIfEverySeatForScreeningIsBooked method. " + ex.Message);
+                }
+            }
+        }
+
+        public static List<Screening> GetCurrentScreenings()
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    DateTime today = ParsingService.ParseStringToDateTime(DateTime.Today.ToString("yyyy-MM-dd"));
+
+                    List<Screening> allScreenings = context.Screenings
+                        .Include(s => s.Movie)
+                        .Include(s => s.Room)
+                        .Where(r => r.IsManuallyDeleted == false)
+                        .ToList();
+
+                    List<Screening> currentScreenings = new List<Screening>();
+
+                    foreach(Screening screening in allScreenings)
+                    {
+                        if(ParsingService.ParseStringToDateTime(
+                            ParsingService.ParseStartDate(screening.StartTime)) >= today)
+                        {
+                            currentScreenings.Add(screening);
+                        }
+                    }
+
+                    return currentScreenings;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetCurrentScreenings method. " + ex.Message);
                 }
             }
         }

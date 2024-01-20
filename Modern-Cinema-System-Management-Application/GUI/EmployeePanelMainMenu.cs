@@ -232,7 +232,7 @@ namespace GUI
         {
             EmployeePanelMovies employeePanelMovies = new EmployeePanelMovies(_user);
             employeePanelMovies.Show();
-            Hide();
+            Close();
         }
 
         private void dataGridViewReservations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -244,6 +244,13 @@ namespace GUI
                     dataGridViewReservations.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.WrapMode = DataGridViewTriState.True;
                 }
             }
+        }
+
+        private void buttonScreenings_Click(object sender, EventArgs e)
+        {
+            EmployeePanelScreenings employeePanelScreenings = new EmployeePanelScreenings(_user);
+            employeePanelScreenings.Show();
+            Close();
         }
     }
 }
