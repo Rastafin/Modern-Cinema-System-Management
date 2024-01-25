@@ -1,9 +1,11 @@
 ﻿using Backend.Model;
+using Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +30,7 @@ namespace GUI
             dataGridViewScreenings.AutoGenerateColumns = false;
 
             dataGridViewScreenings.Columns.Add("StartTime", "Start Time");
+            dataGridViewScreenings.Columns.Add("LastsUntil", "Lasts Until");
             dataGridViewScreenings.Columns.Add("Title", "Title");
             dataGridViewScreenings.Columns.Add("RoomNumber", "Room number");
             dataGridViewScreenings.Columns.Add("NumberOfReservedSeats", "Number of reserved seats");
@@ -39,6 +42,7 @@ namespace GUI
         {
             dataGridViewScreenings.Show();
             labelMessage.Text = String.Empty;
+            buttonDeleteScreening.Enabled = true;
 
             try
             {
@@ -48,6 +52,7 @@ namespace GUI
                 {
                     dataGridViewScreenings.Hide();
                     labelMessage.Text = "There are not any screenings";
+                    buttonDeleteScreening.Enabled = false;
                     return;
                 }
 
@@ -63,6 +68,11 @@ namespace GUI
                         var row = dataGridViewScreenings.Rows[dataGridViewScreenings.Rows.Add()];
 
                         row.Cells["StartTime"].Value = screening.StartTime;
+
+                        DateTime startRange = DateTime.ParseExact(ParsingService.ParseStartTime(screening.StartTime!), "HH:mm", CultureInfo.InvariantCulture);
+                        DateTime endRange = startRange.AddMinutes((double)screening.Movie.Duaration! + 30);
+
+                        row.Cells["LastsUntil"].Value = endRange.ToString("yyyy-MM-dd HH:mm");
                         row.Cells["Title"].Value = screening.Movie.Title;
                         row.Cells["RoomNumber"].Value = screening.Room.RoomNumber;
                         row.Cells["NumberOfReservedSeats"].Value = Reservation.GetNumberOfReservedSeatsForScreening(screening.Id);
@@ -72,6 +82,7 @@ namespace GUI
                 if (dataGridViewScreenings.Rows.Count < 1)
                 {
                     labelMessage.Text = "Cannot find any reservation";
+                    buttonDeleteScreening.Enabled = false;
                     dataGridViewScreenings.Hide();
                 }
             }
@@ -158,12 +169,16 @@ namespace GUI
 
                         labelMessageConfirmation.Text = "This screening has been deleted";
                         buttonBack.Enabled = false;
+                        buttonAddMovieForm.Enabled = false;
+                        buttonUsersReservations.Enabled = false;
 
                         System.Threading.Timer timer = null;
                         timer = new System.Threading.Timer((state) =>
                         {
                             labelMessageConfirmation.Invoke((MethodInvoker)(() => labelMessageConfirmation.Text = ""));
                             buttonBack.Invoke((MethodInvoker)(() => buttonBack.Enabled = true));
+                            buttonAddMovieForm.Invoke((MethodInvoker)(() => buttonAddMovieForm.Enabled = true));
+                            buttonUsersReservations.Invoke((MethodInvoker)(() => buttonUsersReservations.Enabled = true));
                             timer.Dispose();
                         }, null, 3000, System.Threading.Timeout.Infinite);
 
@@ -185,6 +200,7 @@ namespace GUI
         {
             EmployeePanelScreeningsAdd employeePanelScreeningsAdd = new EmployeePanelScreeningsAdd();
             employeePanelScreeningsAdd.ShowDialog();
+            loadScreeningsToDGV();
         }
     }
 }

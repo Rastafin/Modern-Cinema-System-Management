@@ -329,5 +329,64 @@ namespace Backend.Services
                 throw new Exception("Error in ValidateMovieAddProccess. " + ex.Message);
             }
         }
+
+        public static bool ValidateScreeningAddProcess(Movie movie, DateTime screeningDate, 
+            string screeningHour, out string message)
+        {
+            try
+            {
+                if (!IsValidTimeFormat(screeningHour))
+                {
+                    message = "Invalid time format";
+                    return false;
+                }
+
+                DateTime startRange = DateTime.ParseExact(screeningHour, "HH:mm", CultureInfo.InvariantCulture);
+
+                if(startRange.TimeOfDay < TimeSpan.FromHours(10) 
+                    || startRange.TimeOfDay > TimeSpan.FromHours(22))
+                {
+                    message = "Screening must be between\n10:00 and 22:00";
+                    return false;
+                }
+
+                if(screeningDate.Date < DateTime.Now.Date)
+                {
+                    message = "Screening date cannot be\nearlier than today.";
+                    return false;
+                }
+
+                DateTime endRange = startRange.AddMinutes((double)movie.Duaration! + 30);
+
+                List<Screening> screeningsForSelectedDate = Screening.GetScreeningsForSelectedDate(screeningDate);
+
+                foreach(Screening screening in screeningsForSelectedDate)
+                {
+                    DateTime existingStart = DateTime.ParseExact(ParsingService.ParseStartTime(screening.StartTime),
+                        "HH:mm", CultureInfo.InvariantCulture);
+                    DateTime existingEnd = existingStart.AddMinutes((double)screening.Movie.Duaration! + 30);
+
+                    if(!(endRange <= existingStart || startRange >= existingEnd))
+                    {
+                        message = "This term conflicts with\nexisting screening";
+                        return false;
+                    }
+                }
+
+
+
+                message = string.Empty;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in ValidateScreeningAddProcess method. " + ex.Message);
+            }
+        }
+
+        private static bool IsValidTimeFormat(string time)
+        {
+            return DateTime.TryParseExact(time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+        }
     }
 }

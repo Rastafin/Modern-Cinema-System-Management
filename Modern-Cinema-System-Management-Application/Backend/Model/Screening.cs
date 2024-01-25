@@ -29,6 +29,14 @@ namespace Backend.Model
         public int RoomId { get; set; }
         public Room Room { get; set; }
         public bool? IsManuallyDeleted { get; set; } = false;
+        public Screening() { }
+        public Screening(string startTime, int movieId, int roomId, bool isManuallyDeleted = false)
+        {
+            StartTime = startTime;
+            MovieId = movieId;
+            RoomId = roomId;
+            IsManuallyDeleted = isManuallyDeleted;
+        }
 
         public static Screening GetScreeningFromId(int screeningId)
         {
@@ -237,6 +245,52 @@ namespace Backend.Model
                 catch (Exception ex)
                 {
                     throw new Exception("Error in DeleteScreeningWithReservations method. " + ex.Message);
+                }
+            }
+        }
+
+        public static void AddNewScreening(Screening screening)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    context.Screenings.Add(screening);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in AddNewScreening method. " + ex.Message);
+                }
+            }
+        }
+
+        public static List<Screening> GetScreeningsForSelectedDate(DateTime screeningDate)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    List<Screening> allScreenings = context.Screenings
+                        .Where(r => r.IsManuallyDeleted == false)
+                        .Include(r => r.Movie)
+                        .ToList();
+                    List<Screening> selectedScreenings = new List<Screening> ();
+
+                    foreach(Screening screening in allScreenings)
+                    {
+                        if(ParsingService.ParseStringToDateTime(
+                            ParsingService.ParseStartDate(screening.StartTime)) == screeningDate)
+                        {
+                            selectedScreenings.Add(screening);
+                        }
+                    }
+
+                    return selectedScreenings;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetScreeningsForSelectedDate method. " + ex.Message);
                 }
             }
         }

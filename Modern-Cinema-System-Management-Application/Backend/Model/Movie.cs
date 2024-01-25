@@ -35,7 +35,7 @@ namespace Backend.Model
             {
                 try
                 {
-                    return context.Movies.FirstOrDefault(m => m.Title == title);
+                    return context.Movies.FirstOrDefault(m => m.Title == title)!;
                 }
                 catch (Exception ex)
                 {
@@ -133,6 +133,36 @@ namespace Backend.Model
                 catch(Exception ex)
                 {
                     throw new Exception("Error in ArchiveMoviesToWithdraw method. " + ex.Message);
+                }
+            }
+        }
+
+        public static List<Movie> GetMoviesAvailableForScreening(DateTime screenigDate)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    List<Movie> allMovies = context.Movies
+                        .Where(r => r.IsArchived == false)
+                        .ToList();
+
+                    List<Movie> availableMovies = new List<Movie>();
+
+                    foreach (Movie movie in allMovies)
+                    {
+                        if(ParsingService.ParseStringToDateTime(movie.ReleaseDate!) <= screenigDate
+                            && ParsingService.ParseStringToDateTime(movie.WithdrawalDate!) > screenigDate)
+                        {
+                            availableMovies.Add(movie);
+                        }
+                    }
+
+                    return availableMovies;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in GetMoviesAvailableForScreening method. " + ex.Message);
                 }
             }
         }

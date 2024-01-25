@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             buttonCancel = new Button();
-            dateTimePicker1 = new DateTimePicker();
-            maskedTextBox1 = new MaskedTextBox();
+            dateTimePickerDay = new DateTimePicker();
+            maskedTextBoxHour = new MaskedTextBox();
             labelMovieDetails = new Label();
-            comboBoxSex = new ComboBox();
+            comboBoxMovies = new ComboBox();
             textBoxMovie = new TextBox();
             buttonAddScreening = new Button();
+            labelMessage = new Label();
             SuspendLayout();
             // 
             // buttonCancel
@@ -52,30 +53,32 @@
             buttonCancel.UseVisualStyleBackColor = false;
             buttonCancel.Click += buttonCancel_Click;
             // 
-            // dateTimePicker1
+            // dateTimePickerDay
             // 
-            dateTimePicker1.CalendarForeColor = Color.White;
-            dateTimePicker1.CalendarMonthBackground = Color.Black;
-            dateTimePicker1.CalendarTitleBackColor = Color.Black;
-            dateTimePicker1.CalendarTitleForeColor = Color.White;
-            dateTimePicker1.CalendarTrailingForeColor = Color.White;
-            dateTimePicker1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(162, 221);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(265, 43);
-            dateTimePicker1.TabIndex = 33;
+            dateTimePickerDay.CalendarForeColor = Color.White;
+            dateTimePickerDay.CalendarMonthBackground = Color.Black;
+            dateTimePickerDay.CalendarTitleBackColor = Color.Black;
+            dateTimePickerDay.CalendarTitleForeColor = Color.White;
+            dateTimePickerDay.CalendarTrailingForeColor = Color.White;
+            dateTimePickerDay.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            dateTimePickerDay.Format = DateTimePickerFormat.Custom;
+            dateTimePickerDay.Location = new Point(162, 221);
+            dateTimePickerDay.Name = "dateTimePickerDay";
+            dateTimePickerDay.Size = new Size(265, 43);
+            dateTimePickerDay.TabIndex = 33;
+            dateTimePickerDay.ValueChanged += dateTimePickerDay_ValueChanged;
             // 
-            // maskedTextBox1
+            // maskedTextBoxHour
             // 
-            maskedTextBox1.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            maskedTextBox1.Location = new Point(433, 221);
-            maskedTextBox1.Mask = "00:00";
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(100, 43);
-            maskedTextBox1.TabIndex = 34;
-            maskedTextBox1.TextAlign = HorizontalAlignment.Center;
-            maskedTextBox1.ValidatingType = typeof(DateTime);
+            maskedTextBoxHour.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            maskedTextBoxHour.Location = new Point(433, 221);
+            maskedTextBoxHour.Mask = "00:00";
+            maskedTextBoxHour.Name = "maskedTextBoxHour";
+            maskedTextBoxHour.Size = new Size(100, 43);
+            maskedTextBoxHour.TabIndex = 34;
+            maskedTextBoxHour.Text = "1000";
+            maskedTextBoxHour.TextAlign = HorizontalAlignment.Center;
+            maskedTextBoxHour.ValidatingType = typeof(DateTime);
             // 
             // labelMovieDetails
             // 
@@ -89,17 +92,18 @@
             labelMovieDetails.Text = "SCREENING DETAILS";
             labelMovieDetails.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // comboBoxSex
+            // comboBoxMovies
             // 
-            comboBoxSex.BackColor = Color.LightSalmon;
-            comboBoxSex.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxSex.FlatStyle = FlatStyle.Flat;
-            comboBoxSex.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            comboBoxSex.FormattingEnabled = true;
-            comboBoxSex.Location = new Point(162, 346);
-            comboBoxSex.Name = "comboBoxSex";
-            comboBoxSex.Size = new Size(371, 48);
-            comboBoxSex.TabIndex = 65;
+            comboBoxMovies.BackColor = Color.LightSalmon;
+            comboBoxMovies.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxMovies.FlatStyle = FlatStyle.Flat;
+            comboBoxMovies.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            comboBoxMovies.FormattingEnabled = true;
+            comboBoxMovies.Location = new Point(162, 346);
+            comboBoxMovies.MaxDropDownItems = 3;
+            comboBoxMovies.Name = "comboBoxMovies";
+            comboBoxMovies.Size = new Size(371, 48);
+            comboBoxMovies.TabIndex = 65;
             // 
             // textBoxMovie
             // 
@@ -126,6 +130,17 @@
             buttonAddScreening.TabIndex = 66;
             buttonAddScreening.Text = "Add";
             buttonAddScreening.UseVisualStyleBackColor = false;
+            buttonAddScreening.Click += buttonAddScreening_Click;
+            // 
+            // labelMessage
+            // 
+            labelMessage.AutoSize = true;
+            labelMessage.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelMessage.ForeColor = Color.Coral;
+            labelMessage.Location = new Point(171, 129);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Size = new Size(0, 40);
+            labelMessage.TabIndex = 67;
             // 
             // EmployeePanelScreeningsAdd
             // 
@@ -133,17 +148,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(14, 14, 14);
             ClientSize = new Size(714, 623);
+            Controls.Add(labelMessage);
             Controls.Add(buttonAddScreening);
-            Controls.Add(comboBoxSex);
+            Controls.Add(comboBoxMovies);
             Controls.Add(textBoxMovie);
             Controls.Add(labelMovieDetails);
-            Controls.Add(maskedTextBox1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(maskedTextBoxHour);
+            Controls.Add(dateTimePickerDay);
             Controls.Add(buttonCancel);
             FormBorderStyle = FormBorderStyle.None;
             Name = "EmployeePanelScreeningsAdd";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EmployeePanelScreeningsAdd";
+            Load += EmployeePanelScreeningsAdd_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -151,11 +168,12 @@
         #endregion
 
         private Button buttonCancel;
-        private DateTimePicker dateTimePicker1;
-        private MaskedTextBox maskedTextBox1;
+        private DateTimePicker dateTimePickerDay;
+        private MaskedTextBox maskedTextBoxHour;
         private Label labelMovieDetails;
-        private ComboBox comboBoxSex;
+        private ComboBox comboBoxMovies;
         private TextBox textBoxMovie;
         private Button buttonAddScreening;
+        private Label labelMessage;
     }
 }
