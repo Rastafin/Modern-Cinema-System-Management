@@ -24,7 +24,6 @@ namespace Backend.Model
         public string? Street { get; set; }
         public string? HouseNumber { get; set; }
         public string? ZipCode { get; set; }
-        //public bool IsArchived { get; set; } = false;
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }

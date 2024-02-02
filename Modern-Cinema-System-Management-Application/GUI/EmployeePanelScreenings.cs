@@ -33,7 +33,7 @@ namespace GUI
             dataGridViewScreenings.Columns.Add("LastsUntil", "Lasts Until");
             dataGridViewScreenings.Columns.Add("Title", "Title");
             dataGridViewScreenings.Columns.Add("RoomNumber", "Room number");
-            dataGridViewScreenings.Columns.Add("NumberOfReservedSeats", "Number of reserved seats");
+            dataGridViewScreenings.Columns.Add("NumberOfReservedSeats", "Reserved seats");
 
             loadScreeningsToDGV();
         }
@@ -149,13 +149,13 @@ namespace GUI
                         if (int.Parse(selectedRow.Cells["NumberOfReservedSeats"].Value.ToString()!) > 0)
                         {
                             ConfirmationForm confirmationForm = new ConfirmationForm();
-                            confirmationForm.ActivateSecondMessage("Number of reservations for this screening: " +
+                            confirmationForm.ActivateSecondMessage("Number of reserved seats for this screening: " +
                                 selectedRow.Cells["NumberOfReservedSeats"].Value.ToString());
                             confirmationForm.ShowDialog();
 
                             if (confirmationForm.WasYesClicked)
                             {
-                                Screening.DeleteScreeningWithReservations(screeningId);
+                                Screening.DeleteScreeningWithReservations(screeningId, true);
                             }
                             else
                             {
@@ -192,7 +192,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                throw new Exception("Error occurred while trying to delete selected screening. " + ex.Message);
+                MessageBox.Show("Error occurred while trying to delete selected screening. " + ex.Message);
             }
         }
 

@@ -41,6 +41,8 @@
             dataGridViewMovies = new DataGridView();
             dateTimePicker1 = new DateTimePicker();
             labelMessage = new Label();
+            buttonNewMessage = new Button();
+            labelNewMessage = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovies).BeginInit();
@@ -232,12 +234,40 @@
             labelMessage.Size = new Size(0, 40);
             labelMessage.TabIndex = 8;
             // 
+            // buttonNewMessage
+            // 
+            buttonNewMessage.BackgroundImage = Properties.Resources.Zrzut_ekranu_2024_02_02_142236;
+            buttonNewMessage.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonNewMessage.FlatAppearance.BorderColor = Color.White;
+            buttonNewMessage.FlatAppearance.BorderSize = 0;
+            buttonNewMessage.FlatStyle = FlatStyle.Flat;
+            buttonNewMessage.Location = new Point(361, 36);
+            buttonNewMessage.Name = "buttonNewMessage";
+            buttonNewMessage.Size = new Size(93, 100);
+            buttonNewMessage.TabIndex = 9;
+            buttonNewMessage.Text = "button1";
+            buttonNewMessage.UseVisualStyleBackColor = true;
+            buttonNewMessage.Click += button1_Click;
+            // 
+            // labelNewMessage
+            // 
+            labelNewMessage.AutoSize = true;
+            labelNewMessage.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelNewMessage.ForeColor = Color.Red;
+            labelNewMessage.Location = new Point(361, 116);
+            labelNewMessage.Name = "labelNewMessage";
+            labelNewMessage.Size = new Size(87, 15);
+            labelNewMessage.TabIndex = 10;
+            labelNewMessage.Text = "NEW MESSAGE";
+            // 
             // UserMainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(labelNewMessage);
+            Controls.Add(buttonNewMessage);
             Controls.Add(labelMessage);
             Controls.Add(dateTimePicker1);
             Controls.Add(dataGridViewMovies);
@@ -268,5 +298,7 @@
         private DataGridView dataGridViewMovies;
         private DateTimePicker dateTimePicker1;
         private Label labelMessage;
+        private Button buttonNewMessage;
+        private Label labelNewMessage;
     }
 }

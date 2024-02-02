@@ -69,5 +69,15 @@ namespace GUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Zrzut_ekranu_2024_02_02_142236 {
+            get {
+                object obj = ResourceManager.GetObject("Zrzut ekranu 2024-02-02 142236", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

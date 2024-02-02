@@ -14,12 +14,12 @@ namespace Backend.Data
     public class DataContext : DbContext
     {
         public DbSet<Client> Clients { get; set; } = null!;
-        //public DbSet<Employee> Employees { get; set; } = null!;
         public DbSet<Movie> Movies { get; set; } = null!;
         public DbSet<Reservation> Reservations { get; set; } = null!;
         public DbSet<Room> Rooms { get; set; } = null!;
         public DbSet<Screening> Screenings { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Message> Messages { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

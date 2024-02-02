@@ -57,6 +57,8 @@ namespace GUI
             NavBarManager.SetAdminButtonVisibility(buttonAdminPanel, _user!.Role);
             NavBarManager.SetEmployeeButtonVisibility(buttonEmployeePanel, _user!.Role);
 
+            CheckUserMessages(_user.Id);
+
             dataGridViewMovies.AutoGenerateColumns = false;
 
             DataGridViewImageColumn dataGridViewImageColumn = new DataGridViewImageColumn();
@@ -86,9 +88,31 @@ namespace GUI
 
             buttonColumn.DefaultCellStyle = cellStyle;
 
-            //dataGridViewMovies.Columns["StartTime"].Width = 300;
-
             loadScreeningsByDate();
+        }
+
+        public void CheckUserMessages(int userId)
+        {
+            try
+            {
+                List<Backend.Model.Message> notReadMessages = Backend.Model.Message.GetNotReadUserMessages(_user!.Id);
+
+                if (notReadMessages.Any())
+                {
+                    buttonNewMessage.Visible = true;
+                    labelNewMessage.Visible = true;
+                }
+                else
+                {
+                    buttonNewMessage.Visible = false;
+                    labelNewMessage.Visible = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error occured while trying to check user messages" + ex.Message);
+                return;
+            }
         }
 
         public void loadScreeningsByDate()
@@ -114,6 +138,8 @@ namespace GUI
 
                 dataGridViewMovies.Show();
                 labelMessage.Text = String.Empty;
+
+                CheckUserMessages(_user!.Id);
 
                 if (screenings == null || screenings.Count == 0)
                 {
@@ -271,7 +297,7 @@ namespace GUI
 
         private void buttonEmployeePanel_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void buttonEmployeePanel_Click_1(object sender, EventArgs e)
@@ -284,6 +310,13 @@ namespace GUI
         private void buttonWhatsOn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UserMessagesForm userMessagesForm = new UserMessagesForm(_user!);
+            userMessagesForm.ShowDialog();
+            CheckUserMessages(_user!.Id);
         }
     }
 }

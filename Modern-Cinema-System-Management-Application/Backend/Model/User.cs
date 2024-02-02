@@ -24,6 +24,7 @@ namespace Backend.Model
         public Status Status { get; set; } = Status.Active;
         public Role Role { get; set; }
         public List<Reservation> Reservations { get; set; }
+        public List<Message> Messages { get; set; }
         public User(string login, string password, string email)
         {
             Login = login;

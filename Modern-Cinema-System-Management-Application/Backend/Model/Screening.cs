@@ -216,18 +216,25 @@ namespace Backend.Model
             }
         }
 
-        public static void DeleteScreeningWithReservations(int screeningId)
+        public static void DeleteScreeningWithReservations(int screeningId, bool informUsers = false)
         {
             using (var context = new DataContext())
             {
                 try
                 {
-                    Screening screening = context.Screenings.FirstOrDefault(r => r.Id == screeningId && r.IsManuallyDeleted == false)!;
+                    Screening screening = context.Screenings
+                        .Include(r => r.Movie)
+                        .FirstOrDefault(r => r.Id == screeningId && r.IsManuallyDeleted == false)!;
 
                     if (screening == null) throw new Exception("This screening does not exist. ");
 
                     List<Reservation> reservationsToDelete = context.Reservations
                         .Where(r => r.ScreeningId == screening.Id && r.IsDeleted == false)
+                        .ToList();
+
+                    List<int?> uniqueUserIds = reservationsToDelete
+                        .Select(r => r.UserId)
+                        .Distinct()
                         .ToList();
 
                     foreach(Reservation reservation in reservationsToDelete)
@@ -239,6 +246,11 @@ namespace Backend.Model
                     }
 
                     screening.IsManuallyDeleted = true;
+
+                    if (informUsers)
+                    {
+                        Message.AddNewMessages(uniqueUserIds, screening);
+                    }
 
                     context.SaveChanges();
                 }
