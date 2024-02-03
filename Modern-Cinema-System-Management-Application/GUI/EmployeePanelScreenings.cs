@@ -16,6 +16,7 @@ namespace GUI
     public partial class EmployeePanelScreenings : Form
     {
         private readonly User _user;
+        private bool isTimerActive = false;
         public EmployeePanelScreenings(User user)
         {
             InitializeComponent();
@@ -172,15 +173,21 @@ namespace GUI
                         buttonAddMovieForm.Enabled = false;
                         buttonUsersReservations.Enabled = false;
 
-                        System.Threading.Timer timer = null;
-                        timer = new System.Threading.Timer((state) =>
+                        if (!isTimerActive)
                         {
-                            labelMessageConfirmation.Invoke((MethodInvoker)(() => labelMessageConfirmation.Text = ""));
-                            buttonBack.Invoke((MethodInvoker)(() => buttonBack.Enabled = true));
-                            buttonAddMovieForm.Invoke((MethodInvoker)(() => buttonAddMovieForm.Enabled = true));
-                            buttonUsersReservations.Invoke((MethodInvoker)(() => buttonUsersReservations.Enabled = true));
-                            timer.Dispose();
-                        }, null, 3000, System.Threading.Timeout.Infinite);
+                            isTimerActive = true;
+
+                            System.Threading.Timer timer = null;
+                            timer = new System.Threading.Timer((state) =>
+                            {
+                                labelMessageConfirmation.Invoke((MethodInvoker)(() => labelMessageConfirmation.Text = ""));
+                                buttonBack.Invoke((MethodInvoker)(() => buttonBack.Enabled = true));
+                                buttonAddMovieForm.Invoke((MethodInvoker)(() => buttonAddMovieForm.Enabled = true));
+                                buttonUsersReservations.Invoke((MethodInvoker)(() => buttonUsersReservations.Enabled = true));
+                                timer.Dispose();
+                                isTimerActive = false;
+                            }, null, 2000, System.Threading.Timeout.Infinite);
+                        }
 
                         loadScreeningsToDGV();
                     }

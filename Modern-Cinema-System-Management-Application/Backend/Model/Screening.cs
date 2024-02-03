@@ -95,8 +95,10 @@ namespace Backend.Model
                         .ToList();
 
                     var currentTime = DateTime.Now.TimeOfDay;
+                    var currentDate = DateTime.Now.Date; 
 
-                    if(user.Role == Role.Employee || user.Role == Role.Admin)
+                    if(user.Role == Role.Employee || user.Role == Role.Admin
+                        || ParsingService.ParseStringToDateTime(date) > currentDate)
                     {
                         var movieHours = screenings
                         .Where(s => ParsingService.ParseStartDate(s.StartTime) == date)
@@ -114,7 +116,7 @@ namespace Backend.Model
                         .ToList();
 
                         return movieHours;
-                    }              
+                    }
                 }
                 catch (Exception ex)
                 {
