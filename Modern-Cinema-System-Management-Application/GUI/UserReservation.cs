@@ -158,7 +158,7 @@ namespace GUI
                                 if (dataGridViewReservations.Rows[e.RowIndex].Cells["Seats"].Value.ToString() == null) throw new Exception();
 
                                 string filePath = saveFileDialog.FileName;
-                                GenerateFilesService.GeneratePDFWithReservation(Client.GetClient(_user.Id)
+                                GenerateFilesService.GeneratePDFWithReservation(Person.GetClient(_user.Id)
                                     , Reservation.GetUserReservation(_user.Id, Screening.GetScreeningIdFromDateAndMovie(
                                         dataGridViewReservations.Rows[e.RowIndex].Cells["StartTime"].Value.ToString(),
                                         Movie.GetMovieByTitle(dataGridViewReservations.Rows[e.RowIndex].Cells["Title"].Value.ToString()).Id))

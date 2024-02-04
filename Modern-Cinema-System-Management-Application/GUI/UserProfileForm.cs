@@ -17,10 +17,10 @@ namespace GUI
 {
     public partial class UserProfileForm : Form
     {
-        private readonly Client _client;
+        private readonly Person _client;
         public UserProfileForm(User user)
         {
-            _client = Client.GetClient(user.Id);
+            _client = Person.GetClient(user.Id);
             InitializeComponent();
         }
 
@@ -111,7 +111,7 @@ namespace GUI
                 _client.HouseNumber = textBoxHouseNumber.Text;
                 _client.ZipCode = maskedTextBoxZipCode.Text;
 
-                Client.UpdateClient(_client);
+                Person.UpdateClient(_client);
                 labelMessageSuccess.Text = "Your data has been changed successfully";
             }
             catch (Exception ex)

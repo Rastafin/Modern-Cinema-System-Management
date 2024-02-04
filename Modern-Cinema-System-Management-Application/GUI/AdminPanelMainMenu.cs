@@ -53,7 +53,7 @@ namespace GUI
 
             try
             {
-                List<Client> clients = Client.GetClients();
+                List<Person> clients = Person.GetClients();
 
                 if (clients == null || clients.Count == 0)
                 {
@@ -64,7 +64,7 @@ namespace GUI
 
                 dataGridViewUsers.Rows.Clear();
 
-                foreach (Client client in clients)
+                foreach (Person client in clients)
                 {
                     if (string.IsNullOrEmpty(filter)
                         || (client.Name != null && client.Name.Contains(filter, StringComparison.OrdinalIgnoreCase))

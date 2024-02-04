@@ -35,11 +35,11 @@ namespace Backend.Model
             {
                 try
                 {
-                    return context.Movies.FirstOrDefault(m => m.Title == title)!;
+                    return context.Movies.FirstOrDefault(m => m.Title == title && m.IsArchived == false)!;
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new Exception("Error in GetMovieByTitle method. " + ex.Message);
                 }
             }
         }
@@ -68,7 +68,9 @@ namespace Backend.Model
             {
                 try
                 {
-                    var movies = context.Movies.ToList();
+                    var movies = context.Movies
+                        .Where(r => r.IsArchived == false)
+                        .ToList();
 
                     foreach(var movie in movies)
                     {

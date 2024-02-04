@@ -168,7 +168,7 @@ namespace Backend.Services
             }
         }
 
-        public static bool ValidatePersonalDataChange(Client _client, string login, string email, string name, string lastName, string birthday,
+        public static bool ValidatePersonalDataChange(Person _client, string login, string email, string name, string lastName, string birthday,
             string sex, string phoneNumber, string country, string city, string street, string houseNumber, string zipCode, out string message)
         {
             if (login == _client.User.Login &&

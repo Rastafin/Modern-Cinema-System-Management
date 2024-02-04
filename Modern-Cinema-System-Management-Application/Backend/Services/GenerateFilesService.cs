@@ -11,7 +11,7 @@ namespace Backend.Services
 {
     public static class GenerateFilesService
     {
-        public static void GeneratePDFWithReservation(Client client, Reservation reservation, string seats, string filePath)
+        public static void GeneratePDFWithReservation(Person client, Reservation reservation, string seats, string filePath)
         {
             try
             {

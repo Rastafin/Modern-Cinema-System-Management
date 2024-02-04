@@ -62,7 +62,7 @@ namespace GUI
 
             try
             {
-                Client.AddClientWithUser(new Client(textBoxName.Text, textBoxLastname.Text, maskedTextBoxBirthday.Text, parsedSex, textBoxPhoneNumber.Text,
+                Person.AddClientWithUser(new Person(textBoxName.Text, textBoxLastname.Text, maskedTextBoxBirthday.Text, parsedSex, textBoxPhoneNumber.Text,
                 textBoxCountry.Text, textBoxCity.Text, textBoxStreet.Text, textBoxHouseNumber.Text, maskedTextBoxZipCode.Text),
                     new User(textBoxLogin.Text, PasswordHasher.HashPassword(textBoxPassword.Text), textBoxEmail.Text));
             }

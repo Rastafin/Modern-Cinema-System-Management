@@ -96,7 +96,7 @@ namespace Backend.Services
                 }
 
 
-                List<(Client client, int age)> clientsWithAge = Client.GetClientsWithAge();
+                List<(Person client, int age)> clientsWithAge = Person.GetClientsWithAge();
 
                 foreach (var (client, age) in clientsWithAge)
                 {

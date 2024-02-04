@@ -81,7 +81,7 @@ namespace GUI
 
                 foreach (Reservation reservation in reservations)
                 {
-                    Client client = Client.GetClient((int)reservation.UserId);
+                    Person client = Person.GetClient((int)reservation.UserId);
 
                     if (string.IsNullOrEmpty(filter)
                         || (reservation.Id.ToString().Contains(filter, StringComparison.OrdinalIgnoreCase))

@@ -70,7 +70,8 @@ namespace GUI
 
                         row.Cells["StartTime"].Value = screening.StartTime;
 
-                        DateTime startRange = DateTime.ParseExact(ParsingService.ParseStartTime(screening.StartTime!), "HH:mm", CultureInfo.InvariantCulture);
+                        //DateTime startRange = DateTime.ParseExact(ParsingService.ParseStartTime(screening.StartTime!), "HH:mm", CultureInfo.InvariantCulture);
+                        DateTime startRange = ParsingService.ParseStringToDateTimeWithTime(screening.StartTime!);
                         DateTime endRange = startRange.AddMinutes((double)screening.Movie.Duaration! + 30);
 
                         row.Cells["LastsUntil"].Value = endRange.ToString("yyyy-MM-dd HH:mm");
