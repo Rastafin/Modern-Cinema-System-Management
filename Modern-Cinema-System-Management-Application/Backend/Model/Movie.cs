@@ -168,5 +168,48 @@ namespace Backend.Model
                 }
             }
         }
+
+        public static string ArchiveMovie(string movieTitle)
+        {
+            using (var context = new DataContext())
+            {
+                try
+                {
+                    Movie? movieToArchive = context.Movies
+                        .FirstOrDefault(m => m.Title == movieTitle && m.IsArchived == false);
+
+                    List<Screening> currentScreenings = Screening.GetCurrentScreenings();
+
+                    if (movieToArchive == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    if(currentScreenings != null && currentScreenings.Count > 0)
+                    {
+                        foreach (Screening screening in currentScreenings)
+                        {
+                            if (screening.Movie.Id == movieToArchive.Id)
+                            {
+                                return "All screenings with this movie \nneed to be cancelled first";
+                            }
+                        }
+                    } 
+
+                    if (!movieToArchive.IsArchived)
+                    {
+                        movieToArchive.IsArchived = true;
+                    }
+
+                    context.SaveChanges();
+
+                    return "Movie has been archived";
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in ArchiveMovie method. " + ex.Message);
+                }
+            }
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace GUI
         private void loadScreeningsToDGV(string filter = "")
         {
             dataGridViewScreenings.Show();
-            labelMessage.Text = String.Empty;
+            labelMessage.Text = string.Empty;
             buttonDeleteScreening.Enabled = true;
 
             try

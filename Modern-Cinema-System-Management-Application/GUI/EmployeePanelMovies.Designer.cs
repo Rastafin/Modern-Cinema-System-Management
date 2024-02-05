@@ -51,6 +51,7 @@
             labelMessage = new Label();
             panel2 = new Panel();
             labelMovieDetails = new Label();
+            buttonCheckCurrentMovies = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMoviePicture).BeginInit();
@@ -358,12 +359,28 @@
             labelMovieDetails.Text = "MOVIE DETAILS";
             labelMovieDetails.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // buttonCheckCurrentMovies
+            // 
+            buttonCheckCurrentMovies.BackColor = Color.Coral;
+            buttonCheckCurrentMovies.FlatAppearance.BorderColor = Color.Black;
+            buttonCheckCurrentMovies.FlatAppearance.BorderSize = 2;
+            buttonCheckCurrentMovies.FlatStyle = FlatStyle.Flat;
+            buttonCheckCurrentMovies.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonCheckCurrentMovies.Location = new Point(1634, 1010);
+            buttonCheckCurrentMovies.Name = "buttonCheckCurrentMovies";
+            buttonCheckCurrentMovies.Size = new Size(226, 78);
+            buttonCheckCurrentMovies.TabIndex = 63;
+            buttonCheckCurrentMovies.Text = "CHECK CURRENT MOVIES";
+            buttonCheckCurrentMovies.UseVisualStyleBackColor = false;
+            buttonCheckCurrentMovies.Click += buttonCheckCurrentMovies_Click;
+            // 
             // EmployeePanelMovies
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1872, 1100);
+            Controls.Add(buttonCheckCurrentMovies);
             Controls.Add(labelMovieDetails);
             Controls.Add(panel2);
             Controls.Add(labelMessage);
@@ -412,5 +429,6 @@
         private Label labelMessage;
         private Panel panel2;
         private Label labelMovieDetails;
+        private Button buttonCheckCurrentMovies;
     }
 }

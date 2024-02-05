@@ -167,5 +167,11 @@ namespace GUI
             employeePanelScreenings.Show();
             Close();
         }
+
+        private void buttonCheckCurrentMovies_Click(object sender, EventArgs e)
+        {
+            EmployeePanelArchiveMovieForm employeePanelDeleteMovieForm = new EmployeePanelArchiveMovieForm();
+            employeePanelDeleteMovieForm.ShowDialog();
+        }
     }
 }
